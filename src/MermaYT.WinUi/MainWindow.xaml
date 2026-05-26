@@ -85,8 +85,8 @@
                                 Grid.Column="0"
                                 Padding="20,16"
                                 CornerRadius="12"
-                                PlaceholderText="https://youtube.com/watch?v=..."
-                                Foreground="{StaticResource SubtitleColor}">
+                                Foreground="{StaticResource SubtitleColor}"
+                                PlaceholderText="https://youtube.com/watch?v=...">
                                 <TextBox.Resources>
                                     <SolidColorBrush x:Key="TextBoxBackground" Color="{StaticResource InputBackgroundColor}" />
                                     <SolidColorBrush x:Key="TextBoxBackgroundPointerOver" Color="{StaticResource InputBackgroundColor}" />
@@ -99,28 +99,28 @@
                             <Button
                                 Grid.Column="1"
                                 Padding="32,16"
+                                Content="Analyze"
                                 CornerRadius="12"
-                                FontWeight="Bold"
-                                Content="Analyze">
+                                FontWeight="Bold">
                                 <Button.Resources>
+                                    <SolidColorBrush x:Key="ButtonForeground" Color="{StaticResource ButtonForegroundColor}" />
+                                    <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{StaticResource ButtonForegroundColor}" />
+                                    <SolidColorBrush x:Key="ButtonForegroundPressed" Color="{StaticResource ButtonForegroundColor}" />
+
                                     <LinearGradientBrush x:Key="ButtonBackground" StartPoint="0,0.5" EndPoint="1,0.5">
                                         <GradientStop Offset="0.0" Color="{StaticResource ButtonGradientFromColor}" />
                                         <GradientStop Offset="1.0" Color="{StaticResource ButtonGradientToColor}" />
                                     </LinearGradientBrush>
+
                                     <LinearGradientBrush x:Key="ButtonBackgroundPointerOver" StartPoint="0,0.5" EndPoint="1,0.5">
-                                        <GradientStop Offset="0.0" Color="#0891B2" />
-                                        <GradientStop Offset="1.0" Color="#2563EB" />
+                                        <GradientStop Offset="0.0" Color="{StaticResource ButtonGradientPointerOverFromColor}" />
+                                        <GradientStop Offset="1.0" Color="{StaticResource ButtonGradientPointerOverToColor}" />
                                     </LinearGradientBrush>
+
                                     <LinearGradientBrush x:Key="ButtonBackgroundPressed" StartPoint="0,0.5" EndPoint="1,0.5">
-                                        <GradientStop Offset="0.0" Color="#0E7490" />
-                                        <GradientStop Offset="1.0" Color="#1D4ED8" />
+                                        <GradientStop Offset="0.0" Color="{StaticResource ButtonGradientPressedFromColor}" />
+                                        <GradientStop Offset="1.0" Color="{StaticResource ButtonGradientPressedToColor}" />
                                     </LinearGradientBrush>
-                                    <SolidColorBrush x:Key="ButtonForeground" Color="White" />
-                                    <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="White" />
-                                    <SolidColorBrush x:Key="ButtonForegroundPressed" Color="White" />
-                                    <SolidColorBrush x:Key="ButtonBorderBrush" Color="Transparent" />
-                                    <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="Transparent" />
-                                    <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="Transparent" />
                                 </Button.Resources>
                             </Button>
                         </Grid>

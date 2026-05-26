@@ -26,7 +26,12 @@
     <Color x:Key="InputBackgroundColor">#B3FFFFFF</Color>
 
     <!--  Button  -->
+    <Color x:Key="ButtonForegroundColor">#FFFFFF</Color>
     <Color x:Key="ButtonGradientFromColor">#06B6D4</Color>
     <Color x:Key="ButtonGradientToColor">#3B82F6</Color>
+    <Color x:Key="ButtonGradientPointerOverFromColor">#0891B2</Color>
+    <Color x:Key="ButtonGradientPointerOverToColor">#2563EB</Color>
+    <Color x:Key="ButtonGradientPressedFromColor">#0E7490</Color>
+    <Color x:Key="ButtonGradientPressedToColor">#1D4ED8</Color>
 
 </ResourceDictionary>
