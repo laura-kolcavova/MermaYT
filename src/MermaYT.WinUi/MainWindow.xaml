@@ -67,35 +67,47 @@
                     <Border.Background>
                         <SolidColorBrush Color="{StaticResource InputBlockBackgroundColor}" />
                     </Border.Background>
+
                     <Border.BorderBrush>
                         <SolidColorBrush Color="{StaticResource InputBlockBorderColor}" />
                     </Border.BorderBrush>
+
                     <StackPanel Spacing="12">
                         <TextBlock
                             FontSize="14"
                             FontWeight="SemiBold"
                             Foreground="{StaticResource SubtitleColor}"
                             Text="YouTube Video URL" />
+
                         <Grid ColumnSpacing="12">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
+
                             <TextBox
                                 Grid.Column="0"
                                 Padding="20,16"
-                                CornerRadius="12"
-                                Foreground="{StaticResource SubtitleColor}"
+                                BorderThickness="1"
+                                CornerRadius="16"
                                 PlaceholderText="https://youtube.com/watch?v=...">
                                 <TextBox.Resources>
-                                    <SolidColorBrush x:Key="TextBoxBackground" Color="{StaticResource InputBackgroundColor}" />
-                                    <SolidColorBrush x:Key="TextBoxBackgroundPointerOver" Color="{StaticResource InputBackgroundColor}" />
-                                    <SolidColorBrush x:Key="TextBoxBackgroundFocused" Color="{StaticResource InputBackgroundColor}" />
-                                    <SolidColorBrush x:Key="TextBoxBorderBrush" Color="{StaticResource InputBorderColor}" />
-                                    <SolidColorBrush x:Key="TextBoxBorderBrushPointerOver" Color="{StaticResource InputBorderColor}" />
-                                    <SolidColorBrush x:Key="TextBoxBorderBrushFocused" Color="{StaticResource ButtonGradientFromColor}" />
+                                    <SolidColorBrush x:Key="TextControlBackground" Color="{StaticResource InputBackgroundColor}" />
+                                    <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource InputBackgroundColor}" />
+                                    <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource InputBackgroundColor}" />
+                                    <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{StaticResource InputBackgroundColor}" />
+                                    <SolidColorBrush x:Key="TextControlBorderBrush" Color="{StaticResource InputBorderColor}" />
+                                    <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="{StaticResource InputBorderColor}" />
+                                    <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="{StaticResource InputFocusBorderColor}" />
+                                    <SolidColorBrush x:Key="TextControlForeground" Color="{StaticResource SubtitleColor}" />
+                                    <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="{StaticResource SubtitleColor}" />
+                                    <SolidColorBrush x:Key="TextControlForegroundFocused" Color="{StaticResource SubtitleColor}" />
+                                    <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="{StaticResource InputPlaceholderColor}" />
+                                    <SolidColorBrush x:Key="TextControlPlaceholderForegroundPointerOver" Color="{StaticResource InputPlaceholderColor}" />
+                                    <SolidColorBrush x:Key="TextControlPlaceholderForegroundFocused" Color="{StaticResource InputPlaceholderColor}" />
                                 </TextBox.Resources>
                             </TextBox>
+
                             <Button
                                 Grid.Column="1"
                                 Padding="32,16"

@@ -24,6 +24,8 @@
     <!--  Input  -->
     <Color x:Key="InputBorderColor">#A5F3FC</Color>
     <Color x:Key="InputBackgroundColor">#B3FFFFFF</Color>
+    <Color x:Key="InputFocusBorderColor">#67E8F9</Color>
+    <Color x:Key="InputPlaceholderColor">#94A3B8</Color>
 
     <!--  Button  -->
     <Color x:Key="ButtonForegroundColor">#FFFFFF</Color>
