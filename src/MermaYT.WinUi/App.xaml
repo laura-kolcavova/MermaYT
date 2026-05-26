@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Application
     x:Class="MermaYT.WinUi.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -8,9 +8,14 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-                <!-- Other merged dictionaries here -->
+                <!--  Other merged dictionaries here  -->
             </ResourceDictionary.MergedDictionaries>
-            <!-- Other app resources here -->
+            <!--  Other app resources here  -->
+            <Color x:Key="GradientStartColor">#CFFAFE</Color>
+            <Color x:Key="GradientMidColor">#BAE6FD</Color>
+            <Color x:Key="GradientEndColor">#E9D5FF</Color>
+            <Color x:Key="CardBackgroundColor">#4DFFFFFF</Color>
+            <Color x:Key="CardBorderColor">#66FFFFFF</Color>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

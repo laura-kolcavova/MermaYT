@@ -12,10 +12,37 @@
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#CFFAFE" Offset="0.0" />
-                <GradientStop Color="#BAE6FD" Offset="0.5" />
-                <GradientStop Color="#E9D5FF" Offset="1.0" />
+                <GradientStop Color="{StaticResource GradientStartColor}" Offset="0.0" />
+                <GradientStop Color="{StaticResource GradientMidColor}" Offset="0.5" />
+                <GradientStop Color="{StaticResource GradientEndColor}" Offset="1.0" />
             </LinearGradientBrush>
         </Grid.Background>
+
+        <Border
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            MaxWidth="768"
+            CornerRadius="32"
+            Padding="48"
+            BorderThickness="1">
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource CardBackgroundColor}" />
+            </Border.Background>
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{StaticResource CardBorderColor}" />
+            </Border.BorderBrush>
+            <StackPanel Spacing="12">
+                <TextBlock
+                    Text="Download YouTube Video as MP3 or MP4"
+                    FontSize="28"
+                    FontWeight="Bold"
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    Text="Paste a YouTube link below and choose your preferred format."
+                    FontSize="16"
+                    Opacity="0.7"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
