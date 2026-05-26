@@ -90,6 +90,7 @@
                                 Padding="20,16"
                                 BorderThickness="1"
                                 CornerRadius="16"
+                                PlaceholderForeground="{StaticResource InputPlaceholderColor}"
                                 PlaceholderText="https://youtube.com/watch?v=...">
                                 <TextBox.Resources>
                                     <SolidColorBrush x:Key="TextControlBackground" Color="{StaticResource InputBackgroundColor}" />
