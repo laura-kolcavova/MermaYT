@@ -16,6 +16,10 @@
             <Color x:Key="GradientEndColor">#E9D5FF</Color>
             <Color x:Key="CardBackgroundColor">#4DFFFFFF</Color>
             <Color x:Key="CardBorderColor">#66FFFFFF</Color>
+            <Color x:Key="TitleGradientFromColor">#0891B2</Color>
+            <Color x:Key="TitleGradientViaColor">#2563EB</Color>
+            <Color x:Key="TitleGradientToColor">#9333EA</Color>
+            <Color x:Key="SubtitleColor">#334155</Color>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
