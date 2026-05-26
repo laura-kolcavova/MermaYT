@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Title="MermaYT.WinUi">
 
-    <Grid>
+    <Grid Padding="24">
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                 <GradientStop Color="{StaticResource GradientStartColor}" Offset="0.0" />
