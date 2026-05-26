@@ -87,26 +87,41 @@
                                 CornerRadius="12"
                                 PlaceholderText="https://youtube.com/watch?v=..."
                                 Foreground="{StaticResource SubtitleColor}">
-                                <TextBox.Background>
-                                    <SolidColorBrush Color="{StaticResource InputBackgroundColor}" />
-                                </TextBox.Background>
-                                <TextBox.BorderBrush>
-                                    <SolidColorBrush Color="{StaticResource InputBorderColor}" />
-                                </TextBox.BorderBrush>
+                                <TextBox.Resources>
+                                    <SolidColorBrush x:Key="TextBoxBackground" Color="{StaticResource InputBackgroundColor}" />
+                                    <SolidColorBrush x:Key="TextBoxBackgroundPointerOver" Color="{StaticResource InputBackgroundColor}" />
+                                    <SolidColorBrush x:Key="TextBoxBackgroundFocused" Color="{StaticResource InputBackgroundColor}" />
+                                    <SolidColorBrush x:Key="TextBoxBorderBrush" Color="{StaticResource InputBorderColor}" />
+                                    <SolidColorBrush x:Key="TextBoxBorderBrushPointerOver" Color="{StaticResource InputBorderColor}" />
+                                    <SolidColorBrush x:Key="TextBoxBorderBrushFocused" Color="{StaticResource ButtonGradientFromColor}" />
+                                </TextBox.Resources>
                             </TextBox>
                             <Button
                                 Grid.Column="1"
                                 Padding="32,16"
                                 CornerRadius="12"
                                 FontWeight="Bold"
-                                Foreground="White"
                                 Content="Analyze">
-                                <Button.Background>
-                                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                <Button.Resources>
+                                    <LinearGradientBrush x:Key="ButtonBackground" StartPoint="0,0.5" EndPoint="1,0.5">
                                         <GradientStop Offset="0.0" Color="{StaticResource ButtonGradientFromColor}" />
                                         <GradientStop Offset="1.0" Color="{StaticResource ButtonGradientToColor}" />
                                     </LinearGradientBrush>
-                                </Button.Background>
+                                    <LinearGradientBrush x:Key="ButtonBackgroundPointerOver" StartPoint="0,0.5" EndPoint="1,0.5">
+                                        <GradientStop Offset="0.0" Color="#0891B2" />
+                                        <GradientStop Offset="1.0" Color="#2563EB" />
+                                    </LinearGradientBrush>
+                                    <LinearGradientBrush x:Key="ButtonBackgroundPressed" StartPoint="0,0.5" EndPoint="1,0.5">
+                                        <GradientStop Offset="0.0" Color="#0E7490" />
+                                        <GradientStop Offset="1.0" Color="#1D4ED8" />
+                                    </LinearGradientBrush>
+                                    <SolidColorBrush x:Key="ButtonForeground" Color="White" />
+                                    <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="White" />
+                                    <SolidColorBrush x:Key="ButtonForegroundPressed" Color="White" />
+                                    <SolidColorBrush x:Key="ButtonBorderBrush" Color="Transparent" />
+                                    <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="Transparent" />
+                                    <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="Transparent" />
+                                </Button.Resources>
                             </Button>
                         </Grid>
                     </StackPanel>
