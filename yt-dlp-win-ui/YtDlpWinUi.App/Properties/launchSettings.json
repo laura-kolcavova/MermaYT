@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "YtDlpWinUi.App (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "YtDlpWinUi.App (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
