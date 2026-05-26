@@ -13,6 +13,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <!--<ItemGroup>
+    <Page Include="Resources\Colors.xaml" />
+  </ItemGroup>-->
+
   <ItemGroup>
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -39,6 +43,12 @@
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.28000.1839" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.1.3" />
   </ItemGroup>
+
+  <!--<ItemGroup>
+    <None Update="Resources\Colors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>-->
 
   <!--
     Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution

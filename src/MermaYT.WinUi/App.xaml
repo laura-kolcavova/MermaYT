@@ -9,23 +9,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <!--  Other merged dictionaries here  -->
+                <ResourceDictionary Source="Resources/Colors.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <!--  Other app resources here  -->
-            <Color x:Key="GradientStartColor">#CFFAFE</Color>
-            <Color x:Key="GradientMidColor">#BAE6FD</Color>
-            <Color x:Key="GradientEndColor">#E9D5FF</Color>
-            <Color x:Key="CardBackgroundColor">#4DFFFFFF</Color>
-            <Color x:Key="CardBorderColor">#66FFFFFF</Color>
-            <Color x:Key="TitleGradientFromColor">#0891B2</Color>
-            <Color x:Key="TitleGradientViaColor">#2563EB</Color>
-            <Color x:Key="TitleGradientToColor">#9333EA</Color>
-            <Color x:Key="SubtitleColor">#334155</Color>
-            <Color x:Key="InputBlockBackgroundColor">#80FFFFFF</Color>
-            <Color x:Key="InputBlockBorderColor">#80FFFFFF</Color>
-            <Color x:Key="InputBorderColor">#A5F3FC</Color>
-            <Color x:Key="InputBackgroundColor">#B3FFFFFF</Color>
-            <Color x:Key="ButtonGradientFromColor">#06B6D4</Color>
-            <Color x:Key="ButtonGradientToColor">#3B82F6</Color>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
