@@ -1,0 +1,39 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--  Background gradient  -->
+    <Color x:Key="GradientStartColor">#CFFAFE</Color>
+    <Color x:Key="GradientMidColor">#BAE6FD</Color>
+    <Color x:Key="GradientEndColor">#E9D5FF</Color>
+
+    <!--  Card  -->
+    <Color x:Key="CardBackgroundColor">#4DFFFFFF</Color>
+    <Color x:Key="CardBorderColor">#66FFFFFF</Color>
+
+    <!--  Title  -->
+    <Color x:Key="TitleGradientFromColor">#0891B2</Color>
+    <Color x:Key="TitleGradientViaColor">#2563EB</Color>
+    <Color x:Key="TitleGradientToColor">#9333EA</Color>
+
+    <!--  Subtitle  -->
+    <Color x:Key="SubtitleColor">#334155</Color>
+
+    <!--  Input Block  -->
+    <Color x:Key="InputBlockBackgroundColor">#80FFFFFF</Color>
+    <Color x:Key="InputBlockBorderColor">#80FFFFFF</Color>
+
+    <!--  Input  -->
+    <Color x:Key="InputBorderColor">#A5F3FC</Color>
+    <Color x:Key="InputBackgroundColor">#B3FFFFFF</Color>
+    <Color x:Key="InputFocusBorderColor">#67E8F9</Color>
+    <Color x:Key="InputPlaceholderColor">#94A3B8</Color>
+
+    <!--  Button  -->
+    <Color x:Key="ButtonForegroundColor">#FFFFFF</Color>
+    <Color x:Key="ButtonGradientFromColor">#06B6D4</Color>
+    <Color x:Key="ButtonGradientToColor">#3B82F6</Color>
+    <Color x:Key="ButtonGradientPointerOverFromColor">#0891B2</Color>
+    <Color x:Key="ButtonGradientPointerOverToColor">#2563EB</Color>
+    <Color x:Key="ButtonGradientPressedFromColor">#0E7490</Color>
+    <Color x:Key="ButtonGradientPressedToColor">#1D4ED8</Color>
+
+</ResourceDictionary>

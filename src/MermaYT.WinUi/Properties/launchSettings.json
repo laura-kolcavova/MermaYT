@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "MermaYT.WinUi (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "MermaYT.WinUi (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
