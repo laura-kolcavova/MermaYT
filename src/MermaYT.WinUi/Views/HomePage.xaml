@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="MermaYT.WinUi.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:MermaYT.WinUi.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:MermaYT.WinUi.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Padding="24">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Offset="0.0" Color="{StaticResource GradientStartColor}" />
+                <GradientStop Offset="0.5" Color="{StaticResource GradientMidColor}" />
+                <GradientStop Offset="1.0" Color="{StaticResource GradientEndColor}" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Border
+            MaxWidth="768"
+            Padding="48"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            BorderThickness="1"
+            CornerRadius="32">
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource CardBackgroundColor}" />
+            </Border.Background>
+
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{StaticResource CardBorderColor}" />
+            </Border.BorderBrush>
+
+            <StackPanel Spacing="12">
+                <TextBlock
+                    Margin="0,0,0,20"
+                    FontSize="48"
+                    FontWeight="Black"
+                    LineHeight="56"
+                    Text="Download YouTube Video as MP3 or MP4"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap">
+                    <TextBlock.Foreground>
+                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                            <GradientStop Offset="0.0" Color="{StaticResource TitleGradientFromColor}" />
+                            <GradientStop Offset="0.5" Color="{StaticResource TitleGradientViaColor}" />
+                            <GradientStop Offset="1.0" Color="{StaticResource TitleGradientToColor}" />
+                        </LinearGradientBrush>
+                    </TextBlock.Foreground>
+                </TextBlock>
+
+                <TextBlock
+                    Margin="0,0,0,32"
+                    FontSize="18"
+                    Foreground="{StaticResource SubtitleColor}"
+                    LineHeight="28"
+                    Text="Paste a YouTube link below and choose your preferred format."
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+
+                <Border
+                    Padding="20"
+                    BorderThickness="1"
+                    CornerRadius="24">
+                    <Border.Background>
+                        <SolidColorBrush Color="{StaticResource InputBlockBackgroundColor}" />
+                    </Border.Background>
+
+                    <Border.BorderBrush>
+                        <SolidColorBrush Color="{StaticResource InputBlockBorderColor}" />
+                    </Border.BorderBrush>
+
+                    <StackPanel Spacing="12">
+                        <TextBlock
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            Foreground="{StaticResource SubtitleColor}"
+                            Text="YouTube Video URL" />
+
+                        <Grid ColumnSpacing="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox
+                                Grid.Column="0"
+                                Padding="20,16"
+                                BorderThickness="1"
+                                CornerRadius="16"
+                                PlaceholderForeground="{StaticResource InputPlaceholderColor}"
+                                PlaceholderText="https://youtube.com/watch?v=...">
+                                <TextBox.Resources>
+                                    <Thickness x:Key="TextControlBorderThemeThicknessFocused">2</Thickness>
+                                    <SolidColorBrush x:Key="TextControlBackground" Color="{StaticResource InputBackgroundColor}" />
+                                    <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource InputBackgroundColor}" />
+                                    <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource InputBackgroundColor}" />
+                                    <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{StaticResource InputBackgroundColor}" />
+                                    <SolidColorBrush x:Key="TextControlBorderBrush" Color="{StaticResource InputBorderColor}" />
+                                    <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="{StaticResource InputBorderColor}" />
+                                    <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="{StaticResource InputFocusBorderColor}" />
+                                    <SolidColorBrush x:Key="TextControlForeground" Color="{StaticResource SubtitleColor}" />
+                                    <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="{StaticResource SubtitleColor}" />
+                                    <SolidColorBrush x:Key="TextControlForegroundFocused" Color="{StaticResource SubtitleColor}" />
+                                    <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="{StaticResource InputPlaceholderColor}" />
+                                    <SolidColorBrush x:Key="TextControlPlaceholderForegroundPointerOver" Color="{StaticResource InputPlaceholderColor}" />
+                                    <SolidColorBrush x:Key="TextControlPlaceholderForegroundFocused" Color="{StaticResource InputPlaceholderColor}" />
+                                </TextBox.Resources>
+                            </TextBox>
+
+                            <controls:HandCursorButton
+                                Grid.Column="1"
+                                Padding="32,16"
+                                Content="Analyze"
+                                CornerRadius="12"
+                                FontWeight="Bold">
+                                <controls:HandCursorButton.Resources>
+                                    <SolidColorBrush x:Key="ButtonForeground" Color="{StaticResource ButtonForegroundColor}" />
+                                    <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{StaticResource ButtonForegroundColor}" />
+                                    <SolidColorBrush x:Key="ButtonForegroundPressed" Color="{StaticResource ButtonForegroundColor}" />
+
+                                    <LinearGradientBrush x:Key="ButtonBackground" StartPoint="0,0.5" EndPoint="1,0.5">
+                                        <GradientStop Offset="0.0" Color="{StaticResource ButtonGradientFromColor}" />
+                                        <GradientStop Offset="1.0" Color="{StaticResource ButtonGradientToColor}" />
+                                    </LinearGradientBrush>
+
+                                    <LinearGradientBrush x:Key="ButtonBackgroundPointerOver" StartPoint="0,0.5" EndPoint="1,0.5">
+                                        <GradientStop Offset="0.0" Color="{StaticResource ButtonGradientPointerOverFromColor}" />
+                                        <GradientStop Offset="1.0" Color="{StaticResource ButtonGradientPointerOverToColor}" />
+                                    </LinearGradientBrush>
+
+                                    <LinearGradientBrush x:Key="ButtonBackgroundPressed" StartPoint="0,0.5" EndPoint="1,0.5">
+                                        <GradientStop Offset="0.0" Color="{StaticResource ButtonGradientPressedFromColor}" />
+                                        <GradientStop Offset="1.0" Color="{StaticResource ButtonGradientPressedToColor}" />
+                                    </LinearGradientBrush>
+                                </controls:HandCursorButton.Resources>
+                            </controls:HandCursorButton>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>
