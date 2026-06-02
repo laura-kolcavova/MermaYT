@@ -27,6 +27,15 @@
     <Color x:Key="InputFocusBorderColor">#67E8F9</Color>
     <Color x:Key="InputPlaceholderColor">#94A3B8</Color>
 
+    <!--  ComboBox  -->
+    <Color x:Key="ComboBoxForegroundColor">#334155</Color>
+    <Color x:Key="ComboBoxBackgroundColor">#B3FFFFFF</Color>
+    <Color x:Key="ComboBoxBorderColor">#A5F3FC</Color>
+    <Color x:Key="ComboBoxFocusBorderColor">#67E8F9</Color>
+    <Color x:Key="ComboBoxDropDownBackgroundColor">#F0FDFF</Color>
+    <Color x:Key="ComboBoxDropDownBorderColor">#A5F3FC</Color>
+    <Color x:Key="ComboBoxDropDownItemHoverColor">#CFFAFE</Color>
+
     <!--  Button  -->
     <Color x:Key="ButtonForegroundColor">#FFFFFF</Color>
     <Color x:Key="ButtonGradientFromColor">#06B6D4</Color>

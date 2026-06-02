@@ -1,6 +1,6 @@
 ﻿namespace MermaYT.Core;
 
-public enum TargetFileFormat
+public enum OutputProfile
 {
     Mp3 = 1,
 

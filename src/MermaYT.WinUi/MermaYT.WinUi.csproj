@@ -46,6 +46,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MermaYT.Core\MermaYT.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Page Update="Views\HomePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

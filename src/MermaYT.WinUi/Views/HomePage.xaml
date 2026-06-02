@@ -83,6 +83,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
                             <TextBox
@@ -110,8 +111,41 @@
                                 </TextBox.Resources>
                             </TextBox>
 
-                            <controls:HandCursorButton
+                            <ComboBox
+                                x:Name="OutputProfileComboBox"
                                 Grid.Column="1"
+                                Padding="20,16"
+                                VerticalAlignment="Stretch"
+                                BorderThickness="1"
+                                CornerRadius="16"
+                                FontWeight="SemiBold"
+                                SelectedIndex="0">
+                                <ComboBox.Resources>
+                                    <SolidColorBrush x:Key="ComboBoxBackground" Color="{StaticResource ComboBoxBackgroundColor}" />
+                                    <SolidColorBrush x:Key="ComboBoxBackgroundPointerOver" Color="{StaticResource ComboBoxBackgroundColor}" />
+                                    <SolidColorBrush x:Key="ComboBoxBackgroundPressed" Color="{StaticResource ComboBoxBackgroundColor}" />
+                                    <SolidColorBrush x:Key="ComboBoxBackgroundDisabled" Color="{StaticResource ComboBoxBackgroundColor}" />
+                                    <SolidColorBrush x:Key="ComboBoxBorderBrush" Color="{StaticResource ComboBoxBorderColor}" />
+                                    <SolidColorBrush x:Key="ComboBoxBorderBrushPointerOver" Color="{StaticResource ComboBoxFocusBorderColor}" />
+                                    <SolidColorBrush x:Key="ComboBoxBorderBrushFocused" Color="{StaticResource ComboBoxFocusBorderColor}" />
+                                    <SolidColorBrush x:Key="ComboBoxForeground" Color="{StaticResource ComboBoxForegroundColor}" />
+                                    <SolidColorBrush x:Key="ComboBoxForegroundPointerOver" Color="{StaticResource ComboBoxForegroundColor}" />
+                                    <SolidColorBrush x:Key="ComboBoxForegroundFocused" Color="{StaticResource ComboBoxForegroundColor}" />
+                                    <SolidColorBrush x:Key="ComboBoxDropDownGlyphForeground" Color="{StaticResource ComboBoxForegroundColor}" />
+                                    <SolidColorBrush x:Key="ComboBoxDropDownBackground" Color="{StaticResource ComboBoxDropDownBackgroundColor}" />
+                                    <SolidColorBrush x:Key="ComboBoxDropDownBorderBrush" Color="{StaticResource ComboBoxDropDownBorderColor}" />
+                                    <SolidColorBrush x:Key="ComboBoxItemForeground" Color="{StaticResource ComboBoxForegroundColor}" />
+                                    <SolidColorBrush x:Key="ComboBoxItemForegroundPointerOver" Color="{StaticResource ComboBoxForegroundColor}" />
+                                    <SolidColorBrush x:Key="ComboBoxItemBackgroundPointerOver" Color="{StaticResource ComboBoxDropDownItemHoverColor}" />
+                                    <SolidColorBrush x:Key="ComboBoxItemBackgroundSelected" Color="{StaticResource ComboBoxDropDownItemHoverColor}" />
+                                    <SolidColorBrush x:Key="ComboBoxItemForegroundSelected" Color="{StaticResource ComboBoxForegroundColor}" />
+                                </ComboBox.Resources>
+                                <ComboBoxItem Content="🎵 MP3" />
+                                <ComboBoxItem Content="🎬 MP4" />
+                            </ComboBox>
+
+                            <controls:HandCursorButton
+                                Grid.Column="2"
                                 Padding="32,16"
                                 Content="Analyze"
                                 CornerRadius="12"
