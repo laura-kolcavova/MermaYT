@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
+using Windows.UI.ViewManagement;
 
 namespace MermaYT.WinUi.Views;
 
@@ -15,6 +16,15 @@ public sealed partial class MainWindow : Window
         ExtendsContentIntoTitleBar = true;
 
         SetTitleBar(AppTitleBar);
+
+        var uiSettings = new UISettings();
+
+        var uiForegroundColor = uiSettings.GetColorValue(UIColorType.Foreground);
+        var uiBackgroundColor = uiSettings.GetColorValue(UIColorType.Background);
+
+        AppWindow.TitleBar.ButtonForegroundColor = uiForegroundColor;
+        AppWindow.TitleBar.ButtonHoverForegroundColor = uiBackgroundColor;
+        AppWindow.TitleBar.ButtonPressedForegroundColor = uiBackgroundColor;
 
         NavView.SelectedItem = NavView.MenuItems[0];
 
