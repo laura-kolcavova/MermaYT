@@ -5,7 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:views="using:MermaYT.WinUi.Views"
     Title="MermaYT"
     mc:Ignorable="d">
 
@@ -37,13 +36,13 @@
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Downloads" Tag="MermaYT.WinUi.Views.DownloadsPage">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE896;" />
+                        <FontIcon Glyph="{StaticResource DownloadsPageGlyph}" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
 
                 <NavigationViewItem Content="About" Tag="MermaYT.WinUi.Views.AboutPage">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE946;" />
+                        <FontIcon Glyph="{StaticResource AboutPageGlyph}" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
