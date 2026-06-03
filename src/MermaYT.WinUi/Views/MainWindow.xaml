@@ -36,25 +36,27 @@
             IsBackButtonVisible="Collapsed"
             IsPaneToggleButtonVisible="False"
             ItemInvoked="NavView_ItemInvoked">
+
+            <NavigationView.Resources>
+                <Thickness x:Key="NavigationViewHeaderMargin">0</Thickness>
+            </NavigationView.Resources>
+
             <NavigationView.HeaderTemplate>
                 <DataTemplate x:DataType="views:PageHeader">
-                    <Grid Padding="24">
+                    <Grid Padding="24,12,24,12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel
-                            Grid.Column="0"
-                            VerticalAlignment="Center"
-                            Spacing="8">
-
+                        <StackPanel Grid.Column="0" Spacing="8">
                             <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="{x:Bind Title}" />
 
                             <TextBlock
                                 FontSize="14"
+                                FontWeight="Normal"
                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                Style="{StaticResource CaptionTextBlockStyle}"
+                                Style="{StaticResource SubtitleTextBlockStyle}"
                                 Text="{x:Bind Subtitle}"
                                 Visibility="{x:Bind SubtitleVisibility}" />
                         </StackPanel>
