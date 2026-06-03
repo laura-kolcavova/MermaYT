@@ -27,12 +27,20 @@ public sealed partial class MainWindow : Window
         AppWindow.TitleBar.ButtonHoverForegroundColor = uiBackgroundColor;
         AppWindow.TitleBar.ButtonPressedForegroundColor = uiBackgroundColor;
 
-        var presenter = OverlappedPresenter.Create();
+        if (AppWindow.Presenter is OverlappedPresenter presenter)
+        {
+            presenter.PreferredMinimumWidth = 540;
+            presenter.PreferredMinimumHeight = 490;
+        }
+        else
+        {
+            var newPresenter = OverlappedPresenter.Create();
 
-        presenter.PreferredMinimumWidth = 540;
-        presenter.PreferredMinimumHeight = 490;
+            newPresenter.PreferredMinimumWidth = 540;
+            newPresenter.PreferredMinimumHeight = 490;
 
-        AppWindow.SetPresenter(presenter);
+            AppWindow.SetPresenter(newPresenter);
+        }
 
         NavView.SelectedItem = NavView.MenuItems[0];
 
