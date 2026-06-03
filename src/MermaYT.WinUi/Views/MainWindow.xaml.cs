@@ -55,6 +55,15 @@ public sealed partial class MainWindow : Window
         NavigationView sender,
         NavigationViewItemInvokedEventArgs args)
     {
+        if (args.IsSettingsInvoked)
+        {
+            Navigate(
+                typeof(SettingsPage),
+                args.RecommendedNavigationTransitionInfo);
+
+            return;
+        }
+
         var typeName = args.InvokedItemContainer
             ?.Tag
             ?.ToString();
@@ -98,6 +107,11 @@ public sealed partial class MainWindow : Window
         Type pageType,
         NavigationTransitionInfo transitionInfo)
     {
+        if (pageType is null)
+        {
+            return;
+        }
+
         var currentPageType = NavFrame.CurrentSourcePageType;
 
         if (currentPageType == pageType)
