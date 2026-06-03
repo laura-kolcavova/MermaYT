@@ -95,11 +95,17 @@ public sealed partial class MainWindow : Window
         object sender,
         NavigationEventArgs e)
     {
-        var header = ((NavigationViewItem)NavView.SelectedItem)
+        var title = (NavView.SelectedItem as NavigationViewItem)
             ?.Content
-            ?.ToString();
+            ?.ToString()
+            ?? string.Empty;
 
-        NavView.Header = header;
+        NavView.Header = NavFrame.CurrentSourcePageType switch
+        {
+            var t when t == typeof(DownloadsPage)
+                => new PageHeader(title, "Add videos to the queue and download your favorite content."),
+            _ => new PageHeader(title),
+        };
     }
 
     private void AppTitleBar_PaneToggleRequested(

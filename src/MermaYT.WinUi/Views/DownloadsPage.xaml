@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <ScrollViewer>
-        <StackPanel Margin="10" Spacing="10">
+        <StackPanel Padding="24" Spacing="10">
             <TextBox Text="Downloads" />
         </StackPanel>
 
