@@ -5,7 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:views="using:MermaYT.WinUi.Views"
     Title="MermaYT"
     mc:Ignorable="d">
 
@@ -33,45 +32,10 @@
         <NavigationView
             x:Name="NavView"
             Grid.Row="1"
+            AlwaysShowHeader="False"
             IsBackButtonVisible="Collapsed"
             IsPaneToggleButtonVisible="False"
             ItemInvoked="NavView_ItemInvoked">
-
-            <NavigationView.Resources>
-                <Thickness x:Key="NavigationViewHeaderMargin">0</Thickness>
-            </NavigationView.Resources>
-
-            <NavigationView.HeaderTemplate>
-                <DataTemplate x:DataType="views:PageHeader">
-                    <Grid Padding="24,12,24,12">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-
-                        <StackPanel Grid.Column="0" Spacing="8">
-                            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="{x:Bind Title}" />
-
-                            <TextBlock
-                                FontSize="14"
-                                FontWeight="Normal"
-                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                Style="{StaticResource SubtitleTextBlockStyle}"
-                                Text="{x:Bind Subtitle}"
-                                Visibility="{x:Bind SubtitleVisibility}" />
-                        </StackPanel>
-
-                        <Image
-                            x:Name="HeaderImage"
-                            Grid.Column="1"
-                            Width="64"
-                            Height="64"
-                            VerticalAlignment="Center"
-                            Source="ms-appx:///Assets/Square150x150Logo.scale-200.png" />
-                    </Grid>
-                </DataTemplate>
-            </NavigationView.HeaderTemplate>
-
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Downloads" Tag="MermaYT.WinUi.Views.DownloadsPage">
                     <NavigationViewItem.Icon>
@@ -86,7 +50,46 @@
                 </NavigationViewItem>
             </NavigationView.MenuItems>
 
-            <Frame x:Name="NavFrame" Navigated="NavFrame_Navigated" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Grid
+                    x:Name="PageHeader"
+                    Grid.Row="0"
+                    Padding="24,12,24,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Spacing="8">
+                        <TextBlock x:Name="HeaderTitle" Style="{StaticResource TitleTextBlockStyle}" />
+
+                        <TextBlock
+                            x:Name="HeaderSubtitle"
+                            FontSize="14"
+                            FontWeight="Normal"
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            Style="{StaticResource SubtitleTextBlockStyle}"
+                            Visibility="Collapsed" />
+                    </StackPanel>
+
+                    <Image
+                        Grid.Column="1"
+                        Width="64"
+                        Height="64"
+                        VerticalAlignment="Center"
+                        Source="ms-appx:///Assets/Square150x150Logo.scale-200.png" />
+                </Grid>
+
+                <Frame
+                    x:Name="NavFrame"
+                    Grid.Row="1"
+                    Navigated="NavFrame_Navigated" />
+            </Grid>
         </NavigationView>
     </Grid>
 </Window>
