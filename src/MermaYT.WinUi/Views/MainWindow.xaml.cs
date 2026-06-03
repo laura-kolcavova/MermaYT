@@ -1,6 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.UI.Xaml.Navigation;
 using System;
 
 namespace MermaYT.WinUi.Views;
@@ -28,7 +29,9 @@ public sealed partial class MainWindow : Window
         object sender,
         NavigationViewItemInvokedEventArgs e)
     {
-        var typeName = e.InvokedItemContainer?.Tag?.ToString();
+        var typeName = e.InvokedItemContainer
+            ?.Tag
+            ?.ToString();
 
         if (typeName is null)
         {
@@ -45,6 +48,17 @@ public sealed partial class MainWindow : Window
         Navigate(
             pageType,
             e.RecommendedNavigationTransitionInfo);
+    }
+
+    private void NavFrame_Navigated(
+        object sender,
+        NavigationEventArgs e)
+    {
+        var header = ((NavigationViewItem)NavView.SelectedItem)
+            ?.Content
+            ?.ToString();
+
+        NavView.Header = header;
     }
 
     private void Navigate(

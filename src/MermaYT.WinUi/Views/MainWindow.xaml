@@ -48,7 +48,7 @@
                 </NavigationViewItem>
             </NavigationView.MenuItems>
 
-            <Frame x:Name="NavFrame" />
+            <Frame x:Name="NavFrame" Navigated="NavFrame_Navigated" />
         </NavigationView>
     </Grid>
 </Window>
