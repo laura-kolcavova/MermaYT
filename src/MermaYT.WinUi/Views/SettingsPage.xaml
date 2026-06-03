@@ -7,5 +7,50 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid />
+    <ScrollViewer>
+        <Grid Padding="24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Border
+                Grid.Row="0"
+                Padding="16"
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="4">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <FontIcon
+                        Grid.Column="0"
+                        Margin="0,0,16,0"
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Glyph="{StaticResource GlyphColor}" />
+
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        Text="Theme" />
+
+                    <ComboBox
+                        x:Name="ThemeComboBox"
+                        Grid.Column="2"
+                        MinWidth="160"
+                        SelectionChanged="ThemeComboBox_SelectionChanged">
+                        <ComboBoxItem Content="System" Tag="Default" />
+                        <ComboBoxItem Content="Light" Tag="Light" />
+                        <ComboBoxItem Content="Dark" Tag="Dark" />
+                    </ComboBox>
+                </Grid>
+            </Border>
+        </Grid>
+    </ScrollViewer>
 </Page>

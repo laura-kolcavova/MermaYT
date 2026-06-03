@@ -20,27 +20,27 @@ public sealed partial class MainWindow : Window
 
         var uiSettings = new UISettings();
 
-        var uiForegroundColor = uiSettings.GetColorValue(UIColorType.Foreground);
-        var uiBackgroundColor = uiSettings.GetColorValue(UIColorType.Background);
+        //var uiForegroundColor = uiSettings.GetColorValue(UIColorType.Foreground);
+        //var uiBackgroundColor = uiSettings.GetColorValue(UIColorType.Background);
 
-        AppWindow.TitleBar.ButtonForegroundColor = uiForegroundColor;
-        AppWindow.TitleBar.ButtonHoverForegroundColor = uiBackgroundColor;
-        AppWindow.TitleBar.ButtonPressedForegroundColor = uiBackgroundColor;
+        //AppWindow.TitleBar.ButtonForegroundColor = uiForegroundColor;
+        //AppWindow.TitleBar.ButtonHoverForegroundColor = uiBackgroundColor;
+        //AppWindow.TitleBar.ButtonPressedForegroundColor = uiBackgroundColor;
 
         if (AppWindow.Presenter is OverlappedPresenter presenter)
         {
             presenter.PreferredMinimumWidth = 540;
             presenter.PreferredMinimumHeight = 490;
         }
-        else
-        {
-            var newPresenter = OverlappedPresenter.Create();
+        //else
+        //{
+        //    var newPresenter = OverlappedPresenter.Create();
 
-            newPresenter.PreferredMinimumWidth = 540;
-            newPresenter.PreferredMinimumHeight = 490;
+        //    newPresenter.PreferredMinimumWidth = 540;
+        //    newPresenter.PreferredMinimumHeight = 490;
 
-            AppWindow.SetPresenter(newPresenter);
-        }
+        //    AppWindow.SetPresenter(newPresenter);
+        //}
 
         NavView.SelectedItem = NavView.MenuItems[0];
 

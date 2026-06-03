@@ -38,13 +38,13 @@
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Downloads" Tag="MermaYT.WinUi.Views.DownloadsPage">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="{StaticResource DownloadsPageGlyph}" />
+                        <FontIcon Glyph="{StaticResource GlyphDownload}" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
 
                 <NavigationViewItem Content="About" Tag="MermaYT.WinUi.Views.AboutPage">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="{StaticResource AboutPageGlyph}" />
+                        <FontIcon Glyph="{StaticResource GlyphInfo}" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
