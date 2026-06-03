@@ -2,9 +2,9 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace MermaYT.WinUi.Views;
 
-public sealed partial class HomePage : Page
+public sealed partial class DownloadsPage : Page
 {
-    public HomePage()
+    public DownloadsPage()
     {
         InitializeComponent();
     }

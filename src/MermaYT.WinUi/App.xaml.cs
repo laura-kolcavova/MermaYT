@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+﻿using MermaYT.WinUi.Views;
+using Microsoft.UI.Xaml;
 
 namespace MermaYT.WinUi;
 

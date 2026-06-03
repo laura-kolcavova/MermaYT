@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
@@ -12,10 +12,6 @@
     <EnableMsixTooling>true</EnableMsixTooling>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Views\HomePage.xaml" />
-  </ItemGroup>
 
   <ItemGroup>
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -50,16 +46,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Views\HomePage.xaml">
+    <Page Update="Views\AboutPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
 
-  <!--<ItemGroup>
-    <None Update="Resources\Colors.xaml">
+  <ItemGroup>
+    <Page Update="Views\DownloadsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </None>
-  </ItemGroup>-->
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\HomePageOld.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
 
   <!--
     Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution

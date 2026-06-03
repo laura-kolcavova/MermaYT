@@ -2,7 +2,7 @@
 
 public enum OutputProfile
 {
-    Mp3 = 1,
+    MP3 = 1,
 
-    Mp4 = 2,
+    MP4 = 2,
 }
