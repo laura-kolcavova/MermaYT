@@ -1,10 +1,10 @@
+using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
-using Windows.UI.ViewManagement;
 
 namespace MermaYT.WinUi.Views;
 
@@ -14,41 +14,47 @@ public sealed partial class MainWindow : Window
     {
         InitializeComponent();
 
-        ExtendsContentIntoTitleBar = true;
+        InitializeAppWindow();
 
-        SetTitleBar(AppTitleBar);
-
-        var uiSettings = new UISettings();
-
-        //var uiForegroundColor = uiSettings.GetColorValue(UIColorType.Foreground);
-        //var uiBackgroundColor = uiSettings.GetColorValue(UIColorType.Background);
-
-        //AppWindow.TitleBar.ButtonForegroundColor = uiForegroundColor;
-        //AppWindow.TitleBar.ButtonHoverForegroundColor = uiBackgroundColor;
-        //AppWindow.TitleBar.ButtonPressedForegroundColor = uiBackgroundColor;
-
-        if (AppWindow.Presenter is OverlappedPresenter presenter)
-        {
-            presenter.PreferredMinimumWidth = 540;
-            presenter.PreferredMinimumHeight = 490;
-        }
-        //else
-        //{
-        //    var newPresenter = OverlappedPresenter.Create();
-
-        //    newPresenter.PreferredMinimumWidth = 540;
-        //    newPresenter.PreferredMinimumHeight = 490;
-
-        //    AppWindow.SetPresenter(newPresenter);
-        //}
+        InitializeAppTitleBar();
 
         NavView.SelectedItem = NavView.MenuItems[0];
 
         Navigate(
             typeof(DownloadsPage),
             new EntranceNavigationTransitionInfo());
+    }
+
+    private void InitializeAppWindow()
+    {
+        if (AppWindow.Presenter is OverlappedPresenter presenter)
+        {
+            presenter.PreferredMinimumWidth = 540;
+            presenter.PreferredMinimumHeight = 490;
+        }
+    }
+
+    private void InitializeAppTitleBar()
+    {
+        ExtendsContentIntoTitleBar = true;
+
+        SetTitleBar(AppTitleBar);
+
+        if (Content is FrameworkElement rootElement)
+        {
+            rootElement.ActualThemeChanged += RootElement_ActualThemeChanged;
+
+            UpdateAppTitleBarColors(rootElement.ActualTheme);
+        }
 
         // AppWindow.TitleBar.PreferredHeightOption = Microsoft.UI.Windowing.TitleBarHeightOption.Tall;
+    }
+
+    private void RootElement_ActualThemeChanged(
+        FrameworkElement sender,
+        object args)
+    {
+        UpdateAppTitleBarColors(sender.ActualTheme);
     }
 
     private void NavView_ItemInvoked(
@@ -101,6 +107,22 @@ public sealed partial class MainWindow : Window
         object args)
     {
         NavView.IsPaneOpen = !NavView.IsPaneOpen;
+    }
+
+    private void UpdateAppTitleBarColors(
+        ElementTheme theme)
+    {
+        bool isLight = theme == ElementTheme.Light;
+
+        AppWindow.TitleBar.ButtonForegroundColor = isLight
+            ? Colors.Black
+            : Colors.White;
+        AppWindow.TitleBar.ButtonHoverForegroundColor = isLight
+            ? Colors.White
+            : Colors.Black;
+        AppWindow.TitleBar.ButtonPressedForegroundColor = isLight
+            ? Colors.White
+            : Colors.Black;
     }
 
     private void Navigate(
