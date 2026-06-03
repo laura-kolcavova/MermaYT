@@ -1,3 +1,4 @@
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
@@ -26,6 +27,13 @@ public sealed partial class MainWindow : Window
         AppWindow.TitleBar.ButtonHoverForegroundColor = uiBackgroundColor;
         AppWindow.TitleBar.ButtonPressedForegroundColor = uiBackgroundColor;
 
+        var presenter = OverlappedPresenter.Create();
+
+        presenter.PreferredMinimumWidth = 540;
+        presenter.PreferredMinimumHeight = 490;
+
+        AppWindow.SetPresenter(presenter);
+
         NavView.SelectedItem = NavView.MenuItems[0];
 
         Navigate(
@@ -36,10 +44,10 @@ public sealed partial class MainWindow : Window
     }
 
     private void NavView_ItemInvoked(
-        object sender,
-        NavigationViewItemInvokedEventArgs e)
+        NavigationView sender,
+        NavigationViewItemInvokedEventArgs args)
     {
-        var typeName = e.InvokedItemContainer
+        var typeName = args.InvokedItemContainer
             ?.Tag
             ?.ToString();
 
@@ -57,7 +65,7 @@ public sealed partial class MainWindow : Window
 
         Navigate(
             pageType,
-            e.RecommendedNavigationTransitionInfo);
+            args.RecommendedNavigationTransitionInfo);
     }
 
     private void NavFrame_Navigated(
@@ -69,6 +77,13 @@ public sealed partial class MainWindow : Window
             ?.ToString();
 
         NavView.Header = header;
+    }
+
+    private void AppTitleBar_PaneToggleRequested(
+        TitleBar sender,
+        object args)
+    {
+        NavView.IsPaneOpen = !NavView.IsPaneOpen;
     }
 
     private void Navigate(

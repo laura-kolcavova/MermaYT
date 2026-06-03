@@ -21,7 +21,9 @@
         <TitleBar
             x:Name="AppTitleBar"
             Title="MermaYT"
-            Grid.Row="0">
+            Grid.Row="0"
+            IsPaneToggleButtonVisible="True"
+            PaneToggleRequested="AppTitleBar_PaneToggleRequested">
             <TitleBar.IconSource>
                 <ImageIconSource ImageSource="ms-appx:///Assets/AppIcon.png" />
             </TitleBar.IconSource>
@@ -31,6 +33,7 @@
             x:Name="NavView"
             Grid.Row="1"
             IsBackButtonVisible="Collapsed"
+            IsPaneToggleButtonVisible="False"
             IsSettingsVisible="False"
             ItemInvoked="NavView_ItemInvoked">
             <NavigationView.MenuItems>
