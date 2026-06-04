@@ -13,6 +13,7 @@
             <x:String x:Key="GlyphDownload">&#xE896;</x:String>
             <x:String x:Key="GlyphInfo">&#xE946;</x:String>
             <x:String x:Key="GlyphColor">&#xE790;</x:String>
+            <x:String x:Key="GlyphLink">&#xE71B;</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
