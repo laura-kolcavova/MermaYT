@@ -50,46 +50,7 @@
                 </NavigationViewItem>
             </NavigationView.MenuItems>
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-
-                <Grid
-                    x:Name="PageHeader"
-                    Grid.Row="0"
-                    Padding="24,12,24,12">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel Grid.Column="0" Spacing="8">
-                        <TextBlock x:Name="HeaderTitle" Style="{StaticResource TitleTextBlockStyle}" />
-
-                        <TextBlock
-                            x:Name="HeaderSubtitle"
-                            FontSize="14"
-                            FontWeight="Normal"
-                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                            Style="{StaticResource SubtitleTextBlockStyle}"
-                            Visibility="Collapsed" />
-                    </StackPanel>
-
-                    <Image
-                        Grid.Column="1"
-                        Width="64"
-                        Height="64"
-                        VerticalAlignment="Center"
-                        Source="ms-appx:///Assets/Square150x150Logo.scale-200.png" />
-                </Grid>
-
-                <Frame
-                    x:Name="NavFrame"
-                    Grid.Row="1"
-                    Navigated="NavFrame_Navigated" />
-            </Grid>
+            <Frame x:Name="NavFrame" Navigated="NavFrame_Navigated" />
         </NavigationView>
     </Grid>
 </Window>

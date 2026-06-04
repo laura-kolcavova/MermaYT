@@ -95,20 +95,10 @@ public sealed partial class MainWindow : Window
         object sender,
         NavigationEventArgs e)
     {
-        HeaderTitle.Text = (NavView.SelectedItem as NavigationViewItem)
+        NavView.Header = (NavView.SelectedItem as NavigationViewItem)
             ?.Content
             ?.ToString()
             ?? string.Empty;
-
-        if (NavFrame.CurrentSourcePageType == typeof(DownloadsPage))
-        {
-            HeaderSubtitle.Text = "Add videos to the queue and download your favorite content.";
-            HeaderSubtitle.Visibility = Visibility.Visible;
-        }
-        else
-        {
-            HeaderSubtitle.Visibility = Visibility.Collapsed;
-        }
     }
 
     private void AppTitleBar_PaneToggleRequested(
