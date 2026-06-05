@@ -18,6 +18,7 @@
             <x:String x:Key="GlyphAdd">&#xE710;</x:String>
             <x:String x:Key="GlyphMovie">&#xE8B2;</x:String>
             <x:String x:Key="GlyphAudio">&#xE767;</x:String>
+            <x:String x:Key="GlyphDelete">&#xE74D;</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

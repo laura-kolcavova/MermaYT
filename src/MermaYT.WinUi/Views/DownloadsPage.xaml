@@ -112,12 +112,11 @@
                                 <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Download to" />
 
                                 <Grid>
-                                    <TextBox Padding="36,5,10,6" PlaceholderText="Select download folder..." />
+                                    <TextBox Padding="36,5,10,6" PlaceholderText="Select folder..." />
 
                                     <FontIcon
                                         Margin="10,0,0,0"
                                         HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
                                         FontSize="16"
                                         Glyph="{StaticResource GlyphFolderHorizontal}" />
                                 </Grid>
@@ -144,6 +143,47 @@
                                 <FontIcon FontSize="14" Glyph="{StaticResource GlyphAdd}" />
                             </StackPanel>
                         </Button>
+                    </Grid>
+                </Border>
+
+                <Border
+                    Padding="16"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="8">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock
+                                Grid.Column="0"
+                                Style="{StaticResource BodyStrongTextBlockStyle}"
+                                Text="Download queue" />
+
+                            <Button
+                                x:Name="ClearCompletedButton"
+                                Grid.Column="2"
+                                MinWidth="130">
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <FontIcon
+                                        VerticalAlignment="Center"
+                                        FontSize="14"
+                                        Glyph="{StaticResource GlyphDelete}" />
+
+                                    <TextBlock Text="Clear completed" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
                     </Grid>
                 </Border>
             </StackPanel>
