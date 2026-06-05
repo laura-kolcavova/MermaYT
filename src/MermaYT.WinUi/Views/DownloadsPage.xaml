@@ -151,13 +151,13 @@
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
-                <VisualState x:Name="WideState">
+                <VisualState x:Name="WideOptionsGridState">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="640" />
                     </VisualState.StateTriggers>
                 </VisualState>
 
-                <VisualState x:Name="NarrowState">
+                <VisualState x:Name="NarrowOptionsGridState">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
