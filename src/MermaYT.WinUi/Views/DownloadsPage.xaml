@@ -42,6 +42,8 @@
                             <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="YouTube URL" />
 
                             <Grid>
+                                <TextBox Padding="36,5,10,6" PlaceholderText="https://www.youtube.com/watch?v=..." />
+
                                 <FontIcon
                                     Margin="10,0,0,0"
                                     HorizontalAlignment="Left"
@@ -54,8 +56,6 @@
                                         <RotateTransform Angle="-45" />
                                     </FontIcon.RenderTransform>
                                 </FontIcon>
-
-                                <TextBox Padding="36,5,10,6" PlaceholderText="https://www.youtube.com/watch?v=..." />
                             </Grid>
                         </StackPanel>
 
@@ -75,7 +75,7 @@
                                 Spacing="6">
                                 <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Output format" />
 
-                                <ComboBox>
+                                <ComboBox MinWidth="160" SelectedIndex="0">
                                     <ComboBoxItem>
                                         <StackPanel Orientation="Horizontal" Spacing="8">
                                             <FontIcon FontSize="14" Glyph="{StaticResource GlyphMovie}" />
@@ -98,14 +98,14 @@
                                 <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Download to" />
 
                                 <Grid>
+                                    <TextBox Padding="36,5,10,6" PlaceholderText="Select download folder..." />
+
                                     <FontIcon
                                         Margin="10,0,0,0"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
                                         FontSize="16"
                                         Glyph="{StaticResource GlyphFolderHorizontal}" />
-
-                                    <TextBox Padding="36,5,10,6" PlaceholderText="Select download folder..." />
                                 </Grid>
 
                             </StackPanel>
