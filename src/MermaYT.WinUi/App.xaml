@@ -15,6 +15,9 @@
             <x:String x:Key="GlyphColor">&#xE790;</x:String>
             <x:String x:Key="GlyphLink">&#xE71B;</x:String>
             <x:String x:Key="GlyphFolderHorizontal">&#xF12B;</x:String>
+            <x:String x:Key="GlyphAdd">&#xE710;</x:String>
+            <x:String x:Key="GlyphMovie">&#xE8B2;</x:String>
+            <x:String x:Key="GlyphAudio">&#xE767;</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

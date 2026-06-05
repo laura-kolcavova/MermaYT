@@ -74,9 +74,23 @@
                                 Margin="0,0,24,0"
                                 Spacing="6">
                                 <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Output format" />
+
                                 <ComboBox>
-                                    <ComboBoxItem Content="MP4 (Video)" />
-                                    <ComboBoxItem Content="MP3 (Sound)" />
+                                    <ComboBoxItem>
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <FontIcon FontSize="14" Glyph="{StaticResource GlyphMovie}" />
+
+                                            <TextBlock Text="MP4 (Video)" />
+                                        </StackPanel>
+                                    </ComboBoxItem>
+
+                                    <ComboBoxItem>
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <FontIcon FontSize="14" Glyph="{StaticResource GlyphAudio}" />
+
+                                            <TextBlock Text="MP3 (Audio)" />
+                                        </StackPanel>
+                                    </ComboBoxItem>
                                 </ComboBox>
                             </StackPanel>
 
@@ -107,8 +121,13 @@
                             Grid.Row="2"
                             MinWidth="130"
                             HorizontalAlignment="Right"
-                            Content="Add +"
-                            Style="{StaticResource AccentButtonStyle}" />
+                            Style="{StaticResource AccentButtonStyle}">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <TextBlock Text="Add" />
+
+                                <FontIcon FontSize="14" Glyph="{StaticResource GlyphAdd}" />
+                            </StackPanel>
+                        </Button>
                     </Grid>
                 </Border>
             </StackPanel>
