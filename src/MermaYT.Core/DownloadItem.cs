@@ -1,27 +1,50 @@
-﻿namespace MermaYT.Core;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
-public sealed class DownloadItem
+namespace MermaYT.Core;
+
+public sealed class DownloadItem : INotifyPropertyChanged
 {
-    public required string Title { get; set; }
+    public event PropertyChangedEventHandler? PropertyChanged;
 
-    public required string Url { get; set; }
+    public required string Title { get; init; }
 
-    public required OutputFormat OutputFormat { get; set; }
+    public required string Url { get; init; }
 
-    public DownloadState DownloadState { get; set; } = DownloadState.Queued;
+    public required OutputFormat OutputFormat { get; init; }
 
-    public long TotalBytes { get; set; } = -1;
+    public required string? ImageUrl { get; init; }
 
-    public long DownloadedBytes { get; set; }
+    private DownloadState _downloadState = DownloadState.Queued;
+    public DownloadState DownloadState
+    {
+        get => _downloadState;
+        set { _downloadState = value; Notify(); }
+    }
 
-    public float Progress { get; set; }
+    private long _totalBytes = -1;
+    public long TotalBytes
+    {
+        get => _totalBytes;
+        set { _totalBytes = value; Notify(); Notify(nameof(Progress)); }
+    }
 
-    public required string? ImageUrl { get; set; }
+    private long _downloadedBytes;
+    public long DownloadedBytes
+    {
+        get => _downloadedBytes;
+        set { _downloadedBytes = value; Notify(); Notify(nameof(Progress)); }
+    }
 
-    public string? ErrorMessage { get; set; }
+    public float Progress => TotalBytes > 0 ? (float)DownloadedBytes / TotalBytes : 0;
 
-    public float GetProgress() =>
-        TotalBytes > 0
-            ? (float)DownloadedBytes / TotalBytes
-            : 0;
+    private string? _errorMessage;
+    public string? ErrorMessage
+    {
+        get => _errorMessage;
+        set { _errorMessage = value; Notify(); }
+    }
+
+    private void Notify([CallerMemberName] string? name = null)
+        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }
