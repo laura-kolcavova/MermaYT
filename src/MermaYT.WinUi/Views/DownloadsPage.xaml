@@ -60,22 +60,33 @@
                         </StackPanel>
 
                         <Grid
+                            x:Name="OptionsGrid"
                             Grid.Row="1"
                             Margin="0,0,0,20"
                             ColumnSpacing="12">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition x:Name="OptionsCol0" Width="Auto" />
+                                <ColumnDefinition x:Name="OptionsCol1" Width="*" />
+                                <ColumnDefinition x:Name="OptionsCol2" Width="Auto" />
                             </Grid.ColumnDefinitions>
 
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition x:Name="OptionsRow1" Height="0" />
+                                <RowDefinition x:Name="OptionsRow2" Height="0" />
+                            </Grid.RowDefinitions>
+
                             <StackPanel
+                                x:Name="FormatPanel"
                                 Grid.Column="0"
                                 Margin="0,0,24,0"
                                 Spacing="6">
                                 <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Output format" />
 
-                                <ComboBox MinWidth="160" SelectedIndex="0">
+                                <ComboBox
+                                    x:Name="OutputFormatComboBox"
+                                    MinWidth="160"
+                                    SelectedIndex="0">
                                     <ComboBoxItem>
                                         <StackPanel Orientation="Horizontal" Spacing="8">
                                             <FontIcon FontSize="14" Glyph="{StaticResource GlyphMovie}" />
@@ -94,7 +105,10 @@
                                 </ComboBox>
                             </StackPanel>
 
-                            <StackPanel Grid.Column="1" Spacing="6">
+                            <StackPanel
+                                x:Name="DownloadToPanel"
+                                Grid.Column="1"
+                                Spacing="6">
                                 <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Download to" />
 
                                 <Grid>
@@ -111,6 +125,7 @@
                             </StackPanel>
 
                             <Button
+                                x:Name="BrowseButton"
                                 Grid.Column="2"
                                 MinWidth="130"
                                 VerticalAlignment="Bottom"
@@ -118,6 +133,7 @@
                         </Grid>
 
                         <Button
+                            x:Name="AddButton"
                             Grid.Row="2"
                             MinWidth="130"
                             HorizontalAlignment="Right"
@@ -132,5 +148,41 @@
                 </Border>
             </StackPanel>
         </ScrollViewer>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="640" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="OptionsGrid.RowSpacing" Value="12" />
+                        <Setter Target="OptionsGrid.ColumnSpacing" Value="0" />
+                        <Setter Target="OptionsCol0.Width" Value="*" />
+                        <Setter Target="OptionsCol1.Width" Value="0" />
+                        <Setter Target="OptionsCol2.Width" Value="0" />
+                        <Setter Target="OptionsRow1.Height" Value="Auto" />
+                        <Setter Target="OptionsRow2.Height" Value="Auto" />
+                        <Setter Target="FormatPanel.Margin" Value="0,0,0,0" />
+                        <Setter Target="OutputFormatComboBox.HorizontalAlignment" Value="Stretch" />
+                        <Setter Target="DownloadToPanel.(Grid.Column)" Value="0" />
+                        <Setter Target="DownloadToPanel.(Grid.Row)" Value="1" />
+                        <Setter Target="BrowseButton.(Grid.Column)" Value="0" />
+                        <Setter Target="BrowseButton.(Grid.Row)" Value="2" />
+                        <Setter Target="BrowseButton.VerticalAlignment" Value="Top" />
+                        <Setter Target="BrowseButton.HorizontalAlignment" Value="Stretch" />
+                        <Setter Target="BrowseButton.HorizontalAlignment" Value="Stretch" />
+                        <Setter Target="AddButton.HorizontalAlignment" Value="Stretch" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>
