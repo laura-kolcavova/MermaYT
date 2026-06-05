@@ -14,10 +14,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <controls:PageHeader
-            Title="Downloads"
-            Grid.Row="0"
-            Subtitle="Add videos to the queue and download your favorite content." />
+        <controls:PageHeader Title="Settings" Grid.Row="0" />
 
         <ScrollViewer Grid.Row="1">
             <Grid Padding="24">

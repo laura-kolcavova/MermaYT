@@ -31,9 +31,14 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <StackPanel Grid.Row="0" Spacing="6">
+                        <StackPanel
+                            Grid.Row="0"
+                            Margin="0,0,0,20"
+                            Spacing="6">
                             <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="YouTube URL" />
 
                             <Grid>
@@ -53,6 +58,58 @@
                                 <TextBox Padding="36,5,10,6" PlaceholderText="https://www.youtube.com/watch?v=..." />
                             </Grid>
                         </StackPanel>
+
+                        <Grid
+                            Grid.Row="1"
+                            Margin="0,0,0,20"
+                            ColumnSpacing="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel
+                                Grid.Column="0"
+                                Margin="0,0,24,0"
+                                Spacing="6">
+                                <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Output format" />
+                                <ComboBox>
+                                    <ComboBoxItem Content="MP4 (Video)" />
+                                    <ComboBoxItem Content="MP3 (Sound)" />
+                                </ComboBox>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Spacing="6">
+                                <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Download to" />
+
+                                <Grid>
+                                    <FontIcon
+                                        Margin="10,0,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        FontSize="16"
+                                        Glyph="{StaticResource GlyphLink}" />
+
+                                    <TextBox Padding="36,5,10,6" PlaceholderText="Select download folder..." />
+                                </Grid>
+
+                            </StackPanel>
+
+                            <StackPanel
+                                Grid.Column="2"
+                                VerticalAlignment="Bottom"
+                                Spacing="6">
+                                <Button Content="Browse" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Button
+                            Grid.Row="2"
+                            Padding="29,5,29,6"
+                            HorizontalAlignment="Right"
+                            Content="Add +"
+                            Style="{StaticResource AccentButtonStyle}" />
                     </Grid>
                 </Border>
             </StackPanel>
