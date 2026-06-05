@@ -16,6 +16,7 @@ public sealed class DownloadItem : INotifyPropertyChanged
     public required string? ImageUrl { get; init; }
 
     private DownloadState _downloadState = DownloadState.Queued;
+
     public DownloadState DownloadState
     {
         get => _downloadState;
@@ -30,6 +31,7 @@ public sealed class DownloadItem : INotifyPropertyChanged
     }
 
     private long _downloadedBytes;
+
     public long DownloadedBytes
     {
         get => _downloadedBytes;
@@ -39,6 +41,7 @@ public sealed class DownloadItem : INotifyPropertyChanged
     public float Progress => TotalBytes > 0 ? (float)DownloadedBytes / TotalBytes : 0;
 
     private string? _errorMessage;
+
     public string? ErrorMessage
     {
         get => _errorMessage;

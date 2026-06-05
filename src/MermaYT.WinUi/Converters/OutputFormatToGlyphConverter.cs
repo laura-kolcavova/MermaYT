@@ -20,7 +20,7 @@ public sealed class OutputFormatToGlyphConverter :
 
         return format switch
         {
-            OutputFormat.MP3 => "MP4",  // Audio
+            OutputFormat.MP3 => "MP3",  // Audio
             OutputFormat.MP4 => "MP4",  // Movie
             _ => string.Empty
         };

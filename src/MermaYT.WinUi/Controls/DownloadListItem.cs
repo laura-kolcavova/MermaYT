@@ -28,26 +28,43 @@ public sealed partial class DownloadListItem :
     protected override void OnApplyTemplate()
     {
         base.OnApplyTemplate();
-        GoToDownloadState(Item?.DownloadState ?? DownloadState.Queued);
+
+        var downloadState = Item?.DownloadState
+            ?? DownloadState.Queued;
+
+        GoToDownloadState(downloadState);
     }
 
-    private static void OnItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnItemChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e)
     {
         var self = (DownloadListItem)d;
 
         if (e.OldValue is DownloadItem old)
+        {
             old.PropertyChanged -= self.OnItemPropertyChanged;
+        }
 
         if (e.NewValue is DownloadItem next)
+        {
             next.PropertyChanged += self.OnItemPropertyChanged;
+        }
 
-        self.GoToDownloadState((e.NewValue as DownloadItem)?.DownloadState ?? DownloadState.Queued);
+        var downloadState = (e.NewValue as DownloadItem)?.DownloadState
+            ?? DownloadState.Queued;
+
+        self.GoToDownloadState(downloadState);
     }
 
-    private void OnItemPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void OnItemPropertyChanged(
+        object? sender,
+        PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(DownloadItem.DownloadState))
+        {
             GoToDownloadState(Item?.DownloadState ?? DownloadState.Queued);
+        }
     }
 
     private void GoToDownloadState(DownloadState state)
