@@ -89,24 +89,23 @@
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
                                         FontSize="16"
-                                        Glyph="{StaticResource GlyphLink}" />
+                                        Glyph="{StaticResource GlyphFolderHorizontal}" />
 
                                     <TextBox Padding="36,5,10,6" PlaceholderText="Select download folder..." />
                                 </Grid>
 
                             </StackPanel>
 
-                            <StackPanel
+                            <Button
                                 Grid.Column="2"
+                                MinWidth="130"
                                 VerticalAlignment="Bottom"
-                                Spacing="6">
-                                <Button Content="Browse" />
-                            </StackPanel>
+                                Content="Browse" />
                         </Grid>
 
                         <Button
                             Grid.Row="2"
-                            Padding="29,5,29,6"
+                            MinWidth="130"
                             HorizontalAlignment="Right"
                             Content="Add +"
                             Style="{StaticResource AccentButtonStyle}" />
