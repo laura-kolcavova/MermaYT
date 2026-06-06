@@ -4,7 +4,7 @@ using System;
 
 namespace MermaYT.WinUi.Converters;
 
-public sealed class OutputFormatToGlyphConverter :
+public sealed class OutputFormatToStringConverter :
     IValueConverter
 {
     public object Convert(

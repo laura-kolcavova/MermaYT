@@ -31,7 +31,7 @@ public sealed class DownloadItem : INotifyPropertyChanged
         set { _totalBytes = value; Notify(); Notify(nameof(Progress)); }
     }
 
-    private long _downloadedBytes;
+    private long _downloadedBytes = -1;
 
     public long DownloadedBytes
     {
