@@ -54,11 +54,87 @@
             <Setter.Value>
                 <ControlTemplate TargetType="controls:DownloadListItem">
                     <Border
+                        Padding="12"
                         Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                         BorderThickness="1"
-                        CornerRadius="8"
-                        Padding="12">
+                        CornerRadius="8">
+                        <Grid ColumnSpacing="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Border
+                                Grid.Column="0"
+                                Width="80"
+                                Height="80"
+                                Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+                                CornerRadius="4">
+                                <!--<Border.Clip>
+                                    <RectangleGeometry Rect="0,0,80,80" ="4" RadiusY="4" />
+                                </Border.Clip>-->
+                                <Image Source="{Binding Item.ImageUrl, RelativeSource={RelativeSource TemplatedParent}}" Stretch="UniformToFill" />
+                            </Border>
+
+                            <StackPanel
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Spacing="4">
+
+                                <StackPanel
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal"
+                                    Spacing="8">
+                                    <TextBlock
+                                        VerticalAlignment="Center"
+                                        Style="{StaticResource BodyStrongTextBlockStyle}"
+                                        Text="{Binding Item.Title, RelativeSource={RelativeSource TemplatedParent}}"
+                                        TextTrimming="CharacterEllipsis" />
+                                    <Border
+                                        Padding="6,2"
+                                        VerticalAlignment="Center"
+                                        Background="{ThemeResource AccentFillColorDefaultBrush}"
+                                        CornerRadius="4">
+                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                            <FontIcon
+                                                FontSize="12"
+                                                Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}"
+                                                Glyph="{Binding Item.OutputFormat, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource OutputFormatToGlyphConverter}}" />
+                                            <TextBlock
+                                                FontSize="12"
+                                                Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}"
+                                                Text="{Binding Item.OutputFormat, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+
+                                <ProgressBar
+                                    x:Name="DownloadProgressBar"
+                                    Maximum="1"
+                                    Value="{Binding Item.Progress, RelativeSource={RelativeSource TemplatedParent}}" />
+
+                                <StackPanel
+                                    x:Name="BytesRow"
+                                    Orientation="Horizontal"
+                                    Spacing="6">
+                                    <TextBlock
+                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                        Style="{StaticResource CaptionTextBlockStyle}"
+                                        Text="{Binding Item.DownloadState, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource DownloadStateToStringConverter}}" />
+                                    <TextBlock
+                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                        Style="{StaticResource CaptionTextBlockStyle}"
+                                        Text="·" />
+                                    <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}" Style="{StaticResource CaptionTextBlockStyle}">
+                                        <Run Text="{Binding Item.DownloadedBytes, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BytesToFileSizeConverter}}" />
+                                        <Run Text=" of " />
+                                        <Run Text="{Binding Item.TotalBytes, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BytesToFileSizeConverter}}" />
+                                    </TextBlock>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </Grid>
 
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="DownloadStates">
@@ -95,87 +171,6 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-
-                        <Grid ColumnSpacing="12">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <Border
-                                Grid.Column="0"
-                                Width="80"
-                                Height="80"
-                                CornerRadius="4"
-                                Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}">
-                                <Border.Clip>
-                                    <RectangleGeometry Rect="0,0,80,80" RadiusX="4" RadiusY="4" />
-                                </Border.Clip>
-                                <Image
-                                    Source="{Binding Item.ImageUrl, RelativeSource={RelativeSource TemplatedParent}}"
-                                    Stretch="UniformToFill" />
-                            </Border>
-
-                            <StackPanel
-                                Grid.Column="1"
-                                Spacing="4"
-                                VerticalAlignment="Center">
-
-                                <StackPanel
-                                    Orientation="Horizontal"
-                                    Spacing="8"
-                                    VerticalAlignment="Center">
-                                    <TextBlock
-                                        Text="{Binding Item.Title, RelativeSource={RelativeSource TemplatedParent}}"
-                                        Style="{StaticResource BodyStrongTextBlockStyle}"
-                                        TextTrimming="CharacterEllipsis"
-                                        VerticalAlignment="Center" />
-                                    <Border
-                                        Background="{ThemeResource AccentFillColorDefaultBrush}"
-                                        CornerRadius="4"
-                                        Padding="6,2"
-                                        VerticalAlignment="Center">
-                                        <StackPanel Orientation="Horizontal" Spacing="4">
-                                            <FontIcon
-                                                Glyph="{Binding Item.OutputFormat, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource OutputFormatToGlyphConverter}}"
-                                                FontSize="12"
-                                                Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}" />
-                                            <TextBlock
-                                                Text="{Binding Item.OutputFormat, RelativeSource={RelativeSource TemplatedParent}}"
-                                                FontSize="12"
-                                                Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}" />
-                                        </StackPanel>
-                                    </Border>
-                                </StackPanel>
-
-                                <ProgressBar
-                                    x:Name="DownloadProgressBar"
-                                    Value="{Binding Item.Progress, RelativeSource={RelativeSource TemplatedParent}}"
-                                    Maximum="1" />
-
-                                <StackPanel
-                                    x:Name="BytesRow"
-                                    Orientation="Horizontal"
-                                    Spacing="6">
-                                    <TextBlock
-                                        Text="{Binding Item.DownloadState, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource DownloadStateToStringConverter}}"
-                                        Style="{StaticResource CaptionTextBlockStyle}"
-                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                    <TextBlock
-                                        Text="·"
-                                        Style="{StaticResource CaptionTextBlockStyle}"
-                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                    <TextBlock
-                                        Style="{StaticResource CaptionTextBlockStyle}"
-                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}">
-                                        <Run Text="{Binding Item.DownloadedBytes, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BytesToFileSizeConverter}}" />
-                                        <Run Text=" of " />
-                                        <Run Text="{Binding Item.TotalBytes, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BytesToFileSizeConverter}}" />
-                                    </TextBlock>
-                                </StackPanel>
-
-                            </StackPanel>
-                        </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

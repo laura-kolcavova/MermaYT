@@ -7,13 +7,13 @@ public sealed class DownloadItem : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public required string Title { get; init; }
+    public string Title { get; set; } = string.Empty;
 
-    public required string Url { get; init; }
+    public string Url { get; set; } = string.Empty;
 
-    public required OutputFormat OutputFormat { get; init; }
+    public OutputFormat OutputFormat { get; set; }
 
-    public required string? ImageUrl { get; init; }
+    public string? ImageUrl { get; set; }
 
     private DownloadState _downloadState = DownloadState.Queued;
 
@@ -24,6 +24,7 @@ public sealed class DownloadItem : INotifyPropertyChanged
     }
 
     private long _totalBytes = -1;
+
     public long TotalBytes
     {
         get => _totalBytes;
