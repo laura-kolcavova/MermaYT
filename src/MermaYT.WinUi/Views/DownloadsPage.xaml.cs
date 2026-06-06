@@ -7,6 +7,10 @@ namespace MermaYT.WinUi.Views;
 
 public sealed partial class DownloadsPage : Page
 {
+    public string YouTubeUrl { get; set; } = string.Empty;
+
+    public OutputFormat SelectedOutputFormat { get; set; } = OutputFormat.MP3;
+
     public ObservableCollection<DownloadItem> DownloadQueue { get; } = [];
 
     public DownloadsPage()
@@ -18,7 +22,12 @@ public sealed partial class DownloadsPage : Page
         object sender,
         RoutedEventArgs e)
     {
-        var downloadItem = new DownloadItem();
+        var downloadItem = new DownloadItem()
+        {
+            Url = YouTubeUrl,
+            Title = YouTubeUrl,
+            OutputFormat = SelectedOutputFormat,
+        };
 
         DownloadQueue.Add(downloadItem);
     }
