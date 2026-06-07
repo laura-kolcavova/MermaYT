@@ -11,9 +11,11 @@ public sealed class DownloadItem : INotifyPropertyChanged
 
     public string Url { get; set; } = string.Empty;
 
-    public OutputFormat OutputFormat { get; set; }
+    public OutputFormat OutputFormat { get; set; } = OutputFormat.MP3;
 
-    public string? ImageUrl { get; set; }
+    public string ImageUrl { get; set; } = string.Empty;
+
+    public string DestinationFolder { get; set; } = string.Empty;
 
     private DownloadState _downloadState = DownloadState.Queued;
 

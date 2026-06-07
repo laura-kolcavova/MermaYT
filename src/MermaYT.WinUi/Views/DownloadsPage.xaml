@@ -121,7 +121,11 @@
                                 <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Download to" />
 
                                 <Grid>
-                                    <TextBox Padding="36,5,10,6" PlaceholderText="Select folder..." />
+                                    <TextBox
+                                        x:Name="DestinationFolderTextBox"
+                                        Padding="36,5,10,6"
+                                        PlaceholderText="Select folder..."
+                                        Text="{x:Bind DestinationFolder, Mode=TwoWay}" />
 
                                     <FontIcon
                                         Margin="10,0,0,0"
@@ -137,6 +141,7 @@
                                 Grid.Column="2"
                                 MinWidth="130"
                                 VerticalAlignment="Bottom"
+                                Click="BrowseButton_Click"
                                 Content="Browse" />
                         </Grid>
 
