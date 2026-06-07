@@ -1,4 +1,5 @@
 using MermaYT.Core;
+using MermaYT.WinUi.Controls;
 using MermaYT.WinUi.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -56,7 +57,7 @@ public sealed partial class DownloadsPage :
         }
     }
 
-    public ObservableCollection<DownloadItem> DownloadQueue { get; } = [];
+    public ObservableCollection<DownloadItemModel> DownloadQueue { get; } = [];
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -71,7 +72,7 @@ public sealed partial class DownloadsPage :
         object sender,
         RoutedEventArgs e)
     {
-        var downloadItem = new DownloadItem()
+        var downloadItem = new DownloadItemModel()
         {
             Url = YouTubeUrl,
             Title = YouTubeUrl,
@@ -115,6 +116,54 @@ public sealed partial class DownloadsPage :
         {
             // Add your error handling here.
         }
+    }
+
+    private void DownloadListItem_OpenDestinationFolderButtonClick(
+       object sender,
+       RoutedEventArgs e)
+    {
+        if (sender is not DownloadListItem downloadListItem ||
+            downloadListItem.Item is null)
+        {
+            return;
+        }
+
+
+    }
+
+    private void DownloadListItem_PauseButtonClick(
+       object sender,
+       RoutedEventArgs e)
+    {
+        if (sender is not DownloadListItem downloadListItem ||
+            downloadListItem.Item is null)
+        {
+            return;
+        }
+    }
+
+    private void DownloadListItem_ResumeButtonClick(
+       object sender,
+       RoutedEventArgs e)
+    {
+        if (sender is not DownloadListItem downloadListItem ||
+            downloadListItem.Item is null)
+        {
+            return;
+        }
+    }
+
+    private void DownloadListItem_RemoveButtonClick(
+        object sender,
+        RoutedEventArgs e)
+    {
+        if (sender is not DownloadListItem downloadListItem ||
+            downloadListItem.Item is null)
+        {
+            return;
+        }
+
+        DownloadQueue.Remove(downloadListItem.Item);
     }
 
     private void CheckAddButtonIsEnabled()

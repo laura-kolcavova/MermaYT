@@ -211,8 +211,13 @@
                             </ItemsRepeater.Layout>
 
                             <ItemsRepeater.ItemTemplate>
-                                <DataTemplate x:DataType="models:DownloadItem">
-                                    <controls:DownloadListItem Item="{x:Bind}" />
+                                <DataTemplate x:DataType="models:DownloadItemModel">
+                                    <controls:DownloadListItem
+                                        Item="{x:Bind}"
+                                        OpenDestinationFolderButtonClick="DownloadListItem_OpenDestinationFolderButtonClick"
+                                        PauseButtonClick="DownloadListItem_PauseButtonClick"
+                                        RemoveButtonClick="DownloadListItem_RemoveButtonClick"
+                                        ResumeButtonClick="DownloadListItem_ResumeButtonClick" />
                                 </DataTemplate>
                             </ItemsRepeater.ItemTemplate>
                         </ItemsRepeater>

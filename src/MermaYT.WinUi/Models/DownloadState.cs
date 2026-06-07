@@ -1,4 +1,4 @@
-﻿namespace MermaYT.Core;
+﻿namespace MermaYT.WinUi.Models;
 
 public enum DownloadState
 {

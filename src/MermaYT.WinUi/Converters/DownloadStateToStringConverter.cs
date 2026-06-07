@@ -1,4 +1,4 @@
-using MermaYT.Core;
+using MermaYT.WinUi.Models;
 using Microsoft.UI.Xaml.Data;
 using System;
 

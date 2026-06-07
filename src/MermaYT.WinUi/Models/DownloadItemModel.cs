@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace MermaYT.WinUi.Models;
 
-public sealed class DownloadItem : INotifyPropertyChanged
+public sealed class DownloadItemModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
 
