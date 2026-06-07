@@ -4,16 +4,21 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.Storage.Pickers;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace MermaYT.WinUi.Views;
 
-public sealed partial class DownloadsPage : Page
+public sealed partial class DownloadsPage :
+    Page,
+    INotifyPropertyChanged
 {
     public string YouTubeUrl { get; set; } = string.Empty;
 
     public OutputFormat SelectedOutputFormat { get; set; } = OutputFormat.MP3;
 
-    public string DestinationFolder { get; set; } = string.Empty;
+    public string DestinationFolder { get; set; } = Environment.GetFolderPath(
+        Environment.SpecialFolder.Desktop);
 
     public ObservableCollection<DownloadItem> DownloadQueue { get; } = [];
 
@@ -21,6 +26,8 @@ public sealed partial class DownloadsPage : Page
     {
         InitializeComponent();
     }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     private void AddButton_Click(
         object sender,
@@ -50,7 +57,7 @@ public sealed partial class DownloadsPage : Page
 
         var folderPicker = new FolderPicker(appWindow.Id)
         {
-            SuggestedStartLocation = PickerLocationId.Downloads,
+            SuggestedFolder = DestinationFolder,
         };
 
         var result = await folderPicker.PickSingleFolderAsync();
@@ -60,10 +67,17 @@ public sealed partial class DownloadsPage : Page
             var path = result.Path;
 
             DestinationFolder = path;
+            NotifyPropertyChanged(nameof(DestinationFolder));
         }
         else
         {
             // Add your error handling here.
         }
+    }
+
+    private void NotifyPropertyChanged(
+        [CallerMemberName] string? name = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

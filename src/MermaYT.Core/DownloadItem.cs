@@ -22,7 +22,11 @@ public sealed class DownloadItem : INotifyPropertyChanged
     public DownloadState DownloadState
     {
         get => _downloadState;
-        set { _downloadState = value; Notify(); }
+        set
+        {
+            _downloadState = value;
+            NotifyPropertyChanged();
+        }
     }
 
     private long _totalBytes = -1;
@@ -30,7 +34,12 @@ public sealed class DownloadItem : INotifyPropertyChanged
     public long TotalBytes
     {
         get => _totalBytes;
-        set { _totalBytes = value; Notify(); Notify(nameof(Progress)); }
+        set
+        {
+            _totalBytes = value;
+            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(Progress));
+        }
     }
 
     private long _downloadedBytes = -1;
@@ -38,7 +47,12 @@ public sealed class DownloadItem : INotifyPropertyChanged
     public long DownloadedBytes
     {
         get => _downloadedBytes;
-        set { _downloadedBytes = value; Notify(); Notify(nameof(Progress)); }
+        set
+        {
+            _downloadedBytes = value;
+            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(Progress));
+        }
     }
 
     public float Progress => TotalBytes > 0 ? (float)DownloadedBytes / TotalBytes : 0;
@@ -48,9 +62,12 @@ public sealed class DownloadItem : INotifyPropertyChanged
     public string? ErrorMessage
     {
         get => _errorMessage;
-        set { _errorMessage = value; Notify(); }
+        set { _errorMessage = value; NotifyPropertyChanged(); }
     }
 
-    private void Notify([CallerMemberName] string? name = null)
-        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    private void NotifyPropertyChanged(
+        [CallerMemberName] string? name = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    }
 }
