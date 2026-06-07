@@ -5,9 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:MermaYT.WinUi.Controls"
     xmlns:converters="using:MermaYT.WinUi.Converters"
-    xmlns:core="using:MermaYT.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:MermaYT.WinUi.Models"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -117,7 +117,7 @@
                             <StackPanel
                                 x:Name="DownloadToPanel"
                                 Grid.Column="1"
-                                Spacing="6">
+                                Spacing="8">
                                 <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Download to" />
 
                                 <Grid>
@@ -211,7 +211,7 @@
                             </ItemsRepeater.Layout>
 
                             <ItemsRepeater.ItemTemplate>
-                                <DataTemplate x:DataType="core:DownloadItem">
+                                <DataTemplate x:DataType="models:DownloadItem">
                                     <controls:DownloadListItem Item="{x:Bind}" />
                                 </DataTemplate>
                             </ItemsRepeater.ItemTemplate>

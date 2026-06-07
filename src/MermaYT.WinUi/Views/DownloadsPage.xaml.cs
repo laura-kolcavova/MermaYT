@@ -1,4 +1,5 @@
 using MermaYT.Core;
+using MermaYT.WinUi.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.Storage.Pickers;
@@ -57,14 +58,14 @@ public sealed partial class DownloadsPage :
 
     public ObservableCollection<DownloadItem> DownloadQueue { get; } = [];
 
+    public event PropertyChangedEventHandler? PropertyChanged;
+
     public DownloadsPage()
     {
         InitializeComponent();
 
         CheckAddButtonIsEnabled();
     }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
 
     private void AddButton_Click(
         object sender,

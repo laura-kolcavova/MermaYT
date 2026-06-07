@@ -1,7 +1,8 @@
+using MermaYT.Core;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MermaYT.Core;
+namespace MermaYT.WinUi.Models;
 
 public sealed class DownloadItem : INotifyPropertyChanged
 {

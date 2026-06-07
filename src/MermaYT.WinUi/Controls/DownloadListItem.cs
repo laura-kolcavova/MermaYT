@@ -1,4 +1,5 @@
 using MermaYT.Core;
+using MermaYT.WinUi.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System.ComponentModel;

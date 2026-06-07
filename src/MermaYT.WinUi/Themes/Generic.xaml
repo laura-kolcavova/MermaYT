@@ -8,6 +8,14 @@
     <converters:DownloadStateToStringConverter x:Key="DownloadStateToStringConverter" />
     <converters:OutputFormatToStringConverter x:Key="OutputFormatToStringConverter" />
 
+    <Style x:Key="IconButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="8" />
+        <Setter Property="CornerRadius" Value="4" />
+    </Style>
+
     <Style TargetType="controls:PageHeader">
         <Setter Property="Template">
             <Setter.Value>
@@ -63,6 +71,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
                             <Border
@@ -132,9 +141,27 @@
                                     </TextBlock>
                                 </StackPanel>
                             </StackPanel>
+
+                            <StackPanel
+                                Grid.Column="2"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal"
+                                Spacing="8">
+                                <Button x:Name="OpenDestinationFolderButton" Style="{StaticResource IconButtonStyle}">
+                                    <FontIcon FontSize="14" Glyph="{StaticResource GlyphFolderHorizontal}" />
+                                </Button>
+
+                                <Button x:Name="PauseButton" Style="{StaticResource IconButtonStyle}">
+                                    <FontIcon FontSize="14" Glyph="{StaticResource GlyphPause}" />
+                                </Button>
+
+                                <Button x:Name="RemoveButton" Style="{StaticResource IconButtonStyle}">
+                                    <FontIcon FontSize="14" Glyph="{StaticResource GlyphClear}" />
+                                </Button>
+                            </StackPanel>
                         </Grid>
 
-                        <VisualStateManager.VisualStateGroups>
+                        <!--<VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="DownloadStates">
                                 <VisualState x:Name="Queued" />
                                 <VisualState x:Name="Processing">
@@ -168,7 +195,7 @@
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
+                        </VisualStateManager.VisualStateGroups>-->
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
