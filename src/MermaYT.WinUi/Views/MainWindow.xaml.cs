@@ -14,28 +14,12 @@ public sealed partial class MainWindow : Window
     {
         InitializeComponent();
 
-        InitializeAppWindow();
-
-        InitializeAppTitleBar();
-
-        NavView.SelectedItem = NavView.MenuItems[0];
-
-        Navigate(
-            typeof(DownloadsPage),
-            new EntranceNavigationTransitionInfo());
-    }
-
-    private void InitializeAppWindow()
-    {
         if (AppWindow.Presenter is OverlappedPresenter presenter)
         {
             presenter.PreferredMinimumWidth = 540;
             presenter.PreferredMinimumHeight = 490;
         }
-    }
 
-    private void InitializeAppTitleBar()
-    {
         ExtendsContentIntoTitleBar = true;
 
         SetTitleBar(AppTitleBar);
@@ -47,7 +31,11 @@ public sealed partial class MainWindow : Window
             UpdateAppTitleBarColors(rootElement.ActualTheme);
         }
 
-        // AppWindow.TitleBar.PreferredHeightOption = Microsoft.UI.Windowing.TitleBarHeightOption.Tall;
+        NavView.SelectedItem = NavView.MenuItems[0];
+
+        Navigate(
+            typeof(DownloadsPage),
+            new EntranceNavigationTransitionInfo());
     }
 
     private void RootElement_ActualThemeChanged(
