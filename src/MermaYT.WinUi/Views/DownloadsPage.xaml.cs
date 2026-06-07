@@ -5,6 +5,7 @@ using Microsoft.Windows.Storage.Pickers;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 
 namespace MermaYT.WinUi.Views;
@@ -13,18 +14,54 @@ public sealed partial class DownloadsPage :
     Page,
     INotifyPropertyChanged
 {
-    public string YouTubeUrl { get; set; } = string.Empty;
+    private string _youTubeUrl = string.Empty;
+
+    public string YouTubeUrl
+    {
+        get => _youTubeUrl;
+        set
+        {
+            _youTubeUrl = value;
+            NotifyPropertyChanged();
+            CheckAddButtonIsEnabled();
+        }
+    }
 
     public OutputFormat SelectedOutputFormat { get; set; } = OutputFormat.MP3;
 
-    public string DestinationFolder { get; set; } = Environment.GetFolderPath(
+    private string _destinationFolder = Environment.GetFolderPath(
         Environment.SpecialFolder.Desktop);
+
+    public string DestinationFolder
+    {
+        get => _destinationFolder;
+        set
+        {
+            _destinationFolder = value;
+            NotifyPropertyChanged();
+            CheckAddButtonIsEnabled();
+        }
+    }
+
+    private bool _addButtonIsEnabled = false;
+
+    public bool AddButtonIsEnabled
+    {
+        get => _addButtonIsEnabled;
+        private set
+        {
+            _addButtonIsEnabled = value;
+            NotifyPropertyChanged();
+        }
+    }
 
     public ObservableCollection<DownloadItem> DownloadQueue { get; } = [];
 
     public DownloadsPage()
     {
         InitializeComponent();
+
+        CheckAddButtonIsEnabled();
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -55,9 +92,14 @@ public sealed partial class DownloadsPage :
             return;
         }
 
+        var suggestedFolder = Directory.Exists(DestinationFolder)
+            ? DestinationFolder
+            : Environment.GetFolderPath(
+                Environment.SpecialFolder.Desktop);
+
         var folderPicker = new FolderPicker(appWindow.Id)
         {
-            SuggestedFolder = DestinationFolder,
+            SuggestedFolder = suggestedFolder,
         };
 
         var result = await folderPicker.PickSingleFolderAsync();
@@ -67,11 +109,31 @@ public sealed partial class DownloadsPage :
             var path = result.Path;
 
             DestinationFolder = path;
-            NotifyPropertyChanged(nameof(DestinationFolder));
         }
         else
         {
             // Add your error handling here.
+        }
+    }
+
+    private void CheckAddButtonIsEnabled()
+    {
+        var isEnabled = true;
+
+        if (string.IsNullOrEmpty(YouTubeUrl))
+        {
+            isEnabled = false;
+        }
+
+        if (string.IsNullOrEmpty(DestinationFolder) ||
+            !Directory.Exists(DestinationFolder))
+        {
+            isEnabled = false;
+        }
+
+        if (AddButtonIsEnabled != isEnabled)
+        {
+            AddButtonIsEnabled = isEnabled;
         }
     }
 

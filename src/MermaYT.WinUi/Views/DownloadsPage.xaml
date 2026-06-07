@@ -51,7 +51,7 @@
                                 <TextBox
                                     Padding="36,5,10,6"
                                     PlaceholderText="https://www.youtube.com/watch?v=..."
-                                    Text="{x:Bind YouTubeUrl, Mode=TwoWay}" />
+                                    Text="{x:Bind YouTubeUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                                 <FontIcon
                                     Margin="10,0,0,0"
@@ -125,7 +125,7 @@
                                         x:Name="DestinationFolderTextBox"
                                         Padding="36,5,10,6"
                                         PlaceholderText="Select folder..."
-                                        Text="{x:Bind DestinationFolder, Mode=TwoWay}" />
+                                        Text="{x:Bind DestinationFolder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                                     <FontIcon
                                         Margin="10,0,0,0"
@@ -151,6 +151,7 @@
                             MinWidth="130"
                             HorizontalAlignment="Right"
                             Click="AddButton_Click"
+                            IsEnabled="{x:Bind AddButtonIsEnabled, Mode=OneWay}"
                             Style="{StaticResource AccentButtonStyle}">
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <TextBlock Text="Add" />
