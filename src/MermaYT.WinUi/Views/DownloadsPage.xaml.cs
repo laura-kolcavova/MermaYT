@@ -3,12 +3,14 @@ using MermaYT.WinUi.Controls;
 using MermaYT.WinUi.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.Windows.Storage.Pickers;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
+using Windows.System;
 
 namespace MermaYT.WinUi.Views;
 
@@ -68,6 +70,18 @@ public sealed partial class DownloadsPage :
         CheckAddButtonIsEnabled();
     }
 
+    private void YouTubeUrlTextBox_KeyDown(
+        object sender,
+        KeyRoutedEventArgs e)
+    {
+        if (e.Key == VirtualKey.Enter &&
+            !e.KeyStatus.WasKeyDown &&
+            CanAddToDownloadQueue())
+        {
+            AddToDownloadQueue();
+        }
+    }
+
     private async void BrowseButton_Click(
         object sender,
         RoutedEventArgs e)
@@ -107,17 +121,7 @@ public sealed partial class DownloadsPage :
         object sender,
         RoutedEventArgs e)
     {
-        var downloadItem = new DownloadItemModel()
-        {
-            Url = YouTubeUrl,
-            Title = YouTubeUrl,
-            OutputFormat = SelectedOutputFormat,
-            DestinationFolder = DestinationFolder
-        };
-
-        DownloadQueue.Add(downloadItem);
-
-        YouTubeUrl = string.Empty;
+        AddToDownloadQueue();
     }
 
     private void ClearCompletedButton_Click(
@@ -181,26 +185,45 @@ public sealed partial class DownloadsPage :
         DownloadQueue.Remove(downloadListItem.Item);
     }
 
-
-    private void CheckAddButtonIsEnabled()
+    private bool CanAddToDownloadQueue()
     {
-        var isEnabled = true;
-
         if (string.IsNullOrEmpty(YouTubeUrl))
         {
-            isEnabled = false;
+            return false;
         }
 
         if (string.IsNullOrEmpty(DestinationFolder) ||
             !Directory.Exists(DestinationFolder))
         {
-            isEnabled = false;
+            return false;
         }
+
+        return true;
+    }
+
+    private void CheckAddButtonIsEnabled()
+    {
+        var isEnabled = CanAddToDownloadQueue();
 
         if (AddButtonIsEnabled != isEnabled)
         {
             AddButtonIsEnabled = isEnabled;
         }
+    }
+
+    private void AddToDownloadQueue()
+    {
+        var downloadItem = new DownloadItemModel()
+        {
+            Url = YouTubeUrl,
+            Title = YouTubeUrl,
+            OutputFormat = SelectedOutputFormat,
+            DestinationFolder = DestinationFolder
+        };
+
+        DownloadQueue.Add(downloadItem);
+
+        YouTubeUrl = string.Empty;
     }
 
     private void NotifyPropertyChanged(

@@ -50,7 +50,9 @@
 
                             <Grid>
                                 <TextBox
+                                    x:Name="YouTubeUrlTextBox"
                                     Padding="36,5,10,6"
+                                    KeyDown="YouTubeUrlTextBox_KeyDown"
                                     PlaceholderText="https://www.youtube.com/watch?v=..."
                                     Text="{x:Bind YouTubeUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
