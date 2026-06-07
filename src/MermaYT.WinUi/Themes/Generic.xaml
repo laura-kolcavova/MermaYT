@@ -95,7 +95,7 @@
                                 <StackPanel
                                     Grid.Column="1"
                                     VerticalAlignment="Center"
-                                    Spacing="12">
+                                    Spacing="8">
                                     <StackPanel
                                         VerticalAlignment="Center"
                                         Orientation="Horizontal"

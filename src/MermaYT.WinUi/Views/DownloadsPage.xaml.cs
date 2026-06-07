@@ -74,8 +74,10 @@ public sealed partial class DownloadsPage :
         object sender,
         KeyRoutedEventArgs e)
     {
-        if (e.Key == VirtualKey.Enter &&
-            !e.KeyStatus.WasKeyDown &&
+        var enterKeyPressed = e.Key == VirtualKey.Enter &&
+            !e.KeyStatus.WasKeyDown;
+
+        if (enterKeyPressed &&
             CanAddToDownloadQueue())
         {
             AddToDownloadQueue();
