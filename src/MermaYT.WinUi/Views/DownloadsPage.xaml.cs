@@ -95,7 +95,10 @@ public sealed partial class DownloadsPage :
             return;
         }
 
-        var suggestedFolder = Directory.Exists(DestinationFolder)
+        var destinationFolderExists = !string.IsNullOrEmpty(DestinationFolder) &&
+            Directory.Exists(DestinationFolder);
+
+        var suggestedFolder = destinationFolderExists
             ? DestinationFolder
             : Environment.GetFolderPath(
                 Environment.SpecialFolder.Desktop);
@@ -139,7 +142,7 @@ public sealed partial class DownloadsPage :
         }
     }
 
-    private void DownloadListItem_OpenDestinationFolderButtonClick(
+    private async void DownloadListItem_OpenDestinationFolderButtonClick(
        object sender,
        RoutedEventArgs e)
     {
@@ -149,7 +152,15 @@ public sealed partial class DownloadsPage :
             return;
         }
 
+        var destinationFolder = downloadListItem.Item.DestinationFolder;
 
+        var destinationFolderExists = !string.IsNullOrEmpty(destinationFolder) &&
+           Directory.Exists(destinationFolder);
+
+        if (destinationFolderExists)
+        {
+            await Launcher.LaunchFolderPathAsync(destinationFolder);
+        }
     }
 
     private void DownloadListItem_PauseButtonClick(
