@@ -67,83 +67,103 @@
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                         BorderThickness="1"
                         CornerRadius="8">
-                        <Grid ColumnSpacing="12">
+                        <Grid ColumnSpacing="48">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <Border
-                                Grid.Column="0"
-                                Width="80"
-                                Height="80"
-                                Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
-                                CornerRadius="4">
-                                <Border.Clip>
-                                    <RectangleGeometry Rect="0,0,80,80" />
-                                </Border.Clip>
+                            <Grid Grid.Column="0" ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-                                <Image Source="{Binding Item.ImageUrl, RelativeSource={RelativeSource TemplatedParent}}" Stretch="UniformToFill" />
-                            </Border>
+                                <Border
+                                    Grid.Column="0"
+                                    Width="80"
+                                    Height="80"
+                                    Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+                                    CornerRadius="4">
+                                    <Border.Clip>
+                                        <RectangleGeometry Rect="0,0,80,80" />
+                                    </Border.Clip>
+
+                                    <Image Source="{Binding Item.ImageUrl, RelativeSource={RelativeSource TemplatedParent}}" Stretch="UniformToFill" />
+                                </Border>
+
+                                <StackPanel
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Spacing="12">
+                                    <StackPanel
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal"
+                                        Spacing="8">
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            Style="{StaticResource BodyStrongTextBlockStyle}"
+                                            Text="{Binding Item.Title, RelativeSource={RelativeSource TemplatedParent}}"
+                                            TextTrimming="CharacterEllipsis" />
+
+                                        <Border
+                                            Padding="6,2"
+                                            VerticalAlignment="Center"
+                                            Background="{ThemeResource AccentFillColorDefaultBrush}"
+                                            CornerRadius="4">
+                                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                                <TextBlock
+                                                    FontSize="12"
+                                                    Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}"
+                                                    Text="{Binding Item.OutputFormat, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource OutputFormatToStringConverter}}" />
+                                            </StackPanel>
+                                        </Border>
+                                    </StackPanel>
+
+                                    <Grid ColumnSpacing="8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <ProgressBar
+                                            x:Name="DownloadProgressBar"
+                                            Grid.Column="0"
+                                            Maximum="1"
+                                            Value="{Binding Item.Progress, RelativeSource={RelativeSource TemplatedParent}}" />
+
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            LineHeight="22"
+                                            Text="0%" />
+                                    </Grid>
+
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <TextBlock
+                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                            Style="{StaticResource CaptionTextBlockStyle}"
+                                            Text="{Binding Item.DownloadState, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource DownloadStateToStringConverter}}" />
+
+                                        <TextBlock
+                                            x:Name="StatusAndBytesStatusSeparator"
+                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                            Style="{StaticResource CaptionTextBlockStyle}"
+                                            Text="·" />
+
+                                        <TextBlock
+                                            x:Name="BytesStatus"
+                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                            Style="{StaticResource CaptionTextBlockStyle}">
+                                            <Run Text="{Binding Item.DownloadedBytes, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BytesToFileSizeConverter}}" />
+                                            <Run Text=" of " />
+                                            <Run Text="{Binding Item.TotalBytes, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BytesToFileSizeConverter}}" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
 
                             <StackPanel
                                 Grid.Column="1"
-                                VerticalAlignment="Center"
-                                Spacing="4">
-                                <StackPanel
-                                    VerticalAlignment="Center"
-                                    Orientation="Horizontal"
-                                    Spacing="8">
-                                    <TextBlock
-                                        VerticalAlignment="Center"
-                                        Style="{StaticResource BodyStrongTextBlockStyle}"
-                                        Text="{Binding Item.Title, RelativeSource={RelativeSource TemplatedParent}}"
-                                        TextTrimming="CharacterEllipsis" />
-
-                                    <Border
-                                        Padding="6,2"
-                                        VerticalAlignment="Center"
-                                        Background="{ThemeResource AccentFillColorDefaultBrush}"
-                                        CornerRadius="4">
-                                        <StackPanel Orientation="Horizontal" Spacing="4">
-                                            <TextBlock
-                                                FontSize="12"
-                                                Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}"
-                                                Text="{Binding Item.OutputFormat, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource OutputFormatToStringConverter}}" />
-                                        </StackPanel>
-                                    </Border>
-                                </StackPanel>
-
-                                <ProgressBar
-                                    x:Name="DownloadProgressBar"
-                                    Maximum="1"
-                                    Value="{Binding Item.Progress, RelativeSource={RelativeSource TemplatedParent}}" />
-
-                                <StackPanel
-                                    x:Name="BytesRow"
-                                    Orientation="Horizontal"
-                                    Spacing="6">
-                                    <TextBlock
-                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                        Style="{StaticResource CaptionTextBlockStyle}"
-                                        Text="{Binding Item.DownloadState, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource DownloadStateToStringConverter}}" />
-
-                                    <TextBlock
-                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                        Style="{StaticResource CaptionTextBlockStyle}"
-                                        Text="·" />
-
-                                    <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}" Style="{StaticResource CaptionTextBlockStyle}">
-                                        <Run Text="{Binding Item.DownloadedBytes, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BytesToFileSizeConverter}}" />
-                                        <Run Text=" of " />
-                                        <Run Text="{Binding Item.TotalBytes, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BytesToFileSizeConverter}}" />
-                                    </TextBlock>
-                                </StackPanel>
-                            </StackPanel>
-
-                            <StackPanel
-                                Grid.Column="2"
                                 VerticalAlignment="Center"
                                 Orientation="Horizontal"
                                 Spacing="8">
@@ -155,7 +175,10 @@
                                     <FontIcon FontSize="14" Glyph="{StaticResource GlyphPause}" />
                                 </Button>
 
-                                <Button x:Name="ResumeButton" Style="{StaticResource StyleIconButton}">
+                                <Button
+                                    x:Name="ResumeButton"
+                                    Style="{StaticResource StyleIconButton}"
+                                    Visibility="Collapsed">
                                     <FontIcon FontSize="14" Glyph="{StaticResource GlyphPlay}" />
                                 </Button>
 
@@ -165,41 +188,56 @@
                             </StackPanel>
                         </Grid>
 
-                        <!--<VisualStateManager.VisualStateGroups>
+                        <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="DownloadStates">
-                                <VisualState x:Name="Queued" />
+                                <VisualState x:Name="Queued">
+                                    <VisualState.Setters>
+                                        <!--<Setter Target="DownloadProgressBar.Visibility" Value="Collapsed" />-->
+                                        <Setter Target="StatusAndBytesStatusSeparator.Visibility" Value="Collapsed" />
+                                        <Setter Target="BytesStatus.Visibility" Value="Collapsed" />
+                                    </VisualState.Setters>
+                                </VisualState>
+
                                 <VisualState x:Name="Processing">
                                     <VisualState.Setters>
                                         <Setter Target="DownloadProgressBar.IsIndeterminate" Value="True" />
                                     </VisualState.Setters>
                                 </VisualState>
+
                                 <VisualState x:Name="Downloading" />
+
                                 <VisualState x:Name="Converting">
                                     <VisualState.Setters>
                                         <Setter Target="DownloadProgressBar.IsIndeterminate" Value="True" />
                                     </VisualState.Setters>
                                 </VisualState>
-                                <VisualState x:Name="Paused" />
-                                <VisualState x:Name="Completed">
+
+                                <VisualState x:Name="Paused">
                                     <VisualState.Setters>
-                                        <Setter Target="DownloadProgressBar.Visibility" Value="Collapsed" />
-                                        <Setter Target="BytesRow.Visibility" Value="Collapsed" />
+                                        <Setter Target="PauseButton.Visibility" Value="Collapsed" />
+                                        <Setter Target="ResumeButton.Visibility" Value="Visible" />
                                     </VisualState.Setters>
                                 </VisualState>
+
+                                <VisualState x:Name="Completed" />
+
                                 <VisualState x:Name="Failed">
                                     <VisualState.Setters>
-                                        <Setter Target="DownloadProgressBar.Visibility" Value="Collapsed" />
-                                        <Setter Target="BytesRow.Visibility" Value="Collapsed" />
+                                        <!--<Setter Target="DownloadProgressBar.Visibility" Value="Collapsed" />-->
+                                        <Setter Target="StatusAndBytesStatusSeparator.Visibility" Value="Collapsed" />
+                                        <Setter Target="BytesStatus.Visibility" Value="Collapsed" />
                                     </VisualState.Setters>
                                 </VisualState>
+
                                 <VisualState x:Name="Cancelled">
                                     <VisualState.Setters>
-                                        <Setter Target="DownloadProgressBar.Visibility" Value="Collapsed" />
-                                        <Setter Target="BytesRow.Visibility" Value="Collapsed" />
+                                        <!--<Setter Target="DownloadProgressBar.Visibility" Value="Collapsed" />-->
+                                        <Setter Target="StatusAndBytesStatusSeparator.Visibility" Value="Collapsed" />
+                                        <Setter Target="BytesStatus.Visibility" Value="Collapsed" />
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>-->
+                        </VisualStateManager.VisualStateGroups>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

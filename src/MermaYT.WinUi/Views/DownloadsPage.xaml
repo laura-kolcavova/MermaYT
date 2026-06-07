@@ -190,7 +190,8 @@
                             <Button
                                 x:Name="ClearCompletedButton"
                                 Grid.Column="2"
-                                MinWidth="130">
+                                MinWidth="130"
+                                Click="ClearCompletedButton_Click">
                                 <StackPanel Orientation="Horizontal" Spacing="8">
                                     <FontIcon
                                         VerticalAlignment="Center"

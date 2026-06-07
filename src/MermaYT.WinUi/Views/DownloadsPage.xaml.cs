@@ -68,21 +68,6 @@ public sealed partial class DownloadsPage :
         CheckAddButtonIsEnabled();
     }
 
-    private void AddButton_Click(
-        object sender,
-        RoutedEventArgs e)
-    {
-        var downloadItem = new DownloadItemModel()
-        {
-            Url = YouTubeUrl,
-            Title = YouTubeUrl,
-            OutputFormat = SelectedOutputFormat,
-            DestinationFolder = DestinationFolder
-        };
-
-        DownloadQueue.Add(downloadItem);
-    }
-
     private async void BrowseButton_Click(
         object sender,
         RoutedEventArgs e)
@@ -115,6 +100,36 @@ public sealed partial class DownloadsPage :
         else
         {
             // Add your error handling here.
+        }
+    }
+
+    private void AddButton_Click(
+        object sender,
+        RoutedEventArgs e)
+    {
+        var downloadItem = new DownloadItemModel()
+        {
+            Url = YouTubeUrl,
+            Title = YouTubeUrl,
+            OutputFormat = SelectedOutputFormat,
+            DestinationFolder = DestinationFolder
+        };
+
+        DownloadQueue.Add(downloadItem);
+
+        YouTubeUrl = string.Empty;
+    }
+
+    private void ClearCompletedButton_Click(
+        object sender,
+        RoutedEventArgs e)
+    {
+        foreach (var item in DownloadQueue)
+        {
+            if (item.DownloadState == DownloadState.Completed)
+            {
+                DownloadQueue.Remove(item);
+            }
         }
     }
 
@@ -165,6 +180,7 @@ public sealed partial class DownloadsPage :
 
         DownloadQueue.Remove(downloadListItem.Item);
     }
+
 
     private void CheckAddButtonIsEnabled()
     {
