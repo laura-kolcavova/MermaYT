@@ -92,7 +92,7 @@
                                 x:Name="FormatPanel"
                                 Grid.Column="0"
                                 Margin="0,0,24,0"
-                                Spacing="6">
+                                Spacing="8">
                                 <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Output format" />
 
                                 <ComboBox
