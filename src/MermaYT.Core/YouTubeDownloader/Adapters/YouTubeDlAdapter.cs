@@ -5,7 +5,7 @@ using System.Text;
 namespace MermaYT.Core.YouTubeDownloader.Adapters;
 
 internal sealed class YouTubeDlAdapter
-    : IYouTubeDownloadManager
+    : IYouTubeDownloadAdapter
 {
     public async Task DownloadAsync(
         string youTubeUrl,

@@ -10,7 +10,7 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services)
     {
         services
-            .AddScoped<IYouTubeDownloadManager, YouTubeDlAdapter>();
+            .AddScoped<IYouTubeDownloadAdapter, YouTubeDlAdapter>();
 
         return services;
     }
