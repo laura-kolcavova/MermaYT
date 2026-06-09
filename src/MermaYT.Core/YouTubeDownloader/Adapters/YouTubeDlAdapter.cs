@@ -5,14 +5,28 @@ using System.Text;
 namespace MermaYT.Core.YouTubeDownloader.Adapters;
 
 internal sealed class YouTubeDlAdapter
-    : IYouTubeDownloadAdapter
+    : IYouTubeDownloadManager
 {
+    private const string youtubeDlExecutableName = "youtube-dl.exe";
+
     public async Task DownloadAsync(
         string youTubeUrl,
         OutputFormat outputFormat,
         string outputDirectory,
         CancellationToken cancellationToken = default)
     {
+        var youtubeDlPath = Path.Combine(
+            AppContext.BaseDirectory,
+            "Tools",
+            youtubeDlExecutableName);
+
+        if (!File.Exists(youtubeDlPath))
+        {
+            throw new FileNotFoundException(
+                "youtube-dl executable not found.",
+                youtubeDlPath);
+        }
+
         var argumentsBuilder = DownloadArgumentsBuilder
             .New()
             .WithUrl(youTubeUrl)
@@ -21,10 +35,6 @@ internal sealed class YouTubeDlAdapter
 
         var arguments = argumentsBuilder.Build();
 
-        var youtubeDlPath = Path.Combine(
-            AppContext.BaseDirectory,
-            "Tools",
-            "youtube-dl.exe");
 
         var process = new Process()
         {

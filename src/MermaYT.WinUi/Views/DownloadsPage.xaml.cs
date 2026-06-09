@@ -1,6 +1,8 @@
 using MermaYT.Core.YouTubeDownloader;
+using MermaYT.Core.YouTubeDownloader.Abstractions;
 using MermaYT.WinUi.Controls;
 using MermaYT.WinUi.Models;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
@@ -18,6 +20,8 @@ public sealed partial class DownloadsPage :
     Page,
     INotifyPropertyChanged
 {
+    private readonly IYouTubeDownloadManager _youTubeDownloadManager;
+
     private string _youTubeUrl = string.Empty;
 
     public string YouTubeUrl
@@ -65,6 +69,10 @@ public sealed partial class DownloadsPage :
 
     public DownloadsPage()
     {
+        _youTubeDownloadManager = ((App)Application.Current)
+            .Services
+            .GetRequiredService<IYouTubeDownloadManager>();
+
         InitializeComponent();
 
         CheckAddButtonIsEnabled();
@@ -88,7 +96,9 @@ public sealed partial class DownloadsPage :
         object sender,
         RoutedEventArgs e)
     {
-        var appWindow = ((App)Application.Current).Window?.AppWindow;
+        var appWindow = ((App)Application.Current)
+            .Window?
+            .AppWindow;
 
         if (appWindow is null)
         {
@@ -237,6 +247,11 @@ public sealed partial class DownloadsPage :
         DownloadQueue.Add(downloadItem);
 
         YouTubeUrl = string.Empty;
+
+        _youTubeDownloadManager.DownloadAsync(
+            downloadItem.Url,
+            downloadItem.OutputFormat,
+            downloadItem.DestinationFolder);
     }
 
     private void NotifyPropertyChanged(

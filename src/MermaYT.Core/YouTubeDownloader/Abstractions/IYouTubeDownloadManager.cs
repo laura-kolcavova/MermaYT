@@ -1,6 +1,6 @@
 ﻿namespace MermaYT.Core.YouTubeDownloader.Abstractions;
 
-public interface IYouTubeDownloadAdapter
+public interface IYouTubeDownloadManager
 {
     public Task DownloadAsync(
         string youTubeUrl,
