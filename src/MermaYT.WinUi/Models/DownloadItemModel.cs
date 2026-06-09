@@ -8,6 +8,8 @@ public sealed class DownloadItemModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
 
+    public int ProcessId { get; set; } = -1;
+
     public string Title { get; set; } = string.Empty;
 
     public string Url { get; set; } = string.Empty;

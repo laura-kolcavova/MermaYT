@@ -5,15 +5,35 @@ using System.Text;
 namespace MermaYT.Core.YouTubeDownloader.Adapters;
 
 internal sealed class YouTubeDlAdapter
-    : IYouTubeDownloadManager
+    : IYouTubeDownloadAdapter
 {
     private const string youtubeDlExecutableName = "youtube-dl.exe";
 
-    public async Task DownloadAsync(
+    private readonly Dictionary<int, Process> _downloadProcessesByProcessId = [];
+
+    public void CancelDownload(
+        int downloadItemId)
+    {
+
+        if (!_downloadProcessesByProcessId.TryGetValue(
+            downloadItemId,
+            out var process))
+        {
+            return;
+        }
+
+        if (!process.HasExited)
+        {
+            return;
+        }
+
+        process.Kill();
+    }
+
+    public int Download(
         string youTubeUrl,
         OutputFormat outputFormat,
-        string outputDirectory,
-        CancellationToken cancellationToken = default)
+        string outputDirectory)
     {
         var youtubeDlPath = Path.Combine(
             AppContext.BaseDirectory,
@@ -35,22 +55,89 @@ internal sealed class YouTubeDlAdapter
 
         var arguments = argumentsBuilder.Build();
 
+        var startInfo = new ProcessStartInfo
+        {
+            FileName = youtubeDlPath,
+            Arguments = arguments,
+            UseShellExecute = false,
+            CreateNoWindow = true,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+
+        };
 
         var process = new Process()
         {
-            StartInfo = new ProcessStartInfo
-            {
-                FileName = youtubeDlPath,
-                Arguments = arguments,
-                UseShellExecute = false,
-                CreateNoWindow = true,
-            }
+            StartInfo = startInfo
         };
 
-        process.Start();
-        //process.BeginOutputReadLine();
+        process.EnableRaisingEvents = true;
 
-        await process.WaitForExitAsync(cancellationToken);
+        process.OutputDataReceived += Process_OutputDataReceived;
+
+        process.ErrorDataReceived += Process_ErrorDataReceived;
+
+        process.Exited += Process_Exited;
+
+        process.Disposed += Process_Disposed;
+
+        process.Start();
+        process.BeginOutputReadLine();
+        process.BeginErrorReadLine();
+
+        _downloadProcessesByProcessId.Add(process.Id, process);
+
+        return process.Id;
+    }
+
+    private void Process_OutputDataReceived(
+       object sender,
+       DataReceivedEventArgs e)
+    {
+        if (sender is not Process process ||
+            process.HasExited ||
+            string.IsNullOrEmpty(e.Data))
+        {
+            return;
+        }
+
+        Debug.WriteLine(e.Data);
+    }
+
+    private void Process_ErrorDataReceived(
+        object sender,
+        DataReceivedEventArgs e)
+    {
+        if (sender is not Process process ||
+            process.HasExited ||
+            string.IsNullOrEmpty(e.Data))
+        {
+            return;
+        }
+
+        Debug.WriteLine(e.Data);
+
+    }
+
+    private void Process_Exited(
+        object? sender,
+        EventArgs e)
+    {
+        if (sender is not Process process)
+        {
+            return;
+        }
+
+        _downloadProcessesByProcessId.Remove(process.Id);
+
+        // process.Dispose();
+    }
+
+    private void Process_Disposed(
+      object? sender,
+      EventArgs e)
+    {
+        Debug.WriteLine("Dispose");
     }
 
     private sealed class DownloadArgumentsBuilder
@@ -110,14 +197,14 @@ internal sealed class YouTubeDlAdapter
 
             if (_outputFormat == OutputFormat.MP3)
             {
-                //stringBuilder.Append("-f bestaudio ");
                 stringBuilder.Append("-x --audio-format mp3 ");
             }
             else
             {
-                //stringBuilder.Append("-f bestvideo+bestaudio ");
                 stringBuilder.Append("-f mp4 ");
             }
+
+            stringBuilder.Append("--no-overwrites ");
 
             stringBuilder.Append("--no-playlist ");
 

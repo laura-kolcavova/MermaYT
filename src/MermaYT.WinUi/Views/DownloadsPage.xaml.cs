@@ -10,6 +10,7 @@ using Microsoft.Windows.Storage.Pickers;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
 using Windows.System;
@@ -20,7 +21,7 @@ public sealed partial class DownloadsPage :
     Page,
     INotifyPropertyChanged
 {
-    private readonly IYouTubeDownloadManager _youTubeDownloadManager;
+    private readonly IYouTubeDownloadAdapter _youTubeDownloadAdapter;
 
     private string _youTubeUrl = string.Empty;
 
@@ -69,9 +70,9 @@ public sealed partial class DownloadsPage :
 
     public DownloadsPage()
     {
-        _youTubeDownloadManager = ((App)Application.Current)
+        _youTubeDownloadAdapter = ((App)Application.Current)
             .Services
-            .GetRequiredService<IYouTubeDownloadManager>();
+            .GetRequiredService<IYouTubeDownloadAdapter>();
 
         InitializeComponent();
 
@@ -205,7 +206,7 @@ public sealed partial class DownloadsPage :
             return;
         }
 
-        DownloadQueue.Remove(downloadListItem.Item);
+        RemoveFromDownloadQueue(downloadListItem.Item);
     }
 
     private bool CanAddToDownloadQueue()
@@ -236,22 +237,55 @@ public sealed partial class DownloadsPage :
 
     private void AddToDownloadQueue()
     {
-        var downloadItem = new DownloadItemModel()
+        try
         {
-            Url = YouTubeUrl,
-            Title = YouTubeUrl,
-            OutputFormat = SelectedOutputFormat,
-            DestinationFolder = DestinationFolder
-        };
+            var downloadItem = new DownloadItemModel()
+            {
+                Url = YouTubeUrl,
+                Title = YouTubeUrl,
+                OutputFormat = SelectedOutputFormat,
+                DestinationFolder = DestinationFolder
+            };
 
-        DownloadQueue.Add(downloadItem);
+            DownloadQueue.Add(downloadItem);
 
-        YouTubeUrl = string.Empty;
+            YouTubeUrl = string.Empty;
 
-        _youTubeDownloadManager.DownloadAsync(
-            downloadItem.Url,
-            downloadItem.OutputFormat,
-            downloadItem.DestinationFolder);
+            var processId = _youTubeDownloadAdapter.Download(
+               downloadItem.Url,
+               downloadItem.OutputFormat,
+               downloadItem.DestinationFolder);
+
+            downloadItem.ProcessId = processId;
+            downloadItem.DownloadState = DownloadState.Processing;
+
+            Debug.WriteLine("ahoj");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error adding to download queue: {ex.Message}");
+            // Add your error handling here.
+        }
+    }
+
+    private void RemoveFromDownloadQueue(
+        DownloadItemModel item)
+    {
+        try
+        {
+            if (item.ProcessId != -1)
+            {
+                _youTubeDownloadAdapter.CancelDownload(
+                    item.ProcessId);
+            }
+
+            DownloadQueue.Remove(item);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error removing from download queue: {ex.Message}");
+            // Add your error handling here.
+        }
     }
 
     private void NotifyPropertyChanged(
