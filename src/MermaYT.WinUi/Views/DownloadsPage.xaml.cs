@@ -317,14 +317,14 @@ public sealed partial class DownloadsPage :
         DownloadItemModel downloadItem,
         string errorMessage)
     {
-        if (downloadItem.DownloadState == DownloadState.Failed ||
+        if (downloadItem.DownloadState == DownloadState.Error ||
             downloadItem.DownloadState == DownloadState.Cancelled ||
             downloadItem.DownloadState == DownloadState.Completed)
         {
             return;
         }
 
-        downloadItem.DownloadState = DownloadState.Failed;
+        downloadItem.DownloadState = DownloadState.Error;
         downloadItem.ErrorMessage = errorMessage;
     }
 

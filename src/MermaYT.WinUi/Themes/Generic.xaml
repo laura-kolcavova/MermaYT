@@ -140,6 +140,7 @@
 
                                     <StackPanel Orientation="Horizontal" Spacing="8">
                                         <TextBlock
+                                            x:Name="Status"
                                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                             Style="{StaticResource CaptionTextBlockStyle}"
                                             Text="{Binding Item.DownloadState, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource DownloadStateToStringConverter}}" />
@@ -171,7 +172,10 @@
                                     <FontIcon FontSize="14" Glyph="{StaticResource GlyphFolderHorizontal}" />
                                 </Button>
 
-                                <Button x:Name="PauseButton" Style="{StaticResource StyleIconButton}">
+                                <Button
+                                    x:Name="PauseButton"
+                                    Style="{StaticResource StyleIconButton}"
+                                    Visibility="Collapsed">
                                     <FontIcon FontSize="14" Glyph="{StaticResource GlyphPause}" />
                                 </Button>
 
@@ -201,6 +205,8 @@
                                 <VisualState x:Name="Processing">
                                     <VisualState.Setters>
                                         <Setter Target="DownloadProgressBar.IsIndeterminate" Value="True" />
+                                        <Setter Target="StatusAndBytesStatusSeparator.Visibility" Value="Collapsed" />
+                                        <Setter Target="BytesStatus.Visibility" Value="Collapsed" />
                                     </VisualState.Setters>
                                 </VisualState>
 
@@ -219,13 +225,18 @@
                                     </VisualState.Setters>
                                 </VisualState>
 
-                                <VisualState x:Name="Completed" />
+                                <VisualState x:Name="Completed">
+                                    <VisualState.Setters>
+                                        <Setter Target="Status.Foreground" Value="{ThemeResource SystemFillColorSuccessBrush}" />
+                                    </VisualState.Setters>
+                                </VisualState>
 
-                                <VisualState x:Name="Failed">
+                                <VisualState x:Name="Error">
                                     <VisualState.Setters>
                                         <!--<Setter Target="DownloadProgressBar.Visibility" Value="Collapsed" />-->
                                         <Setter Target="StatusAndBytesStatusSeparator.Visibility" Value="Collapsed" />
                                         <Setter Target="BytesStatus.Visibility" Value="Collapsed" />
+                                        <Setter Target="Status.Foreground" Value="{ThemeResource SystemFillColorCriticalBrush}" />
                                     </VisualState.Setters>
                                 </VisualState>
 
