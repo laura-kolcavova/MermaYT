@@ -63,7 +63,6 @@ internal sealed class YouTubeDlAdapter
             CreateNoWindow = true,
             RedirectStandardOutput = true,
             RedirectStandardError = true,
-
         };
 
         var process = new Process()
@@ -78,8 +77,6 @@ internal sealed class YouTubeDlAdapter
         process.ErrorDataReceived += Process_ErrorDataReceived;
 
         process.Exited += Process_Exited;
-
-        process.Disposed += Process_Disposed;
 
         process.Start();
         process.BeginOutputReadLine();
@@ -116,7 +113,6 @@ internal sealed class YouTubeDlAdapter
         }
 
         Debug.WriteLine(e.Data);
-
     }
 
     private void Process_Exited(
@@ -130,14 +126,11 @@ internal sealed class YouTubeDlAdapter
 
         _downloadProcessesByProcessId.Remove(process.Id);
 
-        // process.Dispose();
-    }
+        process.OutputDataReceived -= Process_OutputDataReceived;
+        process.ErrorDataReceived -= Process_ErrorDataReceived;
+        process.Exited -= Process_Exited;
 
-    private void Process_Disposed(
-      object? sender,
-      EventArgs e)
-    {
-        Debug.WriteLine("Dispose");
+        process.Dispose();
     }
 
     private sealed class DownloadArgumentsBuilder

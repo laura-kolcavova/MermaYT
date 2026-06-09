@@ -28,6 +28,13 @@
 
         <ScrollViewer Grid.Row="1">
             <StackPanel Padding="24" Spacing="10">
+                <InfoBar
+                    x:Name="ErrorInfoBar"
+                    Title="Error"
+                    IsClosable="True"
+                    IsOpen="False"
+                    Severity="Error" />
+
                 <Border
                     Padding="16"
                     Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"

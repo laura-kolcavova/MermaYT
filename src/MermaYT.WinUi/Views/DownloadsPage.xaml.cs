@@ -123,13 +123,7 @@ public sealed partial class DownloadsPage :
 
         if (result is not null)
         {
-            var path = result.Path;
-
-            DestinationFolder = path;
-        }
-        else
-        {
-            // Add your error handling here.
+            DestinationFolder = result.Path;
         }
     }
 
@@ -258,13 +252,13 @@ public sealed partial class DownloadsPage :
 
             downloadItem.ProcessId = processId;
             downloadItem.DownloadState = DownloadState.Processing;
-
-            Debug.WriteLine("ahoj");
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error adding to download queue: {ex.Message}");
-            // Add your error handling here.
+            Debug.WriteLine(
+                $"Error while adding to download queue: {ex.Message}");
+
+            ShowError("Failed to add the download. Please check the URL and try again.");
         }
     }
 
@@ -283,9 +277,18 @@ public sealed partial class DownloadsPage :
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error removing from download queue: {ex.Message}");
-            // Add your error handling here.
+            Debug.WriteLine(
+                $"Error while removing from download queue: {ex.Message}");
+
+            ShowError("Failed to remove the download. Please try again.");
         }
+    }
+
+    private void ShowError(
+        string message)
+    {
+        ErrorInfoBar.Message = message;
+        ErrorInfoBar.IsOpen = true;
     }
 
     private void NotifyPropertyChanged(
