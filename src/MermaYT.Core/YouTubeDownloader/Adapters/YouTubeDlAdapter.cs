@@ -1,4 +1,5 @@
 ﻿using MermaYT.Core.YouTubeDownloader.Abstractions;
+using MermaYT.Core.YouTubeDownloader.Events;
 using System.Diagnostics;
 using System.Text;
 
@@ -9,7 +10,11 @@ internal sealed class YouTubeDlAdapter
 {
     private const string youtubeDlExecutableName = "youtube-dl.exe";
 
+    private const string errorPrefix = "ERROR: ";
+
     private readonly Dictionary<int, Process> _downloadProcessesByProcessId = [];
+
+    public event EventHandler<DownloadErrorEventArgs>? DownloadErrorReceived;
 
     public void CancelDownload(
         int downloadItemId)
@@ -72,11 +77,11 @@ internal sealed class YouTubeDlAdapter
 
         process.EnableRaisingEvents = true;
 
-        process.OutputDataReceived += Process_OutputDataReceived;
+        process.OutputDataReceived += OnOutputDataReceived;
 
-        process.ErrorDataReceived += Process_ErrorDataReceived;
+        process.ErrorDataReceived += OnErrorDataReceived;
 
-        process.Exited += Process_Exited;
+        process.Exited += OnExited;
 
         process.Start();
         process.BeginOutputReadLine();
@@ -87,12 +92,11 @@ internal sealed class YouTubeDlAdapter
         return process.Id;
     }
 
-    private void Process_OutputDataReceived(
+    private void OnOutputDataReceived(
        object sender,
        DataReceivedEventArgs e)
     {
         if (sender is not Process process ||
-            process.HasExited ||
             string.IsNullOrEmpty(e.Data))
         {
             return;
@@ -101,21 +105,37 @@ internal sealed class YouTubeDlAdapter
         Debug.WriteLine(e.Data);
     }
 
-    private void Process_ErrorDataReceived(
+    private void OnErrorDataReceived(
         object sender,
         DataReceivedEventArgs e)
     {
         if (sender is not Process process ||
-            process.HasExited ||
             string.IsNullOrEmpty(e.Data))
         {
             return;
         }
 
         Debug.WriteLine(e.Data);
+
+        if (!e.Data.StartsWith(
+            errorPrefix,
+            StringComparison.OrdinalIgnoreCase))
+        {
+            return;
+        }
+
+        var errorMessage = e.Data[errorPrefix.Length..];
+
+        var eventArgs = new DownloadErrorEventArgs
+        {
+            DownloadItemId = process.Id,
+            ErrorMessage = errorMessage
+        };
+
+        DownloadErrorReceived?.Invoke(this, eventArgs);
     }
 
-    private void Process_Exited(
+    private void OnExited(
         object? sender,
         EventArgs e)
     {
@@ -126,11 +146,11 @@ internal sealed class YouTubeDlAdapter
 
         _downloadProcessesByProcessId.Remove(process.Id);
 
-        process.OutputDataReceived -= Process_OutputDataReceived;
-        process.ErrorDataReceived -= Process_ErrorDataReceived;
-        process.Exited -= Process_Exited;
+        //process.OutputDataReceived -= Process_OutputDataReceived;
+        //process.ErrorDataReceived -= Process_ErrorDataReceived;
+        //process.Exited -= Process_Exited;
 
-        process.Dispose();
+        //process.Dispose();
     }
 
     private sealed class DownloadArgumentsBuilder
