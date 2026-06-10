@@ -10,10 +10,6 @@ public sealed partial class DownloadListItem :
 {
     private Button? _openDestinationFolderButton;
 
-    private Button? _pauseButton;
-
-    private Button? _resumeButton;
-
     private Button? _removeButton;
 
     public static readonly DependencyProperty ItemProperty = DependencyProperty.Register(
@@ -31,10 +27,6 @@ public sealed partial class DownloadListItem :
 
     public event RoutedEventHandler? OpenDestinationFolderButtonClick;
 
-    public event RoutedEventHandler? PauseButtonClick;
-
-    public event RoutedEventHandler? ResumeButtonClick;
-
     public event RoutedEventHandler? RemoveButtonClick;
 
     public DownloadListItem()
@@ -47,8 +39,6 @@ public sealed partial class DownloadListItem :
         base.OnApplyTemplate();
 
         InitializeOpenDestinationFolderButton();
-        InitializePauseButton();
-        InitializeResumeButton();
         InitializeRemoveButton();
 
         var downloadState = Item?.DownloadState
@@ -72,36 +62,6 @@ public sealed partial class DownloadListItem :
         }
     }
 
-    private void InitializePauseButton()
-    {
-        if (_pauseButton is not null)
-        {
-            _pauseButton.Click -= OnPauseButtonClick;
-        }
-
-        _pauseButton = GetTemplateChild("PauseButton") as Button;
-
-        if (_pauseButton is not null)
-        {
-            _pauseButton.Click += OnPauseButtonClick;
-        }
-    }
-
-    private void InitializeResumeButton()
-    {
-        if (_resumeButton is not null)
-        {
-            _resumeButton.Click -= OnResumeButtonClick;
-        }
-
-        _resumeButton = GetTemplateChild("ResumeButton") as Button;
-
-        if (_resumeButton is not null)
-        {
-            _resumeButton.Click += OnResumeButtonClick;
-        }
-    }
-
     private void InitializeRemoveButton()
     {
         if (_removeButton is not null)
@@ -121,20 +81,6 @@ public sealed partial class DownloadListItem :
         RoutedEventArgs e)
     {
         OpenDestinationFolderButtonClick?.Invoke(this, e);
-    }
-
-    private void OnPauseButtonClick(
-        object sender,
-        RoutedEventArgs e)
-    {
-        PauseButtonClick?.Invoke(this, e);
-    }
-
-    private void OnResumeButtonClick(
-        object sender,
-        RoutedEventArgs e)
-    {
-        ResumeButtonClick?.Invoke(this, e);
     }
 
     private void OnRemoveButtonClick(
@@ -178,6 +124,9 @@ public sealed partial class DownloadListItem :
 
     private void GoToDownloadState(DownloadState state)
     {
-        VisualStateManager.GoToState(this, state.ToString(), useTransitions: true);
+        VisualStateManager.GoToState(
+            this,
+            state.ToString(),
+            useTransitions: true);
     }
 }
