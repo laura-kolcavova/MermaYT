@@ -1,4 +1,4 @@
-﻿namespace MermaYT.Core;
+﻿namespace MermaYT.Core.YouTubeDownloader;
 
 public enum OutputFormat
 {

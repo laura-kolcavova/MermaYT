@@ -1,4 +1,4 @@
-using MermaYT.Core;
+using MermaYT.Core.YouTubeDownloader;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -7,6 +7,8 @@ namespace MermaYT.WinUi.Models;
 public sealed class DownloadItemModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
+
+    public int ProcessId { get; set; } = -1;
 
     public string Title { get; set; } = string.Empty;
 

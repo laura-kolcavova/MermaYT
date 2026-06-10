@@ -1,4 +1,4 @@
-using MermaYT.Core;
+using MermaYT.Core.YouTubeDownloader;
 using Microsoft.UI.Xaml.Data;
 using System;
 
