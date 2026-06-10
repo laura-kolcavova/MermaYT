@@ -8,15 +8,11 @@ namespace MermaYT.Core.YtDlp;
 internal sealed class YtDlpDownloadAdapter
     : IYouTubeDownloadManager
 {
-    private const string ytDlpExecutableName = "yt-dlp.exe";
+    public event EventHandler<ProgressReceivedEventArgs>? ProgressReceived;
 
-    private const string ffMpegExecutableName = "ffmpeg.exe";
-
-    private const string errorPrefix = "ERROR: ";
+    public event EventHandler<ErrorReceivedEventArgs>? ErrorReceived;
 
     private readonly Dictionary<int, Process> _downloadProcessesByProcessId = [];
-
-    public event EventHandler<DownloadErrorEventArgs>? DownloadErrorReceived;
 
     public void Cancel(
         int downloadItemId)
@@ -57,10 +53,14 @@ internal sealed class YtDlpDownloadAdapter
 
         var argumentsBuilder = YtDlpArgumentsBuilder
             .New()
+            .NewLine()
+            .NoSimulate()
             .NoOverwrites()
             .NoPlaylist()
             .EmbedThumbnail()
             .AddMetaData()
+            .Progress()
+            .ProgressTemplate(YtDlpConstants.ProgressTemplate)
             .OutputTemplate(outputFormat)
             .OutputDirectory(outputDirectory)
             .FFmpegLocation(ffMpegFileName)
@@ -113,6 +113,36 @@ internal sealed class YtDlpDownloadAdapter
         }
 
         Debug.WriteLine(e.Data);
+
+        if (e.Data.StartsWith(
+            YtDlpConstants.ProgressPrefix,
+            StringComparison.OrdinalIgnoreCase))
+        {
+            var progressData = e.Data.Split(
+                YtDlpConstants.ProgressSeparator,
+                StringSplitOptions.RemoveEmptyEntries);
+
+            var status = progressData[1];
+            var percent = progressData[2];
+            var downloadedBytes = progressData[3];
+            var totalBytes = progressData[4];
+            var title = progressData[5];
+
+            _ = float.TryParse(percent, out var parsedPercent);
+            _ = long.TryParse(downloadedBytes, out var parsedDownloadedBytes);
+            _ = long.TryParse(totalBytes, out var parsedTotalBytes);
+
+            var eventArgs = new ProgressReceivedEventArgs
+            {
+                DownloadItemId = process.Id,
+                ProgressPercentage = parsedPercent,
+                DownloadedBytes = parsedDownloadedBytes,
+                TotalBytes = parsedTotalBytes,
+                Title = title
+            };
+
+            ProgressReceived?.Invoke(this, eventArgs);
+        }
     }
 
     private void OnErrorDataReceived(
@@ -128,21 +158,21 @@ internal sealed class YtDlpDownloadAdapter
         Debug.WriteLine(e.Data);
 
         if (!e.Data.StartsWith(
-            errorPrefix,
+            YtDlpConstants.ErrorPrefix,
             StringComparison.OrdinalIgnoreCase))
         {
             return;
         }
 
-        var errorMessage = e.Data[errorPrefix.Length..];
+        var errorMessage = e.Data[YtDlpConstants.ErrorPrefix.Length..];
 
-        var eventArgs = new DownloadErrorEventArgs
+        var eventArgs = new ErrorReceivedEventArgs
         {
             DownloadItemId = process.Id,
             ErrorMessage = errorMessage
         };
 
-        DownloadErrorReceived?.Invoke(this, eventArgs);
+        ErrorReceived?.Invoke(this, eventArgs);
     }
 
     private void OnExited(
@@ -168,7 +198,7 @@ internal sealed class YtDlpDownloadAdapter
         var ytDlpFileName = Path.Combine(
             AppContext.BaseDirectory,
             "Tools",
-            ytDlpExecutableName);
+            YtDlpConstants.YtDlpExecutableName);
 
         if (!File.Exists(ytDlpFileName))
         {
@@ -185,7 +215,7 @@ internal sealed class YtDlpDownloadAdapter
         var ffMpegFileName = Path.Combine(
             AppContext.BaseDirectory,
             "Tools",
-            ffMpegExecutableName);
+            YtDlpConstants.FFmpegExecutableName);
 
         if (!File.Exists(ffMpegFileName))
         {

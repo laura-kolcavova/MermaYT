@@ -4,7 +4,9 @@ namespace MermaYT.Core.YouTubeDownloader.Abstractions;
 
 public interface IYouTubeDownloadManager
 {
-    public event EventHandler<DownloadErrorEventArgs>? DownloadErrorReceived;
+    public event EventHandler<ProgressReceivedEventArgs>? ProgressReceived;
+
+    public event EventHandler<ErrorReceivedEventArgs>? ErrorReceived;
 
     public int Download(
         string youTubeUrl,

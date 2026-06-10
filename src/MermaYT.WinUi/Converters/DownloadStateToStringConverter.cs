@@ -20,7 +20,6 @@ public sealed class DownloadStateToStringConverter :
 
         return state switch
         {
-            DownloadState.Queued => "Queued",
             DownloadState.Processing => "Processing",
             DownloadState.Downloading => "Downloading",
             DownloadState.Converting => "Converting",

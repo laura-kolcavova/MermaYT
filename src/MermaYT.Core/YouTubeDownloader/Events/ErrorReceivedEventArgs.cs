@@ -1,6 +1,6 @@
 ﻿namespace MermaYT.Core.YouTubeDownloader.Events;
 
-public sealed class DownloadErrorEventArgs : EventArgs
+public sealed class ErrorReceivedEventArgs : EventArgs
 {
     public required int DownloadItemId { get; init; }
 

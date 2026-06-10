@@ -42,7 +42,7 @@ public sealed partial class DownloadListItem :
         InitializeRemoveButton();
 
         var downloadState = Item?.DownloadState
-           ?? DownloadState.Queued;
+           ?? DownloadState.Processing;
 
         GoToDownloadState(downloadState);
     }
@@ -107,7 +107,7 @@ public sealed partial class DownloadListItem :
         }
 
         var downloadState = (e.NewValue as DownloadItemModel)?.DownloadState
-            ?? DownloadState.Queued;
+            ?? DownloadState.Processing;
 
         self.GoToDownloadState(downloadState);
     }
@@ -118,7 +118,7 @@ public sealed partial class DownloadListItem :
     {
         if (e.PropertyName == nameof(DownloadItemModel.DownloadState))
         {
-            GoToDownloadState(Item?.DownloadState ?? DownloadState.Queued);
+            GoToDownloadState(Item?.DownloadState ?? DownloadState.Processing);
         }
     }
 

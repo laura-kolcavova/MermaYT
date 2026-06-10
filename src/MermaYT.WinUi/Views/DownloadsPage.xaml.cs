@@ -77,7 +77,8 @@ public sealed partial class DownloadsPage :
             .Services
             .GetRequiredService<IYouTubeDownloadManager>();
 
-        _youTubeDownloadAdapter.DownloadErrorReceived += OnDownloadErrorReceived;
+        _youTubeDownloadAdapter.ErrorReceived += OnErrorReceived;
+        _youTubeDownloadAdapter.ProgressReceived += OnProgressReceived;
 
         InitializeComponent();
 
@@ -146,9 +147,9 @@ public sealed partial class DownloadsPage :
         RemoveFromDownloadQueue(downloadListItem.Item);
     }
 
-    private void OnDownloadErrorReceived(
+    private void OnProgressReceived(
         object? sender,
-        DownloadErrorEventArgs e)
+        ProgressReceivedEventArgs e)
     {
         DispatcherQueue.TryEnqueue(() =>
         {
@@ -160,8 +161,29 @@ public sealed partial class DownloadsPage :
                 return;
             }
 
-            UpdateErrorState(
-                downloadItem,
+            downloadItem.UpdateDownloadingState(
+                e.ProgressPercentage,
+                e.DownloadedBytes,
+                e.TotalBytes,
+                e.Title);
+        });
+    }
+
+    private void OnErrorReceived(
+        object? sender,
+        ErrorReceivedEventArgs e)
+    {
+        DispatcherQueue.TryEnqueue(() =>
+        {
+            var downloadItem = DownloadQueue.FirstOrDefault(
+                item => item.ProcessId == e.DownloadItemId);
+
+            if (downloadItem is null)
+            {
+                return;
+            }
+
+            downloadItem.UpdateErrorState(
                 e.ErrorMessage);
         });
     }
@@ -240,21 +262,19 @@ public sealed partial class DownloadsPage :
     {
         try
         {
+            var processId = _youTubeDownloadAdapter.Download(
+                YouTubeUrl,
+                SelectedOutputFormat,
+                DestinationFolder);
+
             var downloadItem = new DownloadItemModel()
             {
+                ProcessId = processId,
                 Url = YouTubeUrl,
                 Title = YouTubeUrl,
                 OutputFormat = SelectedOutputFormat,
-                DestinationFolder = DestinationFolder
+                DestinationFolder = DestinationFolder,
             };
-
-            var processId = _youTubeDownloadAdapter.Download(
-                downloadItem.Url,
-                downloadItem.OutputFormat,
-                downloadItem.DestinationFolder);
-
-            downloadItem.ProcessId = processId;
-            downloadItem.DownloadState = DownloadState.Processing;
 
             YouTubeUrl = string.Empty;
 
@@ -289,20 +309,6 @@ public sealed partial class DownloadsPage :
 
             ShowError("Failed to remove the download. Please try again.");
         }
-    }
-
-    private void UpdateErrorState(
-        DownloadItemModel downloadItem,
-        string errorMessage)
-    {
-        if (downloadItem.DownloadState == DownloadState.Error ||
-            downloadItem.DownloadState == DownloadState.Completed)
-        {
-            return;
-        }
-
-        downloadItem.DownloadState = DownloadState.Error;
-        downloadItem.ErrorMessage = errorMessage;
     }
 
     private void ClearCompletedDownloads()
