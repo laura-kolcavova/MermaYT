@@ -226,9 +226,7 @@
                                     <controls:DownloadListItem
                                         Item="{x:Bind}"
                                         OpenDestinationFolderButtonClick="DownloadListItem_OpenDestinationFolderButtonClick"
-                                        PauseButtonClick="DownloadListItem_PauseButtonClick"
-                                        RemoveButtonClick="DownloadListItem_RemoveButtonClick"
-                                        ResumeButtonClick="DownloadListItem_ResumeButtonClick" />
+                                        RemoveButtonClick="DownloadListItem_RemoveButtonClick" />
                                 </DataTemplate>
                             </ItemsRepeater.ItemTemplate>
                         </ItemsRepeater>

@@ -24,10 +24,8 @@ public sealed class DownloadStateToStringConverter :
             DownloadState.Processing => "Processing",
             DownloadState.Downloading => "Downloading",
             DownloadState.Converting => "Converting",
-            DownloadState.Paused => "Paused",
             DownloadState.Completed => "Completed",
             DownloadState.Error => "ERROR",
-            DownloadState.Cancelled => "Cancelled",
             _ => string.Empty
         };
     }

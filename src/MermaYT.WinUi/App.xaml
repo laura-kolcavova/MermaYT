@@ -20,8 +20,6 @@
             <x:String x:Key="GlyphAudio">&#xE767;</x:String>
             <x:String x:Key="GlyphDelete">&#xE74D;</x:String>
             <x:String x:Key="GlyphClear">&#xE894;</x:String>
-            <x:String x:Key="GlyphPause">&#xE769;</x:String>
-            <x:String x:Key="GlyphPlay">&#xE768;</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

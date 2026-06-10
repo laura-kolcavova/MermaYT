@@ -172,20 +172,6 @@
                                     <FontIcon FontSize="14" Glyph="{StaticResource GlyphFolderHorizontal}" />
                                 </Button>
 
-                                <Button
-                                    x:Name="PauseButton"
-                                    Style="{StaticResource StyleIconButton}"
-                                    Visibility="Collapsed">
-                                    <FontIcon FontSize="14" Glyph="{StaticResource GlyphPause}" />
-                                </Button>
-
-                                <Button
-                                    x:Name="ResumeButton"
-                                    Style="{StaticResource StyleIconButton}"
-                                    Visibility="Collapsed">
-                                    <FontIcon FontSize="14" Glyph="{StaticResource GlyphPlay}" />
-                                </Button>
-
                                 <Button x:Name="RemoveButton" Style="{StaticResource StyleIconButton}">
                                     <FontIcon FontSize="14" Glyph="{StaticResource GlyphClear}" />
                                 </Button>
@@ -218,13 +204,6 @@
                                     </VisualState.Setters>
                                 </VisualState>
 
-                                <VisualState x:Name="Paused">
-                                    <VisualState.Setters>
-                                        <Setter Target="PauseButton.Visibility" Value="Collapsed" />
-                                        <Setter Target="ResumeButton.Visibility" Value="Visible" />
-                                    </VisualState.Setters>
-                                </VisualState>
-
                                 <VisualState x:Name="Completed">
                                     <VisualState.Setters>
                                         <Setter Target="Status.Foreground" Value="{ThemeResource SystemFillColorSuccessBrush}" />
@@ -237,14 +216,6 @@
                                         <Setter Target="StatusAndBytesStatusSeparator.Visibility" Value="Collapsed" />
                                         <Setter Target="BytesStatus.Visibility" Value="Collapsed" />
                                         <Setter Target="Status.Foreground" Value="{ThemeResource SystemFillColorCriticalBrush}" />
-                                    </VisualState.Setters>
-                                </VisualState>
-
-                                <VisualState x:Name="Cancelled">
-                                    <VisualState.Setters>
-                                        <!--<Setter Target="DownloadProgressBar.Visibility" Value="Collapsed" />-->
-                                        <Setter Target="StatusAndBytesStatusSeparator.Visibility" Value="Collapsed" />
-                                        <Setter Target="BytesStatus.Visibility" Value="Collapsed" />
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>

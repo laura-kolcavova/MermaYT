@@ -1,5 +1,5 @@
 ﻿using MermaYT.Core.YouTubeDownloader.Abstractions;
-using MermaYT.Core.YouTubeDownloader.Adapters;
+using MermaYT.Core.YtDlp;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MermaYT.Core.YouTubeDownloader.Extensions;
@@ -10,7 +10,7 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services)
     {
         services
-            .AddScoped<IYouTubeDownloadAdapter, YouTubeDlAdapter>();
+            .AddScoped<IYouTubeDownloadManager, YtDlpDownloadAdapter>();
 
         return services;
     }

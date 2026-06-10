@@ -24,7 +24,7 @@ public sealed partial class DownloadsPage :
     Page,
     INotifyPropertyChanged
 {
-    private readonly IYouTubeDownloadAdapter _youTubeDownloadAdapter;
+    private readonly IYouTubeDownloadManager _youTubeDownloadAdapter;
 
     private string _youTubeUrl = string.Empty;
 
@@ -75,7 +75,7 @@ public sealed partial class DownloadsPage :
     {
         _youTubeDownloadAdapter = ((App)Application.Current)
             .Services
-            .GetRequiredService<IYouTubeDownloadAdapter>();
+            .GetRequiredService<IYouTubeDownloadManager>();
 
         _youTubeDownloadAdapter.DownloadErrorReceived += OnDownloadErrorReceived;
 
@@ -131,28 +131,6 @@ public sealed partial class DownloadsPage :
 
         await OpenDestinationFolder(
             downloadListItem.Item.DestinationFolder);
-    }
-
-    private void DownloadListItem_PauseButtonClick(
-       object sender,
-       RoutedEventArgs e)
-    {
-        if (sender is not DownloadListItem downloadListItem ||
-            downloadListItem.Item is null)
-        {
-            return;
-        }
-    }
-
-    private void DownloadListItem_ResumeButtonClick(
-       object sender,
-       RoutedEventArgs e)
-    {
-        if (sender is not DownloadListItem downloadListItem ||
-            downloadListItem.Item is null)
-        {
-            return;
-        }
     }
 
     private void DownloadListItem_RemoveButtonClick(
@@ -270,17 +248,17 @@ public sealed partial class DownloadsPage :
                 DestinationFolder = DestinationFolder
             };
 
-            DownloadQueue.Add(downloadItem);
-
-            YouTubeUrl = string.Empty;
-
             var processId = _youTubeDownloadAdapter.Download(
-               downloadItem.Url,
-               downloadItem.OutputFormat,
-               downloadItem.DestinationFolder);
+                downloadItem.Url,
+                downloadItem.OutputFormat,
+                downloadItem.DestinationFolder);
 
             downloadItem.ProcessId = processId;
             downloadItem.DownloadState = DownloadState.Processing;
+
+            YouTubeUrl = string.Empty;
+
+            DownloadQueue.Add(downloadItem);
         }
         catch (Exception ex)
         {
@@ -298,7 +276,7 @@ public sealed partial class DownloadsPage :
         {
             if (item.ProcessId != -1)
             {
-                _youTubeDownloadAdapter.CancelDownload(
+                _youTubeDownloadAdapter.Cancel(
                     item.ProcessId);
             }
 
@@ -318,7 +296,6 @@ public sealed partial class DownloadsPage :
         string errorMessage)
     {
         if (downloadItem.DownloadState == DownloadState.Error ||
-            downloadItem.DownloadState == DownloadState.Cancelled ||
             downloadItem.DownloadState == DownloadState.Completed)
         {
             return;
