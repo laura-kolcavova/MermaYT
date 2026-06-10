@@ -16,6 +16,42 @@ internal sealed class YtDlpArgumentsBuilder
         return new YtDlpArgumentsBuilder();
     }
 
+    public YtDlpArgumentsBuilder PrintTitle()
+    {
+        _arguments.Add("--print title");
+
+        return this;
+    }
+
+    public YtDlpArgumentsBuilder NewLine()
+    {
+        _arguments.Add("--newline");
+
+        return this;
+    }
+
+    public YtDlpArgumentsBuilder NoSimulate()
+    {
+        _arguments.Add("--no-simulate");
+
+        return this;
+    }
+
+    public YtDlpArgumentsBuilder Progress()
+    {
+        _arguments.Add("--progress");
+
+        return this;
+    }
+
+    public YtDlpArgumentsBuilder ProgressTemplate(
+        string progressTemplate)
+    {
+        _arguments.Add($"--progress-template {progressTemplate}");
+
+        return this;
+    }
+
     public YtDlpArgumentsBuilder NoOverwrites()
     {
         _arguments.Add("--no-overwrites");

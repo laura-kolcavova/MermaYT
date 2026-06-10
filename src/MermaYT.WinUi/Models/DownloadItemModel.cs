@@ -10,17 +10,13 @@ public sealed class DownloadItemModel : INotifyPropertyChanged
 
     public int ProcessId { get; set; } = -1;
 
-    public string Title { get; set; } = string.Empty;
-
     public string Url { get; set; } = string.Empty;
 
     public OutputFormat OutputFormat { get; set; } = OutputFormat.MP3;
 
-    public string ImageUrl { get; set; } = string.Empty;
-
     public string DestinationFolder { get; set; } = string.Empty;
 
-    private DownloadState _downloadState = DownloadState.Queued;
+    private DownloadState _downloadState = DownloadState.Processing;
 
     public DownloadState DownloadState
     {
@@ -32,20 +28,43 @@ public sealed class DownloadItemModel : INotifyPropertyChanged
         }
     }
 
-    private long _totalBytes = -1;
+    private string _title = string.Empty;
 
-    public long TotalBytes
+    public string Title
     {
-        get => _totalBytes;
+        get => _title;
         set
         {
-            _totalBytes = value;
+            _title = value;
             NotifyPropertyChanged();
-            NotifyPropertyChanged(nameof(Progress));
         }
     }
 
-    private long _downloadedBytes = -1;
+    private string _imageUrl = string.Empty;
+
+    public string ImageUrl
+    {
+        get => _imageUrl;
+        set
+        {
+            _imageUrl = value;
+            NotifyPropertyChanged();
+        }
+    }
+
+    private float _progressPercentage = 0;
+
+    public float ProgressPercentage
+    {
+        get => _progressPercentage;
+        set
+        {
+            _progressPercentage = value;
+            NotifyPropertyChanged();
+        }
+    }
+
+    private long _downloadedBytes = 0;
 
     public long DownloadedBytes
     {
@@ -54,23 +73,70 @@ public sealed class DownloadItemModel : INotifyPropertyChanged
         {
             _downloadedBytes = value;
             NotifyPropertyChanged();
-            NotifyPropertyChanged(nameof(Progress));
         }
     }
 
-    public float Progress => TotalBytes > 0 ? (float)DownloadedBytes / TotalBytes : 0;
+    private long _totalBytes = 0;
+
+    public long TotalBytes
+    {
+        get => _totalBytes;
+        set
+        {
+            _totalBytes = value;
+            NotifyPropertyChanged();
+        }
+    }
 
     private string? _errorMessage;
 
     public string? ErrorMessage
     {
         get => _errorMessage;
-        set { _errorMessage = value; NotifyPropertyChanged(); }
+        set
+        {
+            _errorMessage = value;
+            NotifyPropertyChanged();
+        }
+    }
+
+    public void UpdateDownloadingState(
+        float progressPercentage,
+        long downloadedBytes,
+        long totalBytes,
+        string title)
+    {
+        if (DownloadState == DownloadState.Converting ||
+            DownloadState == DownloadState.Error ||
+            DownloadState == DownloadState.Completed)
+        {
+            return;
+        }
+
+        DownloadState = DownloadState.Downloading;
+        ProgressPercentage = progressPercentage;
+        DownloadedBytes = downloadedBytes;
+        TotalBytes = totalBytes;
+        Title = title;
+    }
+
+    public void UpdateErrorState(
+        string errorMessage)
+    {
+        if (DownloadState == DownloadState.Completed)
+        {
+            return;
+        }
+
+        DownloadState = DownloadState.Error;
+        ErrorMessage = errorMessage;
     }
 
     private void NotifyPropertyChanged(
         [CallerMemberName] string? name = null)
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        PropertyChanged?.Invoke(
+            this,
+            new PropertyChangedEventArgs(name));
     }
 }

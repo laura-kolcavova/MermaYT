@@ -7,6 +7,7 @@
     <converters:BytesToFileSizeConverter x:Key="BytesToFileSizeConverter" />
     <converters:DownloadStateToStringConverter x:Key="DownloadStateToStringConverter" />
     <converters:OutputFormatToStringConverter x:Key="OutputFormatToStringConverter" />
+    <converters:ProgressPercentageToStringConverter x:Key="ProgressPercentageToStringConverter" />
 
     <Style x:Key="StyleIconButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent" />
@@ -130,12 +131,12 @@
                                             x:Name="DownloadProgressBar"
                                             Grid.Column="0"
                                             Maximum="1"
-                                            Value="{Binding Item.Progress, RelativeSource={RelativeSource TemplatedParent}}" />
+                                            Value="{Binding Item.ProgressPercentage, RelativeSource={RelativeSource TemplatedParent}}" />
 
                                         <TextBlock
                                             Grid.Column="1"
                                             LineHeight="22"
-                                            Text="0%" />
+                                            Text="{Binding Item.ProgressPercentage, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ProgressPercentageToStringConverter}}" />
                                     </Grid>
 
                                     <StackPanel Orientation="Horizontal" Spacing="8">
@@ -180,14 +181,6 @@
 
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="DownloadStates">
-                                <VisualState x:Name="Queued">
-                                    <VisualState.Setters>
-                                        <!--<Setter Target="DownloadProgressBar.Visibility" Value="Collapsed" />-->
-                                        <Setter Target="StatusAndBytesStatusSeparator.Visibility" Value="Collapsed" />
-                                        <Setter Target="BytesStatus.Visibility" Value="Collapsed" />
-                                    </VisualState.Setters>
-                                </VisualState>
-
                                 <VisualState x:Name="Processing">
                                     <VisualState.Setters>
                                         <Setter Target="DownloadProgressBar.IsIndeterminate" Value="True" />

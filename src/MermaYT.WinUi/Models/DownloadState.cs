@@ -2,8 +2,6 @@
 
 public enum DownloadState
 {
-    Queued,
-
     Processing,
 
     Downloading,
