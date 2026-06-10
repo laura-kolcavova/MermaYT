@@ -194,7 +194,7 @@
                             <TextBlock
                                 Grid.Column="0"
                                 Style="{StaticResource BodyStrongTextBlockStyle}"
-                                Text="Download queue" />
+                                Text="Download Queue" />
 
                             <Button
                                 x:Name="ClearCompletedButton"
