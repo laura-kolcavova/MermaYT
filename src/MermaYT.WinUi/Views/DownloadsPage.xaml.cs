@@ -149,7 +149,7 @@ public sealed partial class DownloadsPage :
 
     private void OnProgressReceived(
         object? sender,
-        ProgressReceivedEventArgs e)
+        ProgressUpdatedEventArgs e)
     {
         DispatcherQueue.TryEnqueue(() =>
         {

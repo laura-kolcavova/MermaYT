@@ -8,9 +8,11 @@ namespace MermaYT.Core.YtDlp;
 internal sealed class YtDlpDownloadAdapter
     : IYouTubeDownloadManager
 {
-    public event EventHandler<ProgressReceivedEventArgs>? ProgressReceived;
-
     public event EventHandler<ErrorReceivedEventArgs>? ErrorReceived;
+
+    public event EventHandler<ProgressUpdatedEventArgs>? ProgressUpdated;
+
+    public event EventHandler<CompletedEventArgs>? Completed;
 
     private readonly Dictionary<int, Process> _downloadProcessesByProcessId = [];
 
@@ -132,7 +134,7 @@ internal sealed class YtDlpDownloadAdapter
             _ = long.TryParse(downloadedBytes, out var parsedDownloadedBytes);
             _ = long.TryParse(totalBytes, out var parsedTotalBytes);
 
-            var eventArgs = new ProgressReceivedEventArgs
+            var eventArgs = new ProgressUpdatedEventArgs
             {
                 DownloadItemId = process.Id,
                 ProgressPercentage = parsedPercent,
@@ -141,7 +143,7 @@ internal sealed class YtDlpDownloadAdapter
                 Title = title
             };
 
-            ProgressReceived?.Invoke(this, eventArgs);
+            ProgressUpdated?.Invoke(this, eventArgs);
         }
     }
 
@@ -185,6 +187,26 @@ internal sealed class YtDlpDownloadAdapter
         }
 
         _downloadProcessesByProcessId.Remove(process.Id);
+
+        if (process.ExitCode < 0)
+        {
+            var failedEventArgs = new ErrorReceivedEventArgs
+            {
+                DownloadItemId = process.Id,
+                ErrorMessage = $"Process exited with code {process.ExitCode}."
+            };
+
+            ErrorReceived?.Invoke(this, failedEventArgs);
+
+            return;
+        }
+
+        var completedEventArgs = new CompletedEventArgs
+        {
+            DownloadItemId = process.Id
+        };
+
+        Completed?.Invoke(this, completedEventArgs);
 
         //process.OutputDataReceived -= Process_OutputDataReceived;
         //process.ErrorDataReceived -= Process_ErrorDataReceived;
