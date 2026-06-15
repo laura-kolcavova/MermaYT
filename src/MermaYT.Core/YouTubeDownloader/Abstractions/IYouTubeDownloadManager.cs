@@ -6,7 +6,9 @@ public interface IYouTubeDownloadManager
 {
     public event EventHandler<ProgressUpdatedEventArgs>? ProgressUpdated;
 
-    public event EventHandler<ErrorReceivedEventArgs>? ErrorReceived;
+    public event EventHandler<ConvertingStartedEventArgs>? ConvertingStarted;
+
+    public event EventHandler<FailedEventArgs>? Failed;
 
     public event EventHandler<CompletedEventArgs>? Completed;
 

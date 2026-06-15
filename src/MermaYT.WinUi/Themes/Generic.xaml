@@ -161,9 +161,9 @@
                                             x:Name="BytesStatus"
                                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                             Style="{StaticResource CaptionTextBlockStyle}">
-                                            <Run Text="{Binding Item.DownloadedBytes, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BytesToFileSizeConverter}}" />
-                                            <Run Text=" of " />
-                                            <Run Text="{Binding Item.TotalBytes, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BytesToFileSizeConverter}}" />
+                                            <Run x:Name="DownloadedBytes" Text="{Binding Item.DownloadedBytes, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BytesToFileSizeConverter}}" />
+                                            <Run x:Name="BytesSeparator" Text=" of " />
+                                            <Run x:Name="TotalBytes" Text="{Binding Item.TotalBytes, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BytesToFileSizeConverter}}" />
                                         </TextBlock>
                                     </StackPanel>
                                 </StackPanel>
@@ -199,11 +199,16 @@
                                 <VisualState x:Name="Converting">
                                     <VisualState.Setters>
                                         <Setter Target="DownloadProgressBar.IsIndeterminate" Value="True" />
+                                        <Setter Target="DownloadedBytes.Visibility" Value="Collapsed" />
+                                        <Setter Target="BytesSeparator.Visibility" Value="Collapsed" />
+                                        <Setter Target="DownloadProgressBar.IsIndeterminate" Value="True" />
                                     </VisualState.Setters>
                                 </VisualState>
 
                                 <VisualState x:Name="Completed">
                                     <VisualState.Setters>
+                                        <Setter Target="DownloadedBytes.Visibility" Value="Collapsed" />
+                                        <Setter Target="BytesSeparator.Visibility" Value="Collapsed" />
                                         <Setter Target="Status.Foreground" Value="{ThemeResource SystemFillColorSuccessBrush}" />
                                     </VisualState.Setters>
                                 </VisualState>

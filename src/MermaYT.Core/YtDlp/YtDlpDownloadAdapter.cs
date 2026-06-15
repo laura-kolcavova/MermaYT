@@ -8,9 +8,11 @@ namespace MermaYT.Core.YtDlp;
 internal sealed class YtDlpDownloadAdapter
     : IYouTubeDownloadManager
 {
-    public event EventHandler<ErrorReceivedEventArgs>? ErrorReceived;
-
     public event EventHandler<ProgressUpdatedEventArgs>? ProgressUpdated;
+
+    public event EventHandler<ConvertingStartedEventArgs>? ConvertingStarted;
+
+    public event EventHandler<FailedEventArgs>? Failed;
 
     public event EventHandler<CompletedEventArgs>? Completed;
 
@@ -82,17 +84,14 @@ internal sealed class YtDlpDownloadAdapter
             RedirectStandardError = true,
         };
 
-        var process = new Process()
+        var process = new Process
         {
-            StartInfo = startInfo
+            StartInfo = startInfo,
+            EnableRaisingEvents = true,
         };
 
-        process.EnableRaisingEvents = true;
-
         process.OutputDataReceived += OnOutputDataReceived;
-
         process.ErrorDataReceived += OnErrorDataReceived;
-
         process.Exited += OnExited;
 
         process.Start();
@@ -134,7 +133,7 @@ internal sealed class YtDlpDownloadAdapter
             _ = long.TryParse(downloadedBytes, out var parsedDownloadedBytes);
             _ = long.TryParse(totalBytes, out var parsedTotalBytes);
 
-            var eventArgs = new ProgressUpdatedEventArgs
+            var progressUpdatedEventArgs = new ProgressUpdatedEventArgs
             {
                 DownloadItemId = process.Id,
                 ProgressPercentage = parsedPercent,
@@ -143,7 +142,23 @@ internal sealed class YtDlpDownloadAdapter
                 Title = title
             };
 
-            ProgressUpdated?.Invoke(this, eventArgs);
+            ProgressUpdated?.Invoke(this, progressUpdatedEventArgs);
+
+            return;
+        }
+
+        if (e.Data.StartsWith(
+          YtDlpConstants.ConvertingPrefix,
+          StringComparison.OrdinalIgnoreCase))
+        {
+            var convertingStartedEventArgs = new ConvertingStartedEventArgs
+            {
+                DownloadItemId = process.Id
+            };
+
+            ConvertingStarted?.Invoke(this, convertingStartedEventArgs);
+
+            return;
         }
     }
 
@@ -168,13 +183,13 @@ internal sealed class YtDlpDownloadAdapter
 
         var errorMessage = e.Data[YtDlpConstants.ErrorPrefix.Length..];
 
-        var eventArgs = new ErrorReceivedEventArgs
+        var eventArgs = new FailedEventArgs
         {
             DownloadItemId = process.Id,
             ErrorMessage = errorMessage
         };
 
-        ErrorReceived?.Invoke(this, eventArgs);
+        Failed?.Invoke(this, eventArgs);
     }
 
     private void OnExited(
@@ -190,13 +205,13 @@ internal sealed class YtDlpDownloadAdapter
 
         if (process.ExitCode < 0)
         {
-            var failedEventArgs = new ErrorReceivedEventArgs
+            var failedEventArgs = new FailedEventArgs
             {
                 DownloadItemId = process.Id,
                 ErrorMessage = $"Process exited with code {process.ExitCode}."
             };
 
-            ErrorReceived?.Invoke(this, failedEventArgs);
+            Failed?.Invoke(this, failedEventArgs);
 
             return;
         }

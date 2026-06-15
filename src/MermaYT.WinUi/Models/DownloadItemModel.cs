@@ -132,6 +132,16 @@ public sealed class DownloadItemModel : INotifyPropertyChanged
         ErrorMessage = errorMessage;
     }
 
+    public void UpdateCompletedState()
+    {
+        if (DownloadState == DownloadState.Error)
+        {
+            return;
+        }
+
+        DownloadState = DownloadState.Completed;
+    }
+
     private void NotifyPropertyChanged(
         [CallerMemberName] string? name = null)
     {

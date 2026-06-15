@@ -8,6 +8,8 @@ internal static class YtDlpConstants
 
     public const string ErrorPrefix = "ERROR: ";
 
+    public const string ConvertingPrefix = "[ExtractAudio] Destination: ";
+
     public const string ProgressStatusDownloading = "downloading";
 
     public const string ProgressStatusFinished = "finished";
