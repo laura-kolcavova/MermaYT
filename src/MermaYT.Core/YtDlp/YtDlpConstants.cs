@@ -18,5 +18,5 @@ internal static class YtDlpConstants
 
     public const string ProgressSeparator = "__";
 
-    public const string ProgressTemplate = "[progress]__%(progress.status)s__%(progress._percent)s__%(progress._downloaded_bytes)s__%(progress._total_bytes)s__%(info.title)s";
+    public const string ProgressTemplate = "[progress]__%(progress.status)s__%(progress._percent)s__%(progress.downloaded_bytes)s__%(progress.total_bytes)s__%(info.title)s";
 }

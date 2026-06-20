@@ -78,6 +78,7 @@ public sealed partial class DownloadsPage :
             .GetRequiredService<IYouTubeDownloadManager>();
 
         _youTubeDownloadAdapter.ProgressUpdated += OnProgressUpdated;
+        _youTubeDownloadAdapter.ConvertingStarted += OnConvertingStarted;
         _youTubeDownloadAdapter.Failed += OnFailed;
         _youTubeDownloadAdapter.Completed += OnCompleted;
 
@@ -167,6 +168,23 @@ public sealed partial class DownloadsPage :
                 e.DownloadedBytes,
                 e.TotalBytes,
                 e.Title);
+        });
+    }
+    private void OnConvertingStarted(
+       object? sender,
+       ConvertingStartedEventArgs e)
+    {
+        DispatcherQueue.TryEnqueue(() =>
+        {
+            var downloadItem = DownloadQueue.FirstOrDefault(
+                item => item.ProcessId == e.DownloadItemId);
+
+            if (downloadItem is null)
+            {
+                return;
+            }
+
+            downloadItem.UpdateConvertingState();
         });
     }
 
@@ -332,12 +350,13 @@ public sealed partial class DownloadsPage :
 
     private void ClearCompletedDownloads()
     {
-        foreach (var item in DownloadQueue)
+        var itemsToRemove = DownloadQueue
+            .Where(item => item.DownloadState == DownloadState.Completed)
+            .ToArray();
+
+        foreach (var item in itemsToRemove)
         {
-            if (item.DownloadState == DownloadState.Completed)
-            {
-                DownloadQueue.Remove(item);
-            }
+            DownloadQueue.Remove(item);
         }
     }
 
