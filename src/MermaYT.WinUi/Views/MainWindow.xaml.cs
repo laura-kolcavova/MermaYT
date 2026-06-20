@@ -1,3 +1,5 @@
+using MermaYT.WinUi.Controls;
+using MermaYT.WinUi.Models;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
@@ -83,10 +85,25 @@ public sealed partial class MainWindow : Window
         object sender,
         NavigationEventArgs e)
     {
-        NavView.Header = (NavView.SelectedItem as NavigationViewItem)
-            ?.Content
-            ?.ToString()
-            ?? string.Empty;
+        var title = string.Empty;
+
+        var subtitle = string.Empty;
+
+        if (NavView.SelectedItem is NavigationViewItem navigationViewItem)
+        {
+            title = navigationViewItem.Content.ToString() ?? string.Empty;
+        }
+
+        if (NavView.SelectedItem is NavigationViewItemExtended navigationViewItemExtended)
+        {
+            subtitle = navigationViewItemExtended.Subtitle;
+        }
+
+        var navigationHeaderInfo = new NavigationHeaderInfoModel(
+            Title: title,
+            Subtitle: subtitle);
+
+        NavView.Header = navigationHeaderInfo;
     }
 
     private void AppTitleBar_PaneToggleRequested(

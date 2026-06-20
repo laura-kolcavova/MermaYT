@@ -8,26 +8,25 @@ namespace MermaYT.WinUi.Controls;
 public sealed partial class DownloadListItem :
     Control
 {
-    private Button? _openDestinationFolderButton;
-
-    private Button? _removeButton;
-
     public static readonly DependencyProperty ItemProperty = DependencyProperty.Register(
         nameof(Item),
         typeof(DownloadItemModel),
         typeof(DownloadListItem),
         new PropertyMetadata(null, OnItemChanged));
 
+    private Button? _openDestinationFolderButton;
+
+    private Button? _removeButton;
+
+    public event RoutedEventHandler? OpenDestinationFolderButtonClick;
+
+    public event RoutedEventHandler? RemoveButtonClick;
+
     public DownloadItemModel? Item
     {
         get => (DownloadItemModel?)GetValue(ItemProperty);
         set => SetValue(ItemProperty, value);
     }
-
-
-    public event RoutedEventHandler? OpenDestinationFolderButtonClick;
-
-    public event RoutedEventHandler? RemoveButtonClick;
 
     public DownloadListItem()
     {
