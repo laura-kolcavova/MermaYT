@@ -139,6 +139,7 @@
                                             Value="{Binding Item.ProgressPercentage, RelativeSource={RelativeSource TemplatedParent}}" />
 
                                         <TextBlock
+                                            x:Name="DownloadProgressText"
                                             Grid.Column="1"
                                             LineHeight="22"
                                             Text="{Binding Item.ProgressPercentage, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ProgressPercentageToStringConverter}}" />
@@ -146,25 +147,39 @@
 
                                     <StackPanel Orientation="Horizontal" Spacing="8">
                                         <TextBlock
-                                            x:Name="Status"
+                                            x:Name="DownloadStatusText"
                                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                             Style="{StaticResource CaptionTextBlockStyle}"
                                             Text="{Binding Item.DownloadState, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource DownloadStateToStringConverter}}" />
 
                                         <TextBlock
-                                            x:Name="StatusAndBytesStatusSeparator"
+                                            x:Name="StatusSeparatorText"
                                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                             Style="{StaticResource CaptionTextBlockStyle}"
                                             Text="·" />
 
-                                        <TextBlock
-                                            x:Name="BytesStatus"
-                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                            Style="{StaticResource CaptionTextBlockStyle}">
-                                            <Run Text="{Binding Item.DownloadedBytes, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BytesToFileSizeConverter}}" />
-                                            <Run Text=" of " />
-                                            <Run Text="{Binding Item.TotalBytes, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BytesToFileSizeConverter}}" />
-                                        </TextBlock>
+                                        <StackPanel
+                                            x:Name="BytesStatusStackPanel"
+                                            Orientation="Horizontal"
+                                            Spacing="4">
+                                            <TextBlock
+                                                x:Name="DownloadedBytesText"
+                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                Style="{StaticResource CaptionTextBlockStyle}"
+                                                Text="{Binding Item.DownloadedBytes, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BytesToFileSizeConverter}}" />
+
+                                            <TextBlock
+                                                x:Name="BytesSeparatorText"
+                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                Style="{StaticResource CaptionTextBlockStyle}"
+                                                Text="of" />
+
+                                            <TextBlock
+                                                x:Name="TotalBytesText"
+                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                Style="{StaticResource CaptionTextBlockStyle}"
+                                                Text="{Binding Item.TotalBytes, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BytesToFileSizeConverter}}" />
+                                        </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
                             </Grid>
@@ -189,8 +204,9 @@
                                 <VisualState x:Name="Processing">
                                     <VisualState.Setters>
                                         <Setter Target="DownloadProgressBar.IsIndeterminate" Value="True" />
-                                        <Setter Target="StatusAndBytesStatusSeparator.Visibility" Value="Collapsed" />
-                                        <Setter Target="BytesStatus.Visibility" Value="Collapsed" />
+                                        <!--<Setter Target="DownloadProgressText.Opacity" Value="0" />-->
+                                        <Setter Target="StatusSeparatorText.Visibility" Value="Collapsed" />
+                                        <Setter Target="BytesStatusStackPanel.Visibility" Value="Collapsed" />
                                     </VisualState.Setters>
                                 </VisualState>
 
@@ -199,21 +215,26 @@
                                 <VisualState x:Name="Converting">
                                     <VisualState.Setters>
                                         <Setter Target="DownloadProgressBar.IsIndeterminate" Value="True" />
+                                        <!--<Setter Target="DownloadProgressText.Opacity" Value="0" />-->
+                                        <Setter Target="DownloadedBytesText.Visibility" Value="Collapsed" />
+                                        <Setter Target="BytesSeparatorText.Visibility" Value="Collapsed" />
+                                        <Setter Target="DownloadProgressBar.IsIndeterminate" Value="True" />
                                     </VisualState.Setters>
                                 </VisualState>
 
                                 <VisualState x:Name="Completed">
                                     <VisualState.Setters>
-                                        <Setter Target="Status.Foreground" Value="{ThemeResource SystemFillColorSuccessBrush}" />
+                                        <Setter Target="DownloadedBytesText.Visibility" Value="Collapsed" />
+                                        <Setter Target="BytesSeparatorText.Visibility" Value="Collapsed" />
+                                        <Setter Target="DownloadStatusText.Foreground" Value="{ThemeResource SystemFillColorSuccessBrush}" />
                                     </VisualState.Setters>
                                 </VisualState>
 
                                 <VisualState x:Name="Error">
                                     <VisualState.Setters>
-                                        <!--<Setter Target="DownloadProgressBar.Visibility" Value="Collapsed" />-->
-                                        <Setter Target="StatusAndBytesStatusSeparator.Visibility" Value="Collapsed" />
-                                        <Setter Target="BytesStatus.Visibility" Value="Collapsed" />
-                                        <Setter Target="Status.Foreground" Value="{ThemeResource SystemFillColorCriticalBrush}" />
+                                        <Setter Target="StatusSeparatorText.Visibility" Value="Collapsed" />
+                                        <Setter Target="BytesStatusStackPanel.Visibility" Value="Collapsed" />
+                                        <Setter Target="DownloadStatusText.Foreground" Value="{ThemeResource SystemFillColorCriticalBrush}" />
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>

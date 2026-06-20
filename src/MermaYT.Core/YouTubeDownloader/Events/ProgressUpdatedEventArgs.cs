@@ -1,6 +1,6 @@
 ﻿namespace MermaYT.Core.YouTubeDownloader.Events;
 
-public sealed record ProgressReceivedEventArgs
+public sealed record ProgressUpdatedEventArgs
 {
     public required int DownloadItemId { get; init; }
 

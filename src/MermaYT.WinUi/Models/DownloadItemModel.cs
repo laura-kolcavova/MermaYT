@@ -120,6 +120,19 @@ public sealed class DownloadItemModel : INotifyPropertyChanged
         Title = title;
     }
 
+    public void UpdateConvertingState()
+    {
+        if (DownloadState == DownloadState.Converting ||
+            DownloadState == DownloadState.Error ||
+            DownloadState == DownloadState.Completed)
+        {
+            return;
+        }
+
+        DownloadState = DownloadState.Converting;
+        ProgressPercentage = 100;
+    }
+
     public void UpdateErrorState(
         string errorMessage)
     {
@@ -130,6 +143,18 @@ public sealed class DownloadItemModel : INotifyPropertyChanged
 
         DownloadState = DownloadState.Error;
         ErrorMessage = errorMessage;
+        ProgressPercentage = 0;
+    }
+
+    public void UpdateCompletedState()
+    {
+        if (DownloadState == DownloadState.Error)
+        {
+            return;
+        }
+
+        DownloadState = DownloadState.Completed;
+        ProgressPercentage = 100;
     }
 
     private void NotifyPropertyChanged(

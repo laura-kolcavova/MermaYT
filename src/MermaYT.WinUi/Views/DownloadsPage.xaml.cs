@@ -77,8 +77,10 @@ public sealed partial class DownloadsPage :
             .Services
             .GetRequiredService<IYouTubeDownloadManager>();
 
-        _youTubeDownloadAdapter.ErrorReceived += OnErrorReceived;
-        _youTubeDownloadAdapter.ProgressReceived += OnProgressReceived;
+        _youTubeDownloadAdapter.ProgressUpdated += OnProgressUpdated;
+        _youTubeDownloadAdapter.ConvertingStarted += OnConvertingStarted;
+        _youTubeDownloadAdapter.Failed += OnFailed;
+        _youTubeDownloadAdapter.Completed += OnCompleted;
 
         InitializeComponent();
 
@@ -147,9 +149,9 @@ public sealed partial class DownloadsPage :
         RemoveFromDownloadQueue(downloadListItem.Item);
     }
 
-    private void OnProgressReceived(
+    private void OnProgressUpdated(
         object? sender,
-        ProgressReceivedEventArgs e)
+        ProgressUpdatedEventArgs e)
     {
         DispatcherQueue.TryEnqueue(() =>
         {
@@ -168,10 +170,27 @@ public sealed partial class DownloadsPage :
                 e.Title);
         });
     }
+    private void OnConvertingStarted(
+       object? sender,
+       ConvertingStartedEventArgs e)
+    {
+        DispatcherQueue.TryEnqueue(() =>
+        {
+            var downloadItem = DownloadQueue.FirstOrDefault(
+                item => item.ProcessId == e.DownloadItemId);
 
-    private void OnErrorReceived(
+            if (downloadItem is null)
+            {
+                return;
+            }
+
+            downloadItem.UpdateConvertingState();
+        });
+    }
+
+    private void OnFailed(
         object? sender,
-        ErrorReceivedEventArgs e)
+        FailedEventArgs e)
     {
         DispatcherQueue.TryEnqueue(() =>
         {
@@ -185,6 +204,24 @@ public sealed partial class DownloadsPage :
 
             downloadItem.UpdateErrorState(
                 e.ErrorMessage);
+        });
+    }
+
+    private void OnCompleted(
+       object? sender,
+       CompletedEventArgs e)
+    {
+        DispatcherQueue.TryEnqueue(() =>
+        {
+            var downloadItem = DownloadQueue.FirstOrDefault(
+                item => item.ProcessId == e.DownloadItemId);
+
+            if (downloadItem is null)
+            {
+                return;
+            }
+
+            downloadItem.UpdateCompletedState();
         });
     }
 
@@ -313,12 +350,13 @@ public sealed partial class DownloadsPage :
 
     private void ClearCompletedDownloads()
     {
-        foreach (var item in DownloadQueue)
+        var itemsToRemove = DownloadQueue
+            .Where(item => item.DownloadState == DownloadState.Completed)
+            .ToArray();
+
+        foreach (var item in itemsToRemove)
         {
-            if (item.DownloadState == DownloadState.Completed)
-            {
-                DownloadQueue.Remove(item);
-            }
+            DownloadQueue.Remove(item);
         }
     }
 
