@@ -143,6 +143,7 @@ public sealed class DownloadItemModel : INotifyPropertyChanged
 
         DownloadState = DownloadState.Error;
         ErrorMessage = errorMessage;
+        ProgressPercentage = 0;
     }
 
     public void UpdateCompletedState()
