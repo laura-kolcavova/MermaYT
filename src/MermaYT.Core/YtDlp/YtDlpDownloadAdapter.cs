@@ -5,8 +5,9 @@ using System.Diagnostics;
 
 namespace MermaYT.Core.YtDlp;
 
-internal sealed class YtDlpDownloadAdapter
-    : IYouTubeDownloadManager
+internal sealed class YtDlpDownloadAdapter :
+    IYouTubeDownloadManager
+//IDisposable
 {
     public event EventHandler<ProgressUpdatedEventArgs>? ProgressUpdated;
 
@@ -17,6 +18,13 @@ internal sealed class YtDlpDownloadAdapter
     public event EventHandler<CompletedEventArgs>? Completed;
 
     private readonly Dictionary<int, Process> _downloadProcessesByProcessId = [];
+
+    private bool _disposed;
+
+    //~YtDlpDownloadAdapter()
+    //{
+    //    //Dispose(false);
+    //}
 
     public void Cancel(
         int downloadItemId)
@@ -101,6 +109,13 @@ internal sealed class YtDlpDownloadAdapter
         _downloadProcessesByProcessId.Add(process.Id, process);
 
         return process.Id;
+    }
+
+    public void Dispose()
+    {
+        //Dispose(true);
+
+        //GC.SuppressFinalize(this);
     }
 
     private void OnOutputDataReceived(
@@ -222,12 +237,6 @@ internal sealed class YtDlpDownloadAdapter
         };
 
         Completed?.Invoke(this, completedEventArgs);
-
-        //process.OutputDataReceived -= Process_OutputDataReceived;
-        //process.ErrorDataReceived -= Process_ErrorDataReceived;
-        //process.Exited -= Process_Exited;
-
-        //process.Dispose();
     }
 
     private static string GetYtDlpFileName()
@@ -262,5 +271,40 @@ internal sealed class YtDlpDownloadAdapter
         }
 
         return ffMpegFileName;
+    }
+
+    private void Dispose(bool disposing)
+    {
+        if (_disposed)
+        {
+            return;
+        }
+
+        if (disposing)
+        {
+            // Dispose managed state (managed objects).
+            // ...
+
+            //foreach (var process in _downloadProcessesByProcessId.Values)
+            //{
+            //    process.OutputDataReceived -= OnOutputDataReceived;
+            //    process.ErrorDataReceived -= OnErrorDataReceived;
+            //    process.Exited -= OnExited;
+
+            //    if (!process.HasExited)
+            //    {
+            //        process.Kill();
+            //    }
+
+            //    process.Dispose();
+            //}
+
+            //_downloadProcessesByProcessId.Clear();
+        }
+
+        // Free unmanaged resources.
+        // ...
+
+        _disposed = true;
     }
 }
