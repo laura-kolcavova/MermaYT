@@ -41,13 +41,13 @@ internal sealed class YtDlpDownloadAdapter :
             return;
         }
 
-        var test = Process.GetProcessesByName("yt-dlp");
-
         process.OutputDataReceived -= OnOutputDataReceived;
         process.ErrorDataReceived -= OnErrorDataReceived;
         process.Exited -= OnExited;
 
         process.Kill(true);
+
+        _downloadProcessesByProcessId.Remove(downloadItemId);
     }
 
     public int Download(
@@ -222,8 +222,6 @@ internal sealed class YtDlpDownloadAdapter :
             return;
         }
 
-        _downloadProcessesByProcessId.Remove(process.Id);
-
         if (process.ExitCode < 0)
         {
             var failedEventArgs = new FailedEventArgs
@@ -233,16 +231,18 @@ internal sealed class YtDlpDownloadAdapter :
             };
 
             Failed?.Invoke(this, failedEventArgs);
+        }
+        else
+        {
+            var completedEventArgs = new CompletedEventArgs
+            {
+                DownloadItemId = process.Id
+            };
 
-            return;
+            Completed?.Invoke(this, completedEventArgs);
         }
 
-        var completedEventArgs = new CompletedEventArgs
-        {
-            DownloadItemId = process.Id
-        };
-
-        Completed?.Invoke(this, completedEventArgs);
+        _downloadProcessesByProcessId.Remove(process.Id);
     }
 
     private static string GetYtDlpFileName()
