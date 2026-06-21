@@ -6,8 +6,8 @@ using System.Diagnostics;
 namespace MermaYT.Core.YtDlp;
 
 internal sealed class YtDlpDownloadAdapter :
-    IYouTubeDownloadManager
-//IDisposable
+    IYouTubeDownloadManager,
+    IDisposable
 {
     public event EventHandler<ProgressUpdatedEventArgs>? ProgressUpdated;
 
@@ -21,10 +21,10 @@ internal sealed class YtDlpDownloadAdapter :
 
     private bool _disposed;
 
-    //~YtDlpDownloadAdapter()
-    //{
-    //    //Dispose(false);
-    //}
+    ~YtDlpDownloadAdapter()
+    {
+        Dispose(false);
+    }
 
     public void Cancel(
         int downloadItemId)
@@ -36,12 +36,18 @@ internal sealed class YtDlpDownloadAdapter :
             return;
         }
 
-        if (!process.HasExited)
+        if (process.HasExited)
         {
             return;
         }
 
-        process.Kill();
+        var test = Process.GetProcessesByName("yt-dlp");
+
+        process.OutputDataReceived -= OnOutputDataReceived;
+        process.ErrorDataReceived -= OnErrorDataReceived;
+        process.Exited -= OnExited;
+
+        process.Kill(true);
     }
 
     public int Download(
@@ -113,9 +119,9 @@ internal sealed class YtDlpDownloadAdapter :
 
     public void Dispose()
     {
-        //Dispose(true);
+        Dispose(true);
 
-        //GC.SuppressFinalize(this);
+        GC.SuppressFinalize(this);
     }
 
     private void OnOutputDataReceived(
@@ -285,21 +291,21 @@ internal sealed class YtDlpDownloadAdapter :
             // Dispose managed state (managed objects).
             // ...
 
-            //foreach (var process in _downloadProcessesByProcessId.Values)
-            //{
-            //    process.OutputDataReceived -= OnOutputDataReceived;
-            //    process.ErrorDataReceived -= OnErrorDataReceived;
-            //    process.Exited -= OnExited;
+            foreach (var process in _downloadProcessesByProcessId.Values)
+            {
+                process.OutputDataReceived -= OnOutputDataReceived;
+                process.ErrorDataReceived -= OnErrorDataReceived;
+                process.Exited -= OnExited;
 
-            //    if (!process.HasExited)
-            //    {
-            //        process.Kill();
-            //    }
+                if (!process.HasExited)
+                {
+                    process.Kill(true);
+                }
 
-            //    process.Dispose();
-            //}
+                process.Dispose();
+            }
 
-            //_downloadProcessesByProcessId.Clear();
+            _downloadProcessesByProcessId.Clear();
         }
 
         // Free unmanaged resources.
