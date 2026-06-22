@@ -28,6 +28,13 @@ internal sealed class YtDlpDownloadAdapter :
         Dispose(false);
     }
 
+    public void Dispose()
+    {
+        Dispose(true);
+
+        GC.SuppressFinalize(this);
+    }
+
     public void Cancel(
         int downloadItemId)
     {
@@ -111,13 +118,6 @@ internal sealed class YtDlpDownloadAdapter :
         _downloadProcessesByProcessId.Add(process.Id, process);
 
         return process.Id;
-    }
-
-    public void Dispose()
-    {
-        Dispose(true);
-
-        GC.SuppressFinalize(this);
     }
 
     private void OnOutputDataReceived(
@@ -243,7 +243,24 @@ internal sealed class YtDlpDownloadAdapter :
         _downloadProcessesByProcessId.Remove(process.Id);
     }
 
-    private void Dispose(bool disposing)
+    private void AddListenersToProcess(
+        Process process)
+    {
+        process.OutputDataReceived += OnOutputDataReceived;
+        process.ErrorDataReceived += OnErrorDataReceived;
+        process.Exited += OnExited;
+    }
+
+    private void RemoveListenersFromProcess(
+        Process process)
+    {
+        process.OutputDataReceived -= OnOutputDataReceived;
+        process.ErrorDataReceived -= OnErrorDataReceived;
+        process.Exited -= OnExited;
+    }
+
+    private void Dispose(
+        bool disposing)
     {
         if (_disposed)
         {
@@ -274,21 +291,5 @@ internal sealed class YtDlpDownloadAdapter :
         // ...
 
         _disposed = true;
-    }
-
-    private void AddListenersToProcess(
-        Process process)
-    {
-        process.OutputDataReceived += OnOutputDataReceived;
-        process.ErrorDataReceived += OnErrorDataReceived;
-        process.Exited += OnExited;
-    }
-
-    private void RemoveListenersFromProcess(
-        Process process)
-    {
-        process.OutputDataReceived -= OnOutputDataReceived;
-        process.ErrorDataReceived -= OnErrorDataReceived;
-        process.Exited -= OnExited;
     }
 }
