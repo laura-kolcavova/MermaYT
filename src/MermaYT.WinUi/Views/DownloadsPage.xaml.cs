@@ -79,6 +79,7 @@ public sealed partial class DownloadsPage :
 
         _youTubeDownloadAdapter.ProgressUpdated += OnProgressUpdated;
         _youTubeDownloadAdapter.ConvertingStarted += OnConvertingStarted;
+        _youTubeDownloadAdapter.ErrorOccurred += OnErrorOccurred;
         _youTubeDownloadAdapter.Failed += OnFailed;
         _youTubeDownloadAdapter.Completed += OnCompleted;
 
@@ -188,6 +189,25 @@ public sealed partial class DownloadsPage :
         });
     }
 
+    private void OnErrorOccurred(
+        object? sender,
+        ErrorOccurredEventArgs e)
+    {
+        DispatcherQueue.TryEnqueue(() =>
+        {
+            var downloadItem = DownloadQueue.FirstOrDefault(
+                item => item.ProcessId == e.DownloadItemId);
+
+            if (downloadItem is null)
+            {
+                return;
+            }
+
+            downloadItem.UpdateErrorState(
+                e.ErrorMessage);
+        });
+    }
+
     private void OnFailed(
         object? sender,
         FailedEventArgs e)
@@ -283,7 +303,7 @@ public sealed partial class DownloadsPage :
         }
     }
 
-    private async Task OpenDestinationFolder(
+    private static async Task OpenDestinationFolder(
         string destinationFolder)
     {
         var destinationFolderExists = !string.IsNullOrEmpty(destinationFolder) &&

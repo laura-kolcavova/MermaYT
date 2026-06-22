@@ -8,6 +8,8 @@ public interface IYouTubeDownloadManager
 
     public event EventHandler<ConvertingStartedEventArgs>? ConvertingStarted;
 
+    public event EventHandler<ErrorOccurredEventArgs>? ErrorOccurred;
+
     public event EventHandler<FailedEventArgs>? Failed;
 
     public event EventHandler<CompletedEventArgs>? Completed;

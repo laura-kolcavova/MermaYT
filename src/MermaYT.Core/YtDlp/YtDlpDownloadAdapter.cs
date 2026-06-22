@@ -13,6 +13,8 @@ internal sealed class YtDlpDownloadAdapter :
 
     public event EventHandler<ConvertingStartedEventArgs>? ConvertingStarted;
 
+    public event EventHandler<ErrorOccurredEventArgs>? ErrorOccurred;
+
     public event EventHandler<FailedEventArgs>? Failed;
 
     public event EventHandler<CompletedEventArgs>? Completed;
@@ -36,16 +38,12 @@ internal sealed class YtDlpDownloadAdapter :
             return;
         }
 
-        if (process.HasExited)
+        RemoveListenersFromProcess(process);
+
+        if (!process.HasExited)
         {
-            return;
+            process.Kill(true);
         }
-
-        process.OutputDataReceived -= OnOutputDataReceived;
-        process.ErrorDataReceived -= OnErrorDataReceived;
-        process.Exited -= OnExited;
-
-        process.Kill(true);
 
         _downloadProcessesByProcessId.Remove(downloadItemId);
     }
@@ -65,9 +63,9 @@ internal sealed class YtDlpDownloadAdapter :
             throw new InvalidOperationException("Output directory must be provided.");
         }
 
-        var ytDlpFileName = GetYtDlpFileName();
+        var ytDlpFileName = ToolsPathProvider.GetYtDlpFileName();
 
-        var ffMpegFileName = GetFFmpegFileName();
+        var ffMpegFileName = ToolsPathProvider.GetFfmpegFileName();
 
         var argumentsBuilder = YtDlpArgumentsBuilder
             .New()
@@ -104,9 +102,7 @@ internal sealed class YtDlpDownloadAdapter :
             EnableRaisingEvents = true,
         };
 
-        process.OutputDataReceived += OnOutputDataReceived;
-        process.ErrorDataReceived += OnErrorDataReceived;
-        process.Exited += OnExited;
+        AddListenersToProcess(process);
 
         process.Start();
         process.BeginOutputReadLine();
@@ -204,13 +200,13 @@ internal sealed class YtDlpDownloadAdapter :
 
         var errorMessage = e.Data[YtDlpConstants.ErrorPrefix.Length..];
 
-        var eventArgs = new FailedEventArgs
+        var eventArgs = new ErrorOccurredEventArgs
         {
             DownloadItemId = process.Id,
             ErrorMessage = errorMessage
         };
 
-        Failed?.Invoke(this, eventArgs);
+        ErrorOccurred?.Invoke(this, eventArgs);
     }
 
     private void OnExited(
@@ -242,41 +238,9 @@ internal sealed class YtDlpDownloadAdapter :
             Completed?.Invoke(this, completedEventArgs);
         }
 
+        RemoveListenersFromProcess(process);
+
         _downloadProcessesByProcessId.Remove(process.Id);
-    }
-
-    private static string GetYtDlpFileName()
-    {
-        var ytDlpFileName = Path.Combine(
-            AppContext.BaseDirectory,
-            "Tools",
-            YtDlpConstants.YtDlpExecutableName);
-
-        if (!File.Exists(ytDlpFileName))
-        {
-            throw new FileNotFoundException(
-                "youtube-dl executable not found.",
-                ytDlpFileName);
-        }
-
-        return ytDlpFileName;
-    }
-
-    private static string GetFFmpegFileName()
-    {
-        var ffMpegFileName = Path.Combine(
-            AppContext.BaseDirectory,
-            "Tools",
-            YtDlpConstants.FFmpegExecutableName);
-
-        if (!File.Exists(ffMpegFileName))
-        {
-            throw new FileNotFoundException(
-                "ffmpeg executable not found.",
-                ffMpegFileName);
-        }
-
-        return ffMpegFileName;
     }
 
     private void Dispose(bool disposing)
@@ -293,16 +257,14 @@ internal sealed class YtDlpDownloadAdapter :
 
             foreach (var process in _downloadProcessesByProcessId.Values)
             {
-                process.OutputDataReceived -= OnOutputDataReceived;
-                process.ErrorDataReceived -= OnErrorDataReceived;
-                process.Exited -= OnExited;
+                RemoveListenersFromProcess(process);
 
                 if (!process.HasExited)
                 {
                     process.Kill(true);
                 }
 
-                process.Dispose();
+                //process.Dispose();
             }
 
             _downloadProcessesByProcessId.Clear();
@@ -312,5 +274,21 @@ internal sealed class YtDlpDownloadAdapter :
         // ...
 
         _disposed = true;
+    }
+
+    private void AddListenersToProcess(
+        Process process)
+    {
+        process.OutputDataReceived += OnOutputDataReceived;
+        process.ErrorDataReceived += OnErrorDataReceived;
+        process.Exited += OnExited;
+    }
+
+    private void RemoveListenersFromProcess(
+        Process process)
+    {
+        process.OutputDataReceived -= OnOutputDataReceived;
+        process.ErrorDataReceived -= OnErrorDataReceived;
+        process.Exited -= OnExited;
     }
 }
