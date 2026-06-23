@@ -40,18 +40,6 @@ public sealed class DownloadItemModel : INotifyPropertyChanged
         }
     }
 
-    private string _imageUrl = string.Empty;
-
-    public string ImageUrl
-    {
-        get => _imageUrl;
-        set
-        {
-            _imageUrl = value;
-            NotifyPropertyChanged();
-        }
-    }
-
     private float _progressPercentage = 0;
 
     public float ProgressPercentage

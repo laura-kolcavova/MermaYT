@@ -1,3 +1,4 @@
+using MermaYT.Core.YouTubeDownloader;
 using MermaYT.WinUi.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -8,26 +9,25 @@ namespace MermaYT.WinUi.Controls;
 public sealed partial class DownloadListItem :
     Control
 {
-    private Button? _openDestinationFolderButton;
-
-    private Button? _removeButton;
-
     public static readonly DependencyProperty ItemProperty = DependencyProperty.Register(
         nameof(Item),
         typeof(DownloadItemModel),
         typeof(DownloadListItem),
         new PropertyMetadata(null, OnItemChanged));
 
+    private Button? _openDestinationFolderButton;
+
+    private Button? _removeButton;
+
+    public event RoutedEventHandler? OpenDestinationFolderButtonClick;
+
+    public event RoutedEventHandler? RemoveButtonClick;
+
     public DownloadItemModel? Item
     {
         get => (DownloadItemModel?)GetValue(ItemProperty);
         set => SetValue(ItemProperty, value);
     }
-
-
-    public event RoutedEventHandler? OpenDestinationFolderButtonClick;
-
-    public event RoutedEventHandler? RemoveButtonClick;
 
     public DownloadListItem()
     {
@@ -45,6 +45,11 @@ public sealed partial class DownloadListItem :
            ?? DownloadState.Processing;
 
         GoToDownloadState(downloadState);
+
+        if (Item is not null)
+        {
+            GoToOutputFormatState(Item.OutputFormat);
+        }
     }
 
     private void InitializeOpenDestinationFolderButton()
@@ -110,6 +115,11 @@ public sealed partial class DownloadListItem :
             ?? DownloadState.Processing;
 
         self.GoToDownloadState(downloadState);
+
+        if (e.NewValue is DownloadItemModel newItem)
+        {
+            self.GoToOutputFormatState(newItem.OutputFormat);
+        }
     }
 
     private void OnItemPropertyChanged(
@@ -127,6 +137,14 @@ public sealed partial class DownloadListItem :
         VisualStateManager.GoToState(
             this,
             state.ToString(),
+            useTransitions: true);
+    }
+
+    private void GoToOutputFormatState(OutputFormat format)
+    {
+        VisualStateManager.GoToState(
+            this,
+            format.ToString(),
             useTransitions: true);
     }
 }

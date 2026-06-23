@@ -10,266 +10,253 @@
     xmlns:models="using:MermaYT.WinUi.Models"
     NavigationCacheMode="Required"
     mc:Ignorable="d">
-
     <Page.Resources>
         <converters:OutputFormatToIndexConverter x:Key="OutputFormatToIndexConverter" />
     </Page.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
+    <ScrollViewer>
+        <StackPanel Padding="24,12" Spacing="10">
+            <InfoBar
+                x:Name="ErrorInfoBar"
+                Title="Error"
+                IsClosable="True"
+                IsOpen="False"
+                Severity="Error" />
 
-        <controls:PageHeader
-            Title="Downloads"
-            Grid.Row="0"
-            Subtitle="Add videos to the queue and download your favorite content." />
+            <Border
+                Padding="16"
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="8">
 
-        <ScrollViewer Grid.Row="1">
-            <StackPanel Padding="24" Spacing="10">
-                <InfoBar
-                    x:Name="ErrorInfoBar"
-                    Title="Error"
-                    IsClosable="True"
-                    IsOpen="False"
-                    Severity="Error" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-                <Border
-                    Padding="16"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                    BorderThickness="1"
-                    CornerRadius="8">
+                    <StackPanel
+                        Grid.Row="0"
+                        Margin="0,0,0,20"
+                        Spacing="6">
+                        <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="YouTube URL" />
 
-                    <Grid>
+                        <Grid>
+                            <TextBox
+                                x:Name="YouTubeUrlTextBox"
+                                Padding="36,5,10,6"
+                                KeyDown="YouTubeUrlTextBox_KeyDown"
+                                PlaceholderText="https://www.youtube.com/watch?v=..."
+                                Text="{x:Bind YouTubeUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <FontIcon
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontFamily="Segoe MDL2 Assets"
+                                FontSize="16"
+                                Glyph="{StaticResource GlyphLink}"
+                                RenderTransformOrigin="0.5,0.5">
+                                <FontIcon.RenderTransform>
+                                    <RotateTransform Angle="-45" />
+                                </FontIcon.RenderTransform>
+                            </FontIcon>
+                        </Grid>
+                    </StackPanel>
+
+                    <Grid
+                        x:Name="OptionsGrid"
+                        Grid.Row="1"
+                        Margin="0,0,0,20"
+                        ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition x:Name="OptionsCol0" Width="Auto" />
+                            <ColumnDefinition x:Name="OptionsCol1" Width="*" />
+                            <ColumnDefinition x:Name="OptionsCol2" Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition x:Name="OptionsRow1" Height="0" />
+                            <RowDefinition x:Name="OptionsRow2" Height="0" />
                         </Grid.RowDefinitions>
 
                         <StackPanel
-                            Grid.Row="0"
-                            Margin="0,0,0,20"
-                            Spacing="6">
-                            <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="YouTube URL" />
+                            x:Name="FormatPanel"
+                            Grid.Column="0"
+                            Margin="0,0,24,0"
+                            Spacing="8">
+                            <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Output format" />
+
+                            <ComboBox
+                                x:Name="OutputFormatComboBox"
+                                MinWidth="160"
+                                SelectedIndex="{x:Bind SelectedOutputFormat, Mode=TwoWay, Converter={StaticResource OutputFormatToIndexConverter}}">
+                                <ComboBoxItem>
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <FontIcon FontSize="14" Glyph="{StaticResource GlyphMusic}" />
+
+                                        <TextBlock Text="MP3 (Audio)" />
+                                    </StackPanel>
+                                </ComboBoxItem>
+
+                                <ComboBoxItem>
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <FontIcon FontSize="14" Glyph="{StaticResource GlyphMovie}" />
+
+                                        <TextBlock Text="MP4 (Video)" />
+                                    </StackPanel>
+                                </ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <StackPanel
+                            x:Name="DownloadToPanel"
+                            Grid.Column="1"
+                            Spacing="8">
+                            <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Download to" />
 
                             <Grid>
                                 <TextBox
-                                    x:Name="YouTubeUrlTextBox"
+                                    x:Name="DestinationFolderTextBox"
                                     Padding="36,5,10,6"
-                                    KeyDown="YouTubeUrlTextBox_KeyDown"
-                                    PlaceholderText="https://www.youtube.com/watch?v=..."
-                                    Text="{x:Bind YouTubeUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    PlaceholderText="Select folder..."
+                                    Text="{x:Bind DestinationFolder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                                 <FontIcon
                                     Margin="10,0,0,0"
                                     HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    FontFamily="Segoe MDL2 Assets"
                                     FontSize="16"
-                                    Glyph="{StaticResource GlyphLink}"
-                                    RenderTransformOrigin="0.5,0.5">
-                                    <FontIcon.RenderTransform>
-                                        <RotateTransform Angle="-45" />
-                                    </FontIcon.RenderTransform>
-                                </FontIcon>
+                                    Glyph="{StaticResource GlyphFolderHorizontal}" />
                             </Grid>
+
                         </StackPanel>
 
-                        <Grid
-                            x:Name="OptionsGrid"
-                            Grid.Row="1"
-                            Margin="0,0,0,20"
-                            ColumnSpacing="12">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition x:Name="OptionsCol0" Width="Auto" />
-                                <ColumnDefinition x:Name="OptionsCol1" Width="*" />
-                                <ColumnDefinition x:Name="OptionsCol2" Width="Auto" />
-                            </Grid.ColumnDefinitions>
+                        <Button
+                            x:Name="BrowseButton"
+                            Grid.Column="2"
+                            MinWidth="130"
+                            VerticalAlignment="Bottom"
+                            Click="BrowseButton_Click"
+                            Content="Browse" />
+                    </Grid>
 
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition x:Name="OptionsRow1" Height="0" />
-                                <RowDefinition x:Name="OptionsRow2" Height="0" />
-                            </Grid.RowDefinitions>
+                    <Button
+                        x:Name="AddButton"
+                        Grid.Row="2"
+                        MinWidth="130"
+                        HorizontalAlignment="Right"
+                        Click="AddButton_Click"
+                        IsEnabled="{x:Bind AddButtonIsEnabled, Mode=OneWay}"
+                        Style="{StaticResource AccentButtonStyle}">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBlock Text="Add" />
 
-                            <StackPanel
-                                x:Name="FormatPanel"
-                                Grid.Column="0"
-                                Margin="0,0,24,0"
-                                Spacing="8">
-                                <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Output format" />
+                            <FontIcon FontSize="14" Glyph="{StaticResource GlyphAdd}" />
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Border>
 
-                                <ComboBox
-                                    x:Name="OutputFormatComboBox"
-                                    MinWidth="160"
-                                    SelectedIndex="{x:Bind SelectedOutputFormat, Mode=TwoWay, Converter={StaticResource OutputFormatToIndexConverter}}">
-                                    <ComboBoxItem>
-                                        <StackPanel Orientation="Horizontal" Spacing="8">
-                                            <FontIcon FontSize="14" Glyph="{StaticResource GlyphAudio}" />
+            <Border
+                Padding="16"
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="8">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
-                                            <TextBlock Text="MP3 (Audio)" />
-                                        </StackPanel>
-                                    </ComboBoxItem>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
 
-                                    <ComboBoxItem>
-                                        <StackPanel Orientation="Horizontal" Spacing="8">
-                                            <FontIcon FontSize="14" Glyph="{StaticResource GlyphMovie}" />
-
-                                            <TextBlock Text="MP4 (Video)" />
-                                        </StackPanel>
-                                    </ComboBoxItem>
-                                </ComboBox>
-                            </StackPanel>
-
-                            <StackPanel
-                                x:Name="DownloadToPanel"
-                                Grid.Column="1"
-                                Spacing="8">
-                                <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Download to" />
-
-                                <Grid>
-                                    <TextBox
-                                        x:Name="DestinationFolderTextBox"
-                                        Padding="36,5,10,6"
-                                        PlaceholderText="Select folder..."
-                                        Text="{x:Bind DestinationFolder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                                    <FontIcon
-                                        Margin="10,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        FontSize="16"
-                                        Glyph="{StaticResource GlyphFolderHorizontal}" />
-                                </Grid>
-
-                            </StackPanel>
-
-                            <Button
-                                x:Name="BrowseButton"
-                                Grid.Column="2"
-                                MinWidth="130"
-                                VerticalAlignment="Bottom"
-                                Click="BrowseButton_Click"
-                                Content="Browse" />
-                        </Grid>
+                        <TextBlock
+                            Grid.Column="0"
+                            Style="{StaticResource BodyStrongTextBlockStyle}"
+                            Text="Download Queue" />
 
                         <Button
-                            x:Name="AddButton"
-                            Grid.Row="2"
+                            x:Name="ClearCompletedButton"
+                            Grid.Column="2"
                             MinWidth="130"
-                            HorizontalAlignment="Right"
-                            Click="AddButton_Click"
-                            IsEnabled="{x:Bind AddButtonIsEnabled, Mode=OneWay}"
-                            Style="{StaticResource AccentButtonStyle}">
+                            Click="ClearCompletedButton_Click">
                             <StackPanel Orientation="Horizontal" Spacing="8">
-                                <TextBlock Text="Add" />
+                                <FontIcon
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Glyph="{StaticResource GlyphDelete}" />
 
-                                <FontIcon FontSize="14" Glyph="{StaticResource GlyphAdd}" />
+                                <TextBlock Text="Clear completed" />
                             </StackPanel>
                         </Button>
                     </Grid>
-                </Border>
 
-                <Border
-                    Padding="16"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                    BorderThickness="1"
-                    CornerRadius="8">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
+                    <ItemsRepeater
+                        x:Name="DownloadQueueList"
+                        Grid.Row="1"
+                        Margin="0,12,0,0"
+                        ItemsSource="{x:Bind DownloadQueue}">
+                        <ItemsRepeater.Layout>
+                            <StackLayout Spacing="8" />
+                        </ItemsRepeater.Layout>
 
-                        <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
+                        <ItemsRepeater.ItemTemplate>
+                            <DataTemplate x:DataType="models:DownloadItemModel">
+                                <controls:DownloadListItem
+                                    Item="{x:Bind}"
+                                    OpenDestinationFolderButtonClick="DownloadListItem_OpenDestinationFolderButtonClick"
+                                    RemoveButtonClick="DownloadListItem_RemoveButtonClick" />
+                            </DataTemplate>
+                        </ItemsRepeater.ItemTemplate>
+                    </ItemsRepeater>
 
-                            <TextBlock
-                                Grid.Column="0"
-                                Style="{StaticResource BodyStrongTextBlockStyle}"
-                                Text="Download Queue" />
+                </Grid>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
 
-                            <Button
-                                x:Name="ClearCompletedButton"
-                                Grid.Column="2"
-                                MinWidth="130"
-                                Click="ClearCompletedButton_Click">
-                                <StackPanel Orientation="Horizontal" Spacing="8">
-                                    <FontIcon
-                                        VerticalAlignment="Center"
-                                        FontSize="14"
-                                        Glyph="{StaticResource GlyphDelete}" />
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup>
+            <VisualState x:Name="WideOptionsGridState">
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowWidth="640" />
+                </VisualState.StateTriggers>
+            </VisualState>
 
-                                    <TextBlock Text="Clear completed" />
-                                </StackPanel>
-                            </Button>
-                        </Grid>
+            <VisualState x:Name="NarrowOptionsGridState">
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowWidth="0" />
+                </VisualState.StateTriggers>
 
-                        <ItemsRepeater
-                            x:Name="DownloadQueueList"
-                            Grid.Row="1"
-                            Margin="0,12,0,0"
-                            ItemsSource="{x:Bind DownloadQueue}">
-                            <ItemsRepeater.Layout>
-                                <StackLayout Spacing="8" />
-                            </ItemsRepeater.Layout>
-
-                            <ItemsRepeater.ItemTemplate>
-                                <DataTemplate x:DataType="models:DownloadItemModel">
-                                    <controls:DownloadListItem
-                                        Item="{x:Bind}"
-                                        OpenDestinationFolderButtonClick="DownloadListItem_OpenDestinationFolderButtonClick"
-                                        RemoveButtonClick="DownloadListItem_RemoveButtonClick" />
-                                </DataTemplate>
-                            </ItemsRepeater.ItemTemplate>
-                        </ItemsRepeater>
-
-                    </Grid>
-                </Border>
-            </StackPanel>
-        </ScrollViewer>
-
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="WideOptionsGridState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="640" />
-                    </VisualState.StateTriggers>
-                </VisualState>
-
-                <VisualState x:Name="NarrowOptionsGridState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
-                    </VisualState.StateTriggers>
-
-                    <VisualState.Setters>
-                        <Setter Target="OptionsGrid.RowSpacing" Value="12" />
-                        <Setter Target="OptionsGrid.ColumnSpacing" Value="0" />
-                        <Setter Target="OptionsCol0.Width" Value="*" />
-                        <Setter Target="OptionsCol1.Width" Value="0" />
-                        <Setter Target="OptionsCol2.Width" Value="0" />
-                        <Setter Target="OptionsRow1.Height" Value="Auto" />
-                        <Setter Target="OptionsRow2.Height" Value="Auto" />
-                        <Setter Target="FormatPanel.Margin" Value="0,0,0,0" />
-                        <Setter Target="OutputFormatComboBox.HorizontalAlignment" Value="Stretch" />
-                        <Setter Target="DownloadToPanel.(Grid.Column)" Value="0" />
-                        <Setter Target="DownloadToPanel.(Grid.Row)" Value="1" />
-                        <Setter Target="BrowseButton.(Grid.Column)" Value="0" />
-                        <Setter Target="BrowseButton.(Grid.Row)" Value="2" />
-                        <Setter Target="BrowseButton.VerticalAlignment" Value="Top" />
-                        <Setter Target="BrowseButton.HorizontalAlignment" Value="Stretch" />
-                        <Setter Target="BrowseButton.HorizontalAlignment" Value="Stretch" />
-                        <Setter Target="AddButton.HorizontalAlignment" Value="Stretch" />
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-    </Grid>
+                <VisualState.Setters>
+                    <Setter Target="OptionsGrid.RowSpacing" Value="12" />
+                    <Setter Target="OptionsGrid.ColumnSpacing" Value="0" />
+                    <Setter Target="OptionsCol0.Width" Value="*" />
+                    <Setter Target="OptionsCol1.Width" Value="0" />
+                    <Setter Target="OptionsCol2.Width" Value="0" />
+                    <Setter Target="OptionsRow1.Height" Value="Auto" />
+                    <Setter Target="OptionsRow2.Height" Value="Auto" />
+                    <Setter Target="FormatPanel.Margin" Value="0,0,0,0" />
+                    <Setter Target="OutputFormatComboBox.HorizontalAlignment" Value="Stretch" />
+                    <Setter Target="DownloadToPanel.(Grid.Column)" Value="0" />
+                    <Setter Target="DownloadToPanel.(Grid.Row)" Value="1" />
+                    <Setter Target="BrowseButton.(Grid.Column)" Value="0" />
+                    <Setter Target="BrowseButton.(Grid.Row)" Value="2" />
+                    <Setter Target="BrowseButton.VerticalAlignment" Value="Top" />
+                    <Setter Target="BrowseButton.HorizontalAlignment" Value="Stretch" />
+                    <Setter Target="BrowseButton.HorizontalAlignment" Value="Stretch" />
+                    <Setter Target="AddButton.HorizontalAlignment" Value="Stretch" />
+                </VisualState.Setters>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
 </Page>
