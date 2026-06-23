@@ -8,10 +8,43 @@
     mc:Ignorable="d">
 
 
-    <ScrollViewer>
-        <StackPanel Padding="24,12" Spacing="10">
-            <TextBox Text="About" />
+    <Grid>
+        <StackPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Spacing="8">
+
+            <TextBlock
+                HorizontalAlignment="Center"
+                FontSize="24"
+                FontWeight="SemiBold"
+                Text="MermaYT" />
+
+            <TextBlock HorizontalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}">
+                <Run Text="GUI wrapper for " />
+                <Hyperlink NavigateUri="https://github.com/yt-dlp/yt-dlp ">yt-dlp</Hyperlink>
+            </TextBlock>
+
+            <TextBlock
+                Margin="0,16,0,0"
+                HorizontalAlignment="Center"
+                Text="Download audio and video from YouTube" />
+
+            <TextBlock
+                Margin="0,16,0,0"
+                HorizontalAlignment="Center"
+                Foreground="{ThemeResource TextFillColorSecondaryBrush}">
+                <Run Text="&#169; 2026" />
+                <Hyperlink NavigateUri="https://github.com/laura-kolcavova">Laura Kolčavová</Hyperlink>
+            </TextBlock>
+
+            <!--<TextBlock
+                Margin="0,8,0,0"
+                HorizontalAlignment="Center"
+                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                Text="Icons and illustrations by [Name]" />-->
+
         </StackPanel>
-    </ScrollViewer>
+    </Grid>
 
 </Page>

@@ -52,7 +52,7 @@
             <NavigationView.MenuItems>
                 <controls:NavigationViewItemExtended
                     Content="Downloads"
-                    Subtitle="Add videos to the queue and download your favorite content."
+                    Subtitle="Add video or audio to the queue and download your favorite content."
                     Tag="MermaYT.WinUi.Views.DownloadsPage">
                     <controls:NavigationViewItemExtended.Icon>
                         <FontIcon Glyph="{StaticResource GlyphDownload}" />
