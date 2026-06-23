@@ -4,7 +4,7 @@ internal static class YtDlpConstants
 {
     public const string YtDlpExecutableName = "yt-dlp.exe";
 
-    public const string FFmpegExecutableName = "ffmpeg.exe";
+    public const string FfmpegExecutableName = "ffmpeg.exe";
 
     public const string ErrorPrefix = "ERROR: ";
 

@@ -5,18 +5,35 @@ using System.Diagnostics;
 
 namespace MermaYT.Core.YtDlp;
 
-internal sealed class YtDlpDownloadAdapter
-    : IYouTubeDownloadManager
+internal sealed class YtDlpDownloadAdapter :
+    IYouTubeDownloadManager,
+    IDisposable
 {
     public event EventHandler<ProgressUpdatedEventArgs>? ProgressUpdated;
 
     public event EventHandler<ConvertingStartedEventArgs>? ConvertingStarted;
+
+    public event EventHandler<ErrorOccurredEventArgs>? ErrorOccurred;
 
     public event EventHandler<FailedEventArgs>? Failed;
 
     public event EventHandler<CompletedEventArgs>? Completed;
 
     private readonly Dictionary<int, Process> _downloadProcessesByProcessId = [];
+
+    private bool _disposed;
+
+    ~YtDlpDownloadAdapter()
+    {
+        Dispose(false);
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+
+        GC.SuppressFinalize(this);
+    }
 
     public void Cancel(
         int downloadItemId)
@@ -28,12 +45,14 @@ internal sealed class YtDlpDownloadAdapter
             return;
         }
 
+        RemoveListenersFromProcess(process);
+
         if (!process.HasExited)
         {
-            return;
+            process.Kill(true);
         }
 
-        process.Kill();
+        _downloadProcessesByProcessId.Remove(downloadItemId);
     }
 
     public int Download(
@@ -51,9 +70,9 @@ internal sealed class YtDlpDownloadAdapter
             throw new InvalidOperationException("Output directory must be provided.");
         }
 
-        var ytDlpFileName = GetYtDlpFileName();
+        var ytDlpFileName = ToolsPathProvider.GetYtDlpFileName();
 
-        var ffMpegFileName = GetFFmpegFileName();
+        var ffMpegFileName = ToolsPathProvider.GetFfmpegFileName();
 
         var argumentsBuilder = YtDlpArgumentsBuilder
             .New()
@@ -90,9 +109,7 @@ internal sealed class YtDlpDownloadAdapter
             EnableRaisingEvents = true,
         };
 
-        process.OutputDataReceived += OnOutputDataReceived;
-        process.ErrorDataReceived += OnErrorDataReceived;
-        process.Exited += OnExited;
+        AddListenersToProcess(process);
 
         process.Start();
         process.BeginOutputReadLine();
@@ -183,13 +200,13 @@ internal sealed class YtDlpDownloadAdapter
 
         var errorMessage = e.Data[YtDlpConstants.ErrorPrefix.Length..];
 
-        var eventArgs = new FailedEventArgs
+        var eventArgs = new ErrorOccurredEventArgs
         {
             DownloadItemId = process.Id,
             ErrorMessage = errorMessage
         };
 
-        Failed?.Invoke(this, eventArgs);
+        ErrorOccurred?.Invoke(this, eventArgs);
     }
 
     private void OnExited(
@@ -201,8 +218,6 @@ internal sealed class YtDlpDownloadAdapter
             return;
         }
 
-        _downloadProcessesByProcessId.Remove(process.Id);
-
         if (process.ExitCode < 0)
         {
             var failedEventArgs = new FailedEventArgs
@@ -212,55 +227,69 @@ internal sealed class YtDlpDownloadAdapter
             };
 
             Failed?.Invoke(this, failedEventArgs);
+        }
+        else
+        {
+            var completedEventArgs = new CompletedEventArgs
+            {
+                DownloadItemId = process.Id
+            };
 
+            Completed?.Invoke(this, completedEventArgs);
+        }
+
+        RemoveListenersFromProcess(process);
+
+        _downloadProcessesByProcessId.Remove(process.Id);
+    }
+
+    private void AddListenersToProcess(
+        Process process)
+    {
+        process.OutputDataReceived += OnOutputDataReceived;
+        process.ErrorDataReceived += OnErrorDataReceived;
+        process.Exited += OnExited;
+    }
+
+    private void RemoveListenersFromProcess(
+        Process process)
+    {
+        process.OutputDataReceived -= OnOutputDataReceived;
+        process.ErrorDataReceived -= OnErrorDataReceived;
+        process.Exited -= OnExited;
+    }
+
+    private void Dispose(
+        bool disposing)
+    {
+        if (_disposed)
+        {
             return;
         }
 
-        var completedEventArgs = new CompletedEventArgs
+        if (disposing)
         {
-            DownloadItemId = process.Id
-        };
+            // Dispose managed state (managed objects).
+            // ...
 
-        Completed?.Invoke(this, completedEventArgs);
+            foreach (var process in _downloadProcessesByProcessId.Values)
+            {
+                RemoveListenersFromProcess(process);
 
-        //process.OutputDataReceived -= Process_OutputDataReceived;
-        //process.ErrorDataReceived -= Process_ErrorDataReceived;
-        //process.Exited -= Process_Exited;
+                if (!process.HasExited)
+                {
+                    process.Kill(true);
+                }
 
-        //process.Dispose();
-    }
+                //process.Dispose();
+            }
 
-    private static string GetYtDlpFileName()
-    {
-        var ytDlpFileName = Path.Combine(
-            AppContext.BaseDirectory,
-            "Tools",
-            YtDlpConstants.YtDlpExecutableName);
-
-        if (!File.Exists(ytDlpFileName))
-        {
-            throw new FileNotFoundException(
-                "youtube-dl executable not found.",
-                ytDlpFileName);
+            _downloadProcessesByProcessId.Clear();
         }
 
-        return ytDlpFileName;
-    }
+        // Free unmanaged resources.
+        // ...
 
-    private static string GetFFmpegFileName()
-    {
-        var ffMpegFileName = Path.Combine(
-            AppContext.BaseDirectory,
-            "Tools",
-            YtDlpConstants.FFmpegExecutableName);
-
-        if (!File.Exists(ffMpegFileName))
-        {
-            throw new FileNotFoundException(
-                "ffmpeg executable not found.",
-                ffMpegFileName);
-        }
-
-        return ffMpegFileName;
+        _disposed = true;
     }
 }
