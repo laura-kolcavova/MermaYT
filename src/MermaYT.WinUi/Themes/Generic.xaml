@@ -43,12 +43,12 @@
                                 Visibility="{TemplateBinding SubtitleVisibility}" />
                         </StackPanel>
 
-                        <Image
+                        <!--<Image
                             Grid.Column="1"
                             Width="64"
                             Height="64"
                             VerticalAlignment="Center"
-                            Source="ms-appx:///Assets/Square150x150Logo.scale-200.png" />
+                            Source="ms-appx:///Assets/Square150x150Logo.scale-200.png" />-->
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -87,7 +87,18 @@
                                         <RectangleGeometry Rect="0,0,80,80" />
                                     </Border.Clip>
 
-                                    <Image Source="{Binding Item.ImageUrl, RelativeSource={RelativeSource TemplatedParent}}" Stretch="UniformToFill" />
+                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <FontIcon
+                                            x:Name="AudioFormatIcon"
+                                            FontSize="32"
+                                            Glyph="{StaticResource GlyphMusic}"
+                                            Visibility="Collapsed" />
+                                        <FontIcon
+                                            x:Name="VideoFormatIcon"
+                                            FontSize="32"
+                                            Glyph="{StaticResource GlyphMovie}"
+                                            Visibility="Collapsed" />
+                                    </Grid>
                                 </Border>
 
                                 <StackPanel
@@ -232,6 +243,20 @@
                                         <Setter Target="StatusSeparatorText.Visibility" Value="Collapsed" />
                                         <Setter Target="BytesStatusStackPanel.Visibility" Value="Collapsed" />
                                         <Setter Target="DownloadStatusText.Foreground" Value="{ThemeResource SystemFillColorCriticalBrush}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+
+                            <VisualStateGroup x:Name="OutputFormatStates">
+                                <VisualState x:Name="MP3">
+                                    <VisualState.Setters>
+                                        <Setter Target="AudioFormatIcon.Visibility" Value="Visible" />
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                                <VisualState x:Name="MP4">
+                                    <VisualState.Setters>
+                                        <Setter Target="VideoFormatIcon.Visibility" Value="Visible" />
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>

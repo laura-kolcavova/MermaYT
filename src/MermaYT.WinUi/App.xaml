@@ -17,7 +17,7 @@
             <x:String x:Key="GlyphFolderHorizontal">&#xF12B;</x:String>
             <x:String x:Key="GlyphAdd">&#xE710;</x:String>
             <x:String x:Key="GlyphMovie">&#xE8B2;</x:String>
-            <x:String x:Key="GlyphAudio">&#xE767;</x:String>
+            <x:String x:Key="GlyphMusic">&#xE8D6;</x:String>
             <x:String x:Key="GlyphDelete">&#xE74D;</x:String>
             <x:String x:Key="GlyphClear">&#xE894;</x:String>
         </ResourceDictionary>

@@ -1,3 +1,4 @@
+using MermaYT.Core.YouTubeDownloader;
 using MermaYT.WinUi.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -44,6 +45,11 @@ public sealed partial class DownloadListItem :
            ?? DownloadState.Processing;
 
         GoToDownloadState(downloadState);
+
+        if (Item is not null)
+        {
+            GoToOutputFormatState(Item.OutputFormat);
+        }
     }
 
     private void InitializeOpenDestinationFolderButton()
@@ -109,6 +115,11 @@ public sealed partial class DownloadListItem :
             ?? DownloadState.Processing;
 
         self.GoToDownloadState(downloadState);
+
+        if (e.NewValue is DownloadItemModel newItem)
+        {
+            self.GoToOutputFormatState(newItem.OutputFormat);
+        }
     }
 
     private void OnItemPropertyChanged(
@@ -126,6 +137,14 @@ public sealed partial class DownloadListItem :
         VisualStateManager.GoToState(
             this,
             state.ToString(),
+            useTransitions: true);
+    }
+
+    private void GoToOutputFormatState(OutputFormat format)
+    {
+        VisualStateManager.GoToState(
+            this,
+            format.ToString(),
             useTransitions: true);
     }
 }

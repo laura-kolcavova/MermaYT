@@ -96,7 +96,7 @@
                                 SelectedIndex="{x:Bind SelectedOutputFormat, Mode=TwoWay, Converter={StaticResource OutputFormatToIndexConverter}}">
                                 <ComboBoxItem>
                                     <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <FontIcon FontSize="14" Glyph="{StaticResource GlyphAudio}" />
+                                        <FontIcon FontSize="14" Glyph="{StaticResource GlyphMusic}" />
 
                                         <TextBlock Text="MP3 (Audio)" />
                                     </StackPanel>
