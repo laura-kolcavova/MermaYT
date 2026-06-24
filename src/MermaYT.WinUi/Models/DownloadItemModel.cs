@@ -1,6 +1,5 @@
 using MermaYT.Core.YouTubeDownloader;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace MermaYT.WinUi.Models;
 
@@ -24,7 +23,7 @@ public sealed class DownloadItemModel : INotifyPropertyChanged
         set
         {
             _downloadState = value;
-            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(DownloadState));
         }
     }
 
@@ -36,7 +35,7 @@ public sealed class DownloadItemModel : INotifyPropertyChanged
         set
         {
             _title = value;
-            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(Title));
         }
     }
 
@@ -48,7 +47,7 @@ public sealed class DownloadItemModel : INotifyPropertyChanged
         set
         {
             _progressPercentage = value;
-            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(ProgressPercentage));
         }
     }
 
@@ -60,7 +59,7 @@ public sealed class DownloadItemModel : INotifyPropertyChanged
         set
         {
             _downloadedBytes = value;
-            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(DownloadedBytes));
         }
     }
 
@@ -72,7 +71,7 @@ public sealed class DownloadItemModel : INotifyPropertyChanged
         set
         {
             _totalBytes = value;
-            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(TotalBytes));
         }
     }
 
@@ -84,7 +83,7 @@ public sealed class DownloadItemModel : INotifyPropertyChanged
         set
         {
             _errorMessage = value;
-            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(ErrorMessage));
         }
     }
 
@@ -146,7 +145,7 @@ public sealed class DownloadItemModel : INotifyPropertyChanged
     }
 
     private void NotifyPropertyChanged(
-        [CallerMemberName] string? name = null)
+        string name)
     {
         PropertyChanged?.Invoke(
             this,

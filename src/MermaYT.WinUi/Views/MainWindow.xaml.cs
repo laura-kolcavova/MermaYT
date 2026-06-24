@@ -7,11 +7,18 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
+using System.Collections.Generic;
 
 namespace MermaYT.WinUi.Views;
 
 public sealed partial class MainWindow : Window
 {
+    private static readonly Dictionary<string, Type> _pageTypesByTag = new()
+    {
+        { "DownloadsPage", typeof(DownloadsPage) },
+        { "AboutPage", typeof(AboutPage) }
+    };
+
     public MainWindow()
     {
         InitializeComponent();
@@ -60,18 +67,18 @@ public sealed partial class MainWindow : Window
             return;
         }
 
-        var typeName = args.InvokedItemContainer
+        var tag = args.InvokedItemContainer
             ?.Tag
             ?.ToString();
 
-        if (typeName is null)
+        if (tag is null)
         {
             return;
         }
 
-        var pageType = Type.GetType(typeName);
-
-        if (pageType is null)
+        if (!_pageTypesByTag.TryGetValue(
+            tag,
+            out var pageType))
         {
             return;
         }
