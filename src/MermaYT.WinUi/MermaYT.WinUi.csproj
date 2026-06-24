@@ -99,8 +99,5 @@
 
     <PublishTrimmed Condition="'$(Configuration)' == 'Debug'">False</PublishTrimmed>
     <PublishTrimmed Condition="'$(Configuration)' != 'Debug'">True</PublishTrimmed>
-
-    <WindowsAppSDKSelfContained Condition="'$(Configuration)' == 'Debug'">false</WindowsAppSDKSelfContained>
-    <WindowsAppSDKSelfContained Condition="'$(Configuration)' != 'Debug'">true</WindowsAppSDKSelfContained>
   </PropertyGroup>
 </Project>

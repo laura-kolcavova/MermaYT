@@ -30,5 +30,5 @@ MermaYT provides a simple graphical interface for downloading audio and video fr
 ### Publish portable release (x64)
 
 ```powershell
-dotnet publish src/MermaYT.WinUi/MermaYT.WinUi.csproj -c Release -r win-x64 --self-contained /p:Platform=x64 /p:WindowsPackageType=None
+dotnet publish src/MermaYT.WinUi/MermaYT.WinUi.csproj -c Release -r win-x64 --self-contained /p:Platform=x64 /p:WindowsPackageType=None /p:WindowsAppSDKSelfContained=true /p:PublishSingleFile=true
 ```
