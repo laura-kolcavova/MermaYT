@@ -14,7 +14,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Windows.System;
 
@@ -34,7 +33,7 @@ public sealed partial class DownloadsPage :
         set
         {
             _youTubeUrl = value;
-            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(YouTubeUrl));
             CheckAddButtonIsEnabled();
         }
     }
@@ -50,7 +49,7 @@ public sealed partial class DownloadsPage :
         set
         {
             _destinationFolder = value;
-            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(DestinationFolder));
             CheckAddButtonIsEnabled();
         }
     }
@@ -63,7 +62,7 @@ public sealed partial class DownloadsPage :
         private set
         {
             _addButtonIsEnabled = value;
-            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(AddButtonIsEnabled));
         }
     }
 
@@ -388,8 +387,10 @@ public sealed partial class DownloadsPage :
     }
 
     private void NotifyPropertyChanged(
-        [CallerMemberName] string? name = null)
+        string name)
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        PropertyChanged?.Invoke(
+            this,
+            new PropertyChangedEventArgs(name));
     }
 }
