@@ -53,13 +53,13 @@
                 <controls:NavigationViewItemExtended
                     Content="Downloads"
                     Subtitle="Add video or audio to the queue and download your favorite content."
-                    Tag="MermaYT.WinUi.Views.DownloadsPage">
+                    Tag="DownloadsPage">
                     <controls:NavigationViewItemExtended.Icon>
                         <FontIcon Glyph="{StaticResource GlyphDownload}" />
                     </controls:NavigationViewItemExtended.Icon>
                 </controls:NavigationViewItemExtended>
 
-                <NavigationViewItem Content="About" Tag="MermaYT.WinUi.Views.AboutPage">
+                <NavigationViewItem Content="About" Tag="AboutPage">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="{StaticResource GlyphInfo}" />
                     </NavigationViewItem.Icon>

@@ -6,6 +6,7 @@ A Windows GUI wrapper for the [yt-dlp](https://github.com/yt-dlp/yt-dlp) command
 
 MermaYT provides a simple graphical interface for downloading audio and video from YouTube via yt-dlp.
 
+## Screenshots
 ![MermaYT Downloads — light mode](docs/images/MermaYT_downloads_light.png)
 
 ## Features
