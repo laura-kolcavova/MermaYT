@@ -24,11 +24,13 @@
     <Content Include="..\..\Tools\yt-dlp.exe">
       <Link>Tools\yt-dlp.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
 
     <Content Include="..\..\Tools\ffmpeg.exe">
       <Link>Tools\ffmpeg.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
   </ItemGroup>
 
