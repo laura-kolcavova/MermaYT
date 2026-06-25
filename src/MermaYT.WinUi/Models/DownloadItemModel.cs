@@ -3,7 +3,8 @@ using System.ComponentModel;
 
 namespace MermaYT.WinUi.Models;
 
-public sealed class DownloadItemModel : INotifyPropertyChanged
+public sealed partial class DownloadItemModel :
+    INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
 

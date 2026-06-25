@@ -135,7 +135,6 @@
                                     FontSize="16"
                                     Glyph="{StaticResource GlyphFolderHorizontal}" />
                             </Grid>
-
                         </StackPanel>
 
                         <Button
@@ -231,7 +230,6 @@
                             </DataTemplate>
                         </ItemsRepeater.ItemTemplate>
                     </ItemsRepeater>
-
                 </Grid>
             </Border>
         </StackPanel>

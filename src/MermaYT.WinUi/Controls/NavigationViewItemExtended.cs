@@ -3,14 +3,14 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace MermaYT.WinUi.Controls;
 
-internal sealed class NavigationViewItemExtended :
+public sealed partial class NavigationViewItemExtended :
     NavigationViewItem
 {
     public static readonly DependencyProperty SubtitleProperty = DependencyProperty.Register(
         nameof(Subtitle),
         typeof(string),
         typeof(NavigationViewItemExtended),
-        new PropertyMetadata(default(string)));
+        new PropertyMetadata(string.Empty));
 
     public string Subtitle
     {

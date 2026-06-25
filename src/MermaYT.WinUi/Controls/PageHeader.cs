@@ -10,14 +10,14 @@ public sealed partial class PageHeader :
         nameof(Title),
         typeof(string),
         typeof(PageHeader),
-        new PropertyMetadata(default(string)));
+        new PropertyMetadata(string.Empty));
 
     public static readonly DependencyProperty SubtitleProperty = DependencyProperty.Register(
         nameof(Subtitle),
         typeof(string),
         typeof(PageHeader),
         new PropertyMetadata(
-            default(string),
+            string.Empty,
             OnSubtitleChanged));
 
     public static readonly DependencyProperty SubtitleVisibilityProperty = DependencyProperty.Register(
