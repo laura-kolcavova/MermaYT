@@ -1,13 +1,7 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="using:MermaYT.WinUi.Controls"
-    xmlns:converters="using:MermaYT.WinUi.Converters">
-
-    <converters:BytesToFileSizeConverter x:Key="BytesToFileSizeConverter" />
-    <converters:DownloadStateToStringConverter x:Key="DownloadStateToStringConverter" />
-    <converters:OutputFormatToStringConverter x:Key="OutputFormatToStringConverter" />
-    <converters:ProgressPercentageToStringConverter x:Key="ProgressPercentageToStringConverter" />
+    xmlns:controls="using:MermaYT.WinUi.Controls">
 
     <Style x:Key="StyleIconButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent" />
@@ -115,7 +109,7 @@
                                             Grid.Column="0"
                                             VerticalAlignment="Center"
                                             Style="{StaticResource BodyStrongTextBlockStyle}"
-                                            Text="{Binding Item.Title, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Text="{TemplateBinding Title}"
                                             TextTrimming="CharacterEllipsis"
                                             TextWrapping="NoWrap" />
 
@@ -129,7 +123,7 @@
                                                 <TextBlock
                                                     FontSize="12"
                                                     Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}"
-                                                    Text="{Binding Item.OutputFormat, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource OutputFormatToStringConverter}}" />
+                                                    Text="{TemplateBinding OutputFormatText}" />
                                             </StackPanel>
                                         </Border>
                                     </Grid>
@@ -144,13 +138,13 @@
                                             x:Name="DownloadProgressBar"
                                             Grid.Column="0"
                                             Maximum="100"
-                                            Value="{Binding Item.ProgressPercentage, RelativeSource={RelativeSource TemplatedParent}}" />
+                                            Value="{TemplateBinding Progress}" />
 
                                         <TextBlock
                                             x:Name="DownloadProgressText"
                                             Grid.Column="1"
                                             LineHeight="22"
-                                            Text="{Binding Item.ProgressPercentage, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ProgressPercentageToStringConverter}}" />
+                                            Text="{TemplateBinding ProgressText}" />
                                     </Grid>
 
                                     <StackPanel Orientation="Horizontal" Spacing="8">
@@ -158,7 +152,7 @@
                                             x:Name="DownloadStatusText"
                                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                             Style="{StaticResource CaptionTextBlockStyle}"
-                                            Text="{Binding Item.DownloadState, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource DownloadStateToStringConverter}}" />
+                                            Text="{TemplateBinding DownloadStateText}" />
 
                                         <TextBlock
                                             x:Name="StatusSeparatorText"
@@ -174,7 +168,7 @@
                                                 x:Name="DownloadedBytesText"
                                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                 Style="{StaticResource CaptionTextBlockStyle}"
-                                                Text="{Binding Item.DownloadedBytes, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BytesToFileSizeConverter}}" />
+                                                Text="{TemplateBinding DownloadedBytesText}" />
 
                                             <TextBlock
                                                 x:Name="BytesSeparatorText"
@@ -186,7 +180,7 @@
                                                 x:Name="TotalBytesText"
                                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                 Style="{StaticResource CaptionTextBlockStyle}"
-                                                Text="{Binding Item.TotalBytes, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BytesToFileSizeConverter}}" />
+                                                Text="{TemplateBinding TotalBytesText}" />
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>

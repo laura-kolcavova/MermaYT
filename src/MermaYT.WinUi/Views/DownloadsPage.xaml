@@ -12,6 +12,10 @@
     mc:Ignorable="d">
     <Page.Resources>
         <converters:OutputFormatToIndexConverter x:Key="OutputFormatToIndexConverter" />
+        <converters:BytesToFileSizeConverter x:Key="BytesToFileSizeConverter" />
+        <converters:DownloadStateToStringConverter x:Key="DownloadStateToStringConverter" />
+        <converters:OutputFormatToStringConverter x:Key="OutputFormatToStringConverter" />
+        <converters:ProgressPercentageToStringConverter x:Key="ProgressPercentageToStringConverter" />
     </Page.Resources>
 
     <ScrollViewer>
@@ -212,9 +216,18 @@
                         <ItemsRepeater.ItemTemplate>
                             <DataTemplate x:DataType="models:DownloadItemModel">
                                 <controls:DownloadListItem
+                                    Title="{x:Bind Title, Mode=OneWay}"
+                                    DownloadState="{x:Bind DownloadState, Mode=OneWay}"
+                                    DownloadStateText="{x:Bind DownloadState, Mode=OneWay, Converter={StaticResource DownloadStateToStringConverter}}"
+                                    DownloadedBytesText="{x:Bind DownloadedBytes, Mode=OneWay, Converter={StaticResource BytesToFileSizeConverter}}"
                                     Item="{x:Bind}"
                                     OpenDestinationFolderButtonClick="DownloadListItem_OpenDestinationFolderButtonClick"
-                                    RemoveButtonClick="DownloadListItem_RemoveButtonClick" />
+                                    OutputFormat="{x:Bind OutputFormat, Mode=OneWay}"
+                                    OutputFormatText="{x:Bind OutputFormat, Mode=OneWay, Converter={StaticResource OutputFormatToStringConverter}}"
+                                    Progress="{x:Bind ProgressPercentage, Mode=OneWay}"
+                                    ProgressText="{x:Bind ProgressPercentage, Mode=OneWay, Converter={StaticResource ProgressPercentageToStringConverter}}"
+                                    RemoveButtonClick="DownloadListItem_RemoveButtonClick"
+                                    TotalBytesText="{x:Bind TotalBytes, Mode=OneWay, Converter={StaticResource BytesToFileSizeConverter}}" />
                             </DataTemplate>
                         </ItemsRepeater.ItemTemplate>
                     </ItemsRepeater>
