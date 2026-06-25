@@ -2,26 +2,130 @@ using MermaYT.Core.YouTubeDownloader;
 using MermaYT.WinUi.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using System.ComponentModel;
 
 namespace MermaYT.WinUi.Controls;
 
 public sealed partial class DownloadListItem :
     Control
 {
+    public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
+        nameof(Title),
+        typeof(string),
+        typeof(DownloadListItem),
+        new PropertyMetadata(string.Empty));
+
+    public static readonly DependencyProperty OutputFormatProperty = DependencyProperty.Register(
+        nameof(OutputFormat),
+        typeof(OutputFormat),
+        typeof(DownloadListItem),
+        new PropertyMetadata(OutputFormat.MP3, OnOutputFormatChanged));
+
+    public static readonly DependencyProperty OutputFormatTextProperty = DependencyProperty.Register(
+        nameof(OutputFormatText),
+        typeof(string),
+        typeof(DownloadListItem),
+        new PropertyMetadata(string.Empty));
+
+    public static readonly DependencyProperty ProgressProperty = DependencyProperty.Register(
+        nameof(Progress),
+        typeof(double),
+        typeof(DownloadListItem),
+        new PropertyMetadata(0));
+
+    public static readonly DependencyProperty ProgressTextProperty = DependencyProperty.Register(
+        nameof(ProgressText),
+        typeof(string),
+        typeof(DownloadListItem),
+        new PropertyMetadata(string.Empty));
+
+    public static readonly DependencyProperty DownloadedBytesTextProperty = DependencyProperty.Register(
+        nameof(DownloadedBytesText),
+        typeof(string),
+        typeof(DownloadListItem), new PropertyMetadata(string.Empty));
+
+    public static readonly DependencyProperty TotalBytesTextProperty = DependencyProperty.Register(
+        nameof(TotalBytesText),
+        typeof(string),
+        typeof(DownloadListItem),
+        new PropertyMetadata(string.Empty));
+
+    public static readonly DependencyProperty DownloadStateProperty = DependencyProperty.Register(
+        nameof(DownloadState),
+        typeof(DownloadState),
+        typeof(DownloadListItem),
+        new PropertyMetadata(DownloadState.Processing, OnDownloadStateChanged));
+
+    public static readonly DependencyProperty DownloadStateTextProperty = DependencyProperty.Register(
+        nameof(DownloadStateText),
+        typeof(string),
+        typeof(DownloadListItem),
+        new PropertyMetadata(string.Empty));
+
     public static readonly DependencyProperty ItemProperty = DependencyProperty.Register(
         nameof(Item),
         typeof(DownloadItemModel),
         typeof(DownloadListItem),
-        new PropertyMetadata(null, OnItemChanged));
+        new PropertyMetadata(null));
 
     private Button? _openDestinationFolderButton;
-
     private Button? _removeButton;
 
     public event RoutedEventHandler? OpenDestinationFolderButtonClick;
 
     public event RoutedEventHandler? RemoveButtonClick;
+
+    public string Title
+    {
+        get => (string)GetValue(TitleProperty);
+        set => SetValue(TitleProperty, value);
+    }
+    public OutputFormat OutputFormat
+    {
+        get => (OutputFormat)GetValue(OutputFormatProperty);
+        set => SetValue(OutputFormatProperty, value);
+    }
+
+    public string OutputFormatText
+    {
+        get => (string)GetValue(OutputFormatTextProperty);
+        set => SetValue(OutputFormatTextProperty, value);
+    }
+
+    public double Progress
+    {
+        get => (double)GetValue(ProgressProperty);
+        set => SetValue(ProgressProperty, value);
+    }
+
+    public string ProgressText
+    {
+        get => (string)GetValue(ProgressTextProperty);
+        set => SetValue(ProgressTextProperty, value);
+    }
+
+    public string DownloadedBytesText
+    {
+        get => (string)GetValue(DownloadedBytesTextProperty);
+        set => SetValue(DownloadedBytesTextProperty, value);
+    }
+
+    public string TotalBytesText
+    {
+        get => (string)GetValue(TotalBytesTextProperty);
+        set => SetValue(TotalBytesTextProperty, value);
+    }
+
+    public DownloadState DownloadState
+    {
+        get => (DownloadState)GetValue(DownloadStateProperty);
+        set => SetValue(DownloadStateProperty, value);
+    }
+
+    public string DownloadStateText
+    {
+        get => (string)GetValue(DownloadStateTextProperty);
+        set => SetValue(DownloadStateTextProperty, value);
+    }
 
     public DownloadItemModel? Item
     {
@@ -41,15 +145,8 @@ public sealed partial class DownloadListItem :
         InitializeOpenDestinationFolderButton();
         InitializeRemoveButton();
 
-        var downloadState = Item?.DownloadState
-           ?? DownloadState.Processing;
-
-        GoToDownloadState(downloadState);
-
-        if (Item is not null)
-        {
-            GoToOutputFormatState(Item.OutputFormat);
-        }
+        GoToDownloadState(DownloadState);
+        GoToOutputFormatState(OutputFormat);
     }
 
     private void InitializeOpenDestinationFolderButton()
@@ -73,6 +170,7 @@ public sealed partial class DownloadListItem :
         {
             _removeButton.Click -= OnRemoveButtonClick;
         }
+
         _removeButton = GetTemplateChild("RemoveButton") as Button;
 
         if (_removeButton is not null)
@@ -95,56 +193,43 @@ public sealed partial class DownloadListItem :
         RemoveButtonClick?.Invoke(this, e);
     }
 
-    private static void OnItemChanged(
+    private void GoToDownloadState(
+        DownloadState downloadState)
+    {
+        VisualStateManager.GoToState(
+            this,
+            downloadState.ToString(),
+            useTransitions: true);
+    }
+
+    private void GoToOutputFormatState(
+        OutputFormat outputFormat)
+    {
+        VisualStateManager.GoToState(
+            this,
+            outputFormat.ToString(),
+            useTransitions: true);
+    }
+
+    private static void OnOutputFormatChanged(
         DependencyObject d,
         DependencyPropertyChangedEventArgs e)
     {
         var self = (DownloadListItem)d;
 
-        if (e.OldValue is DownloadItemModel old)
-        {
-            old.PropertyChanged -= self.OnItemPropertyChanged;
-        }
+        var outputFormat = (OutputFormat)e.NewValue;
 
-        if (e.NewValue is DownloadItemModel next)
-        {
-            next.PropertyChanged += self.OnItemPropertyChanged;
-        }
+        self.GoToOutputFormatState(outputFormat);
+    }
 
-        var downloadState = (e.NewValue as DownloadItemModel)?.DownloadState
-            ?? DownloadState.Processing;
+    private static void OnDownloadStateChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e)
+    {
+        var self = (DownloadListItem)d;
+
+        var downloadState = (DownloadState)e.NewValue;
 
         self.GoToDownloadState(downloadState);
-
-        if (e.NewValue is DownloadItemModel newItem)
-        {
-            self.GoToOutputFormatState(newItem.OutputFormat);
-        }
-    }
-
-    private void OnItemPropertyChanged(
-        object? sender,
-        PropertyChangedEventArgs e)
-    {
-        if (e.PropertyName == nameof(DownloadItemModel.DownloadState))
-        {
-            GoToDownloadState(Item?.DownloadState ?? DownloadState.Processing);
-        }
-    }
-
-    private void GoToDownloadState(DownloadState state)
-    {
-        VisualStateManager.GoToState(
-            this,
-            state.ToString(),
-            useTransitions: true);
-    }
-
-    private void GoToOutputFormatState(OutputFormat format)
-    {
-        VisualStateManager.GoToState(
-            this,
-            format.ToString(),
-            useTransitions: true);
     }
 }

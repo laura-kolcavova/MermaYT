@@ -123,7 +123,7 @@ public sealed partial class MainWindow : Window
     private void UpdateAppTitleBarColors(
         ElementTheme theme)
     {
-        bool isLight = theme == ElementTheme.Light;
+        var isLight = theme == ElementTheme.Light;
 
         AppWindow.TitleBar.ButtonForegroundColor = isLight
             ? Colors.Black
