@@ -102,7 +102,6 @@
     <PublishTrimmed Condition="'$(Configuration)' == 'Debug'">False</PublishTrimmed>
     <PublishTrimmed Condition="'$(Configuration)' != 'Debug'">True</PublishTrimmed>
 
-    <AllowUnsafeBlocks Condition="'$(Configuration)' == 'Debug'">False</AllowUnsafeBlocks>
     <AllowUnsafeBlocks Condition="'$(Configuration)' != 'Debug'">True</AllowUnsafeBlocks>
   </PropertyGroup>
 </Project>

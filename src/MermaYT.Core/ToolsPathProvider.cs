@@ -6,10 +6,14 @@ internal static class ToolsPathProvider
 {
     private const string ToolsDirectoryName = "Tools";
 
+    private static string BaseDirectory =>
+        Path.GetDirectoryName(Environment.ProcessPath)
+        ?? AppContext.BaseDirectory;
+
     public static string GetYtDlpFileName()
     {
         var ytDlpFileName = Path.Combine(
-            AppContext.BaseDirectory,
+            BaseDirectory,
             ToolsDirectoryName,
             YtDlpConstants.YtDlpExecutableName);
 
@@ -26,7 +30,7 @@ internal static class ToolsPathProvider
     public static string GetFfmpegFileName()
     {
         var ffMpegFileName = Path.Combine(
-            AppContext.BaseDirectory,
+            BaseDirectory,
             ToolsDirectoryName,
             YtDlpConstants.FfmpegExecutableName);
 
