@@ -21,14 +21,14 @@
                 Text="MermaYT" />
 
             <TextBlock HorizontalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}">
-                <Run Text="GUI wrapper for " />
+                <Run x:Uid="AboutPage_GuiWrapperRun" />
                 <Hyperlink NavigateUri="https://github.com/yt-dlp/yt-dlp ">yt-dlp</Hyperlink>
             </TextBlock>
 
             <TextBlock
+                x:Uid="AboutPage_DescriptionText"
                 Margin="0,16,0,0"
-                HorizontalAlignment="Center"
-                Text="Download audio and video from YouTube" />
+                HorizontalAlignment="Center" />
 
             <TextBlock
                 Margin="0,16,0,0"
