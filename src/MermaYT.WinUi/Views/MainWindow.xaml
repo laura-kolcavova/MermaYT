@@ -51,15 +51,14 @@
 
             <NavigationView.MenuItems>
                 <controls:NavigationViewItemExtended
-                    Content="Downloads"
-                    Subtitle="Add video or audio to the queue and download your favorite content."
+                    x:Uid="MainWindow_DownloadsNavItem"
                     Tag="DownloadsPage">
                     <controls:NavigationViewItemExtended.Icon>
                         <FontIcon Glyph="{StaticResource GlyphDownload}" />
                     </controls:NavigationViewItemExtended.Icon>
                 </controls:NavigationViewItemExtended>
 
-                <NavigationViewItem Content="About" Tag="AboutPage">
+                <NavigationViewItem x:Uid="MainWindow_AboutNavItem" Tag="AboutPage">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="{StaticResource GlyphInfo}" />
                     </NavigationViewItem.Icon>

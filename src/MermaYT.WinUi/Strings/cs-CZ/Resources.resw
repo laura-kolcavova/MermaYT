@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- MainWindow -->
+  <data name="MainWindow_DownloadsNavItem.Content" xml:space="preserve">
+    <value>Stahování</value>
+  </data>
+  <data name="MainWindow_DownloadsNavItem.Subtitle" xml:space="preserve">
+    <value>Přidejte video nebo zvuk do fronty a stáhněte svůj oblíbený obsah.</value>
+  </data>
+  <data name="MainWindow_AboutNavItem.Content" xml:space="preserve">
+    <value>O aplikaci</value>
+  </data>
+
+  <!-- AboutPage -->
+  <data name="AboutPage_GuiWrapperRun.Text" xml:space="preserve">
+    <value>GUI nadstavba pro </value>
+  </data>
+  <data name="AboutPage_DescriptionText.Text" xml:space="preserve">
+    <value>Stahujte zvuk a video z YouTube</value>
+  </data>
+
+  <!-- DownloadsPage -->
+  <data name="DownloadsPage_ErrorInfoBar.Title" xml:space="preserve">
+    <value>Chyba</value>
+  </data>
+  <data name="DownloadsPage_YouTubeUrlLabel.Text" xml:space="preserve">
+    <value>YouTube URL</value>
+  </data>
+  <data name="DownloadsPage_YouTubeUrlTextBox.PlaceholderText" xml:space="preserve">
+    <value>https://www.youtube.com/watch?v=...</value>
+  </data>
+  <data name="DownloadsPage_OutputFormatLabel.Text" xml:space="preserve">
+    <value>Výstupní formát</value>
+  </data>
+  <data name="DownloadsPage_Mp3Text.Text" xml:space="preserve">
+    <value>MP3 (Zvuk)</value>
+  </data>
+  <data name="DownloadsPage_Mp4Text.Text" xml:space="preserve">
+    <value>MP4 (Video)</value>
+  </data>
+  <data name="DownloadsPage_DownloadToLabel.Text" xml:space="preserve">
+    <value>Stáhnout do</value>
+  </data>
+  <data name="DownloadsPage_DestinationFolderTextBox.PlaceholderText" xml:space="preserve">
+    <value>Vyberte složku...</value>
+  </data>
+  <data name="DownloadsPage_BrowseButton.Content" xml:space="preserve">
+    <value>Procházet</value>
+  </data>
+  <data name="DownloadsPage_AddButtonText.Text" xml:space="preserve">
+    <value>Přidat</value>
+  </data>
+  <data name="DownloadsPage_DownloadQueueLabel.Text" xml:space="preserve">
+    <value>Fronta stahování</value>
+  </data>
+  <data name="DownloadsPage_ClearCompletedText.Text" xml:space="preserve">
+    <value>Vymazat dokončené</value>
+  </data>
+</root>
