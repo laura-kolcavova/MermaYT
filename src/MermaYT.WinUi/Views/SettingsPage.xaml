@@ -36,18 +36,18 @@
                         Glyph="{StaticResource GlyphColor}" />
 
                     <TextBlock
+                        x:Uid="SettingsPage_ThemeLabel"
                         Grid.Column="1"
-                        VerticalAlignment="Center"
-                        Text="Theme" />
+                        VerticalAlignment="Center" />
 
                     <ComboBox
                         x:Name="ThemeComboBox"
                         Grid.Column="2"
                         MinWidth="160"
                         SelectionChanged="ThemeComboBox_SelectionChanged">
-                        <ComboBoxItem Content="System" Tag="Default" />
-                        <ComboBoxItem Content="Light" Tag="Light" />
-                        <ComboBoxItem Content="Dark" Tag="Dark" />
+                        <ComboBoxItem x:Uid="SettingsPage_ThemeSystemItem" Tag="Default" />
+                        <ComboBoxItem x:Uid="SettingsPage_ThemeLightItem" Tag="Light" />
+                        <ComboBoxItem x:Uid="SettingsPage_ThemeDarkItem" Tag="Dark" />
                     </ComboBox>
                 </Grid>
             </Border>
