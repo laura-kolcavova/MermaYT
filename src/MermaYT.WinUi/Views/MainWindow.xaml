@@ -9,7 +9,6 @@
     xmlns:models="using:MermaYT.WinUi.Models"
     Title="MermaYT"
     mc:Ignorable="d">
-
     <Window.SystemBackdrop>
         <MicaBackdrop Kind="Base" />
     </Window.SystemBackdrop>
@@ -31,28 +30,27 @@
             </TitleBar.IconSource>
         </TitleBar>
 
-        <NavigationView
+        <controls:NavigationViewExtended
             x:Name="NavView"
             Grid.Row="1"
+            ImageSource="ms-appx:///Assets/NavBackground.png"
             IsBackButtonVisible="Collapsed"
             IsPaneToggleButtonVisible="False"
             ItemInvoked="NavView_ItemInvoked">
 
-            <NavigationView.Resources>
+            <controls:NavigationViewExtended.Resources>
                 <Thickness x:Key="NavigationViewHeaderMargin">0,0,0,0</Thickness>
                 <Thickness x:Key="NavigationViewMinimalHeaderMargin">0,0,0,0</Thickness>
-            </NavigationView.Resources>
+            </controls:NavigationViewExtended.Resources>
 
-            <NavigationView.HeaderTemplate>
+            <controls:NavigationViewExtended.HeaderTemplate>
                 <DataTemplate x:DataType="models:NavigationHeaderInfoModel">
                     <controls:PageHeader Title="{x:Bind Title}" Subtitle="{x:Bind Subtitle}" />
                 </DataTemplate>
-            </NavigationView.HeaderTemplate>
+            </controls:NavigationViewExtended.HeaderTemplate>
 
-            <NavigationView.MenuItems>
-                <controls:NavigationViewItemExtended
-                    x:Uid="MainWindow_DownloadsNavItem"
-                    Tag="DownloadsPage">
+            <controls:NavigationViewExtended.MenuItems>
+                <controls:NavigationViewItemExtended x:Uid="MainWindow_DownloadsNavItem" Tag="DownloadsPage">
                     <controls:NavigationViewItemExtended.Icon>
                         <FontIcon Glyph="{StaticResource GlyphDownload}" />
                     </controls:NavigationViewItemExtended.Icon>
@@ -63,9 +61,9 @@
                         <FontIcon Glyph="{StaticResource GlyphInfo}" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-            </NavigationView.MenuItems>
+            </controls:NavigationViewExtended.MenuItems>
 
             <Frame x:Name="NavFrame" Navigated="NavFrame_Navigated" />
-        </NavigationView>
+        </controls:NavigationViewExtended>
     </Grid>
 </Window>
