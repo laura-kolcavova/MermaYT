@@ -23,21 +23,26 @@ public sealed partial class MainWindow : Window
     {
         InitializeComponent();
 
-        if (AppWindow.Presenter is OverlappedPresenter presenter)
-        {
-            presenter.PreferredMinimumWidth = 540;
-            presenter.PreferredMinimumHeight = 490;
-        }
-
         ExtendsContentIntoTitleBar = true;
 
         SetTitleBar(AppTitleBar);
+
+        //var iconId = IconService.GetApplicationIconId();
+
+        //AppWindow.SetIcon(iconId);
+        //AppWindow.SetTaskbarIcon(iconId);
 
         if (Content is FrameworkElement rootElement)
         {
             rootElement.ActualThemeChanged += RootElement_ActualThemeChanged;
 
             UpdateAppTitleBarColors(rootElement.ActualTheme);
+        }
+
+        if (AppWindow.Presenter is OverlappedPresenter presenter)
+        {
+            presenter.PreferredMinimumWidth = 540;
+            presenter.PreferredMinimumHeight = 490;
         }
 
         NavView.SelectedItem = NavView.MenuItems[0];
