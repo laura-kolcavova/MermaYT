@@ -26,14 +26,14 @@
             IsPaneToggleButtonVisible="True"
             PaneToggleRequested="AppTitleBar_PaneToggleRequested">
             <TitleBar.IconSource>
-                <ImageIconSource ImageSource="ms-appx:///Assets/icon.png" />
+                <ImageIconSource ImageSource="ms-appx:///Assets/icon.svg" />
             </TitleBar.IconSource>
         </TitleBar>
 
         <controls:NavigationViewExtended
             x:Name="NavView"
             Grid.Row="1"
-            ImageSource="ms-appx:///Assets/NavBackground.png"
+            ImageSource="ms-appx:///Assets/vila.svg"
             IsBackButtonVisible="Collapsed"
             IsPaneToggleButtonVisible="False"
             ItemInvoked="NavView_ItemInvoked">

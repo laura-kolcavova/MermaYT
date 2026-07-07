@@ -11,6 +11,22 @@
         <Setter Property="CornerRadius" Value="4" />
     </Style>
 
+    <Style TargetType="controls:MusleIcon">
+        <Setter Property="Foreground" Value="{ThemeResource AccentFillColorDefaultBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:MusleIcon">
+                    <Image
+                        x:Name="MusleImage"
+                        Width="64"
+                        Height="64"
+                        VerticalAlignment="Center"
+                        Source="ms-appx:///Assets/musle.svg" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="controls:PageHeader">
         <Setter Property="Template">
             <Setter.Value>
@@ -37,12 +53,14 @@
                                 Visibility="{TemplateBinding SubtitleVisibility}" />
                         </StackPanel>
 
+                        <controls:MusleIcon Grid.Column="1" VerticalAlignment="Center" />
+
                         <!--<Image
                             Grid.Column="1"
                             Width="64"
                             Height="64"
                             VerticalAlignment="Center"
-                            Source="ms-appx:///Assets/Square150x150Logo.scale-200.png" />-->
+                            Source="ms-appx:///Assets/musle.svg" />-->
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

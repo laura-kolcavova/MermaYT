@@ -42,7 +42,8 @@
     <Content Include="Assets\icon.ico" />
     <Content Include="Assets\icon.png" />
     <Content Include="Assets\icon.svg" />
-    <Content Include="Assets\NavBackground.png" />
+    <Content Include="Assets\musle.svg" />
+    <Content Include="Assets\vila.svg" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
