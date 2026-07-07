@@ -94,13 +94,6 @@
                         </StackPanel>
 
                         <controls:MusleIcon Grid.Column="1" VerticalAlignment="Center" />
-
-                        <!--<Image
-                            Grid.Column="1"
-                            Width="64"
-                            Height="64"
-                            VerticalAlignment="Center"
-                            Source="ms-appx:///Assets/musle.svg" />-->
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
