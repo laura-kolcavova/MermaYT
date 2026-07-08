@@ -13,8 +13,6 @@ public sealed partial class NavigationViewExtended :
         typeof(NavigationViewExtended),
         new PropertyMetadata(null, OnImageSourceChanged));
 
-    AcrylicBrush? oldNavigationViewDefaultPaneBackground;
-
     private static void OnImageSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var control = (NavigationViewExtended)d;
