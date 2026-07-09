@@ -26,6 +26,18 @@ public sealed partial class PageHeader :
         typeof(PageHeader),
         new PropertyMetadata(Visibility.Collapsed));
 
+    public static readonly DependencyProperty MusleIconVisibilityProperty = DependencyProperty.Register(
+        nameof(MusleIconVisibility),
+        typeof(Visibility),
+        typeof(PageHeader),
+        new PropertyMetadata(Visibility.Visible));
+
+    public static readonly DependencyProperty MusleIconLightVisibilityProperty = DependencyProperty.Register(
+        nameof(MusleIconLightVisibility),
+        typeof(Visibility),
+        typeof(PageHeader),
+        new PropertyMetadata(Visibility.Collapsed));
+
     public string Title
     {
         get => (string)GetValue(TitleProperty);
@@ -44,9 +56,25 @@ public sealed partial class PageHeader :
         private set => SetValue(SubtitleVisibilityProperty, value);
     }
 
+    public Visibility MusleIconVisibility
+    {
+        get => (Visibility)GetValue(MusleIconVisibilityProperty);
+        private set => SetValue(MusleIconVisibilityProperty, value);
+    }
+
+    public Visibility MusleIconLightVisibility
+    {
+        get => (Visibility)GetValue(MusleIconLightVisibilityProperty);
+        private set => SetValue(MusleIconLightVisibilityProperty, value);
+    }
+
     public PageHeader()
     {
         DefaultStyleKey = typeof(PageHeader);
+
+        ActualThemeChanged += PageHeader_ActualThemeChanged;
+
+        UpdateMusleIconVisibility(ActualTheme);
     }
 
     private static void OnSubtitleChanged(
@@ -58,6 +86,27 @@ public sealed partial class PageHeader :
         var isSubtitleSet = !string.IsNullOrEmpty((string)e.NewValue);
 
         self.SubtitleVisibility = isSubtitleSet
+            ? Visibility.Visible
+            : Visibility.Collapsed;
+    }
+
+    private void PageHeader_ActualThemeChanged(
+        FrameworkElement sender,
+        object args)
+    {
+        UpdateMusleIconVisibility(sender.ActualTheme);
+    }
+
+    private void UpdateMusleIconVisibility(
+        ElementTheme theme)
+    {
+        var isLight = theme == ElementTheme.Light;
+
+        MusleIconVisibility = isLight
+            ? Visibility.Collapsed
+            : Visibility.Visible;
+
+        MusleIconLightVisibility = isLight
             ? Visibility.Visible
             : Visibility.Collapsed;
     }
