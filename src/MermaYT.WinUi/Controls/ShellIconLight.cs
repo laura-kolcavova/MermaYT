@@ -4,13 +4,13 @@ using Microsoft.UI.Xaml.Media;
 
 namespace MermaYT.WinUi.Controls;
 
-public sealed partial class MusleIconLight :
+public sealed partial class ShellIconLight :
     Control
 {
     public static readonly DependencyProperty FillBrushProperty = DependencyProperty.Register(
         nameof(FillBrush),
         typeof(Brush),
-        typeof(MusleIconLight),
+        typeof(ShellIconLight),
         new PropertyMetadata(default));
 
     public Brush FillBrush
@@ -19,8 +19,8 @@ public sealed partial class MusleIconLight :
         set => SetValue(FillBrushProperty, value);
     }
 
-    public MusleIconLight()
+    public ShellIconLight()
     {
-        DefaultStyleKey = typeof(MusleIconLight);
+        DefaultStyleKey = typeof(ShellIconLight);
     }
 }
