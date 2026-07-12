@@ -15,113 +15,110 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ShellIconDark">
-                    <Viewbox Width="64" Height="64">
-                        <Canvas Width="960.5" Height="960.5">
+                    <Canvas Width="960.5" Height="960.5">
 
-                            <!--  bg_60  -->
-                            <Path Fill="{TemplateBinding FillBrush}" Opacity="0.6">
-                                <Path.Data>
-                                    <EllipseGeometry
-                                        Center="314.81,337.57"
-                                        RadiusX="208.24"
-                                        RadiusY="208.24" />
-                                </Path.Data>
-                            </Path>
+                        <!--  bg_60  -->
+                        <Path Fill="{TemplateBinding FillBrush}" Opacity="0.6">
+                            <Path.Data>
+                                <EllipseGeometry
+                                    Center="314.81,337.57"
+                                    RadiusX="208.24"
+                                    RadiusY="208.24" />
+                            </Path.Data>
+                        </Path>
 
-                            <!--  bg_60 overlay  -->
-                            <Path Fill="#222222" Opacity="0.3">
-                                <Path.Data>
-                                    <EllipseGeometry
-                                        Center="314.81,337.57"
-                                        RadiusX="208.24"
-                                        RadiusY="208.24" />
-                                </Path.Data>
-                            </Path>
+                        <!--  bg_60 overlay  -->
+                        <Path Fill="#222222" Opacity="0.3">
+                            <Path.Data>
+                                <EllipseGeometry
+                                    Center="314.81,337.57"
+                                    RadiusX="208.24"
+                                    RadiusY="208.24" />
+                            </Path.Data>
+                        </Path>
 
 
-                            <!--  bg_100_big  -->
-                            <Path Fill="{TemplateBinding FillBrush}">
-                                <Path.Data>
-                                    <EllipseGeometry
-                                        Center="626.00,582.40"
-                                        RadiusX="311.03"
-                                        RadiusY="311.03" />
-                                </Path.Data>
-                            </Path>
+                        <!--  bg_100_big  -->
+                        <Path Fill="{TemplateBinding FillBrush}">
+                            <Path.Data>
+                                <EllipseGeometry
+                                    Center="626.00,582.40"
+                                    RadiusX="311.03"
+                                    RadiusY="311.03" />
+                            </Path.Data>
+                        </Path>
 
-                            <!--  bg_100_big overlay  -->
-                            <Path Fill="#222222" Opacity="0.3">
-                                <Path.Data>
-                                    <EllipseGeometry
-                                        Center="626.00,582.40"
-                                        RadiusX="311.03"
-                                        RadiusY="311.03" />
-                                </Path.Data>
-                            </Path>
+                        <!--  bg_100_big overlay  -->
+                        <Path Fill="#222222" Opacity="0.3">
+                            <Path.Data>
+                                <EllipseGeometry
+                                    Center="626.00,582.40"
+                                    RadiusX="311.03"
+                                    RadiusY="311.03" />
+                            </Path.Data>
+                        </Path>
 
-                            <!--  bg_100_small  -->
-                            <Path Fill="{TemplateBinding FillBrush}">
-                                <Path.Data>
-                                    <EllipseGeometry
-                                        Center="207.99,783.50"
-                                        RadiusX="92.74"
-                                        RadiusY="92.74" />
-                                </Path.Data>
-                            </Path>
+                        <!--  bg_100_small  -->
+                        <Path Fill="{TemplateBinding FillBrush}">
+                            <Path.Data>
+                                <EllipseGeometry
+                                    Center="207.99,783.50"
+                                    RadiusX="92.74"
+                                    RadiusY="92.74" />
+                            </Path.Data>
+                        </Path>
 
-                            <!--  bg_100_small overlay  -->
-                            <Path Fill="#222222" Opacity="0.3">
-                                <Path.Data>
-                                    <EllipseGeometry
-                                        Center="207.99,783.50"
-                                        RadiusX="92.74"
-                                        RadiusY="92.74" />
-                                </Path.Data>
-                            </Path>
+                        <!--  bg_100_small overlay  -->
+                        <Path Fill="#222222" Opacity="0.3">
+                            <Path.Data>
+                                <EllipseGeometry
+                                    Center="207.99,783.50"
+                                    RadiusX="92.74"
+                                    RadiusY="92.74" />
+                            </Path.Data>
+                        </Path>
 
-                            <!--  shell underlay  -->
-                            <Path
-                                Data="{StaticResource ShellIconPath}"
-                                Fill="{ThemeResource TextFillColorPrimaryBrush}"
-                                Opacity="0.7"
-                                RenderTransformOrigin="0,0">
-                                <Path.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
-                                        <TranslateTransform X="36.41" Y="-94.52" />
-                                    </TransformGroup>
-                                </Path.RenderTransform>
-                            </Path>
+                        <!--  shell underlay  -->
+                        <Path
+                            Data="{StaticResource ShellIconPath}"
+                            Fill="{ThemeResource TextFillColorPrimaryBrush}"
+                            RenderTransformOrigin="0,0">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
+                                    <TranslateTransform X="36.41" Y="-94.52" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
 
-                            <!--  shell  -->
-                            <Path
-                                Data="{StaticResource ShellIconPath}"
-                                Fill="{TemplateBinding FillBrush}"
-                                Opacity="0.2"
-                                RenderTransformOrigin="0,0">
-                                <Path.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
-                                        <TranslateTransform X="36.41" Y="-94.52" />
-                                    </TransformGroup>
-                                </Path.RenderTransform>
-                            </Path>
+                        <!--  shell  -->
+                        <Path
+                            Data="{StaticResource ShellIconPath}"
+                            Fill="{TemplateBinding FillBrush}"
+                            Opacity="0.2"
+                            RenderTransformOrigin="0,0">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
+                                    <TranslateTransform X="36.41" Y="-94.52" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
 
-                            <!--  shell overlay  -->
-                            <Path
-                                Data="{StaticResource ShellIconPath}"
-                                Fill="#222222"
-                                Opacity="0.3"
-                                RenderTransformOrigin="0,0">
-                                <Path.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
-                                        <TranslateTransform X="36.41" Y="-94.52" />
-                                    </TransformGroup>
-                                </Path.RenderTransform>
-                            </Path>
-                        </Canvas>
-                    </Viewbox>
+                        <!--  shell overlay  -->
+                        <Path
+                            Data="{StaticResource ShellIconPath}"
+                            Fill="#222222"
+                            Opacity="0.3"
+                            RenderTransformOrigin="0,0">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
+                                    <TranslateTransform X="36.41" Y="-94.52" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Canvas>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -131,68 +128,117 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ShellIconLight">
-                    <Viewbox Width="64" Height="64">
-                        <Canvas Width="960.5" Height="960.5">
+                    <Canvas Width="960.5" Height="960.5">
 
-                            <!--  bg_60  -->
-                            <Path Fill="{TemplateBinding FillBrush}" Opacity="0.6">
-                                <Path.Data>
-                                    <EllipseGeometry
-                                        Center="314.81,337.57"
-                                        RadiusX="208.24"
-                                        RadiusY="208.24" />
-                                </Path.Data>
-                            </Path>
+                        <!--  bg_60  -->
+                        <Path Fill="{TemplateBinding FillBrush}" Opacity="0.6">
+                            <Path.Data>
+                                <EllipseGeometry
+                                    Center="314.81,337.57"
+                                    RadiusX="208.24"
+                                    RadiusY="208.24" />
+                            </Path.Data>
+                        </Path>
 
-                            <!--  bg_100_big  -->
-                            <Path Fill="{TemplateBinding FillBrush}">
-                                <Path.Data>
-                                    <EllipseGeometry
-                                        Center="626.00,582.40"
-                                        RadiusX="311.03"
-                                        RadiusY="311.03" />
-                                </Path.Data>
-                            </Path>
+                        <!--  bg_100_big  -->
+                        <Path Fill="{TemplateBinding FillBrush}">
+                            <Path.Data>
+                                <EllipseGeometry
+                                    Center="626.00,582.40"
+                                    RadiusX="311.03"
+                                    RadiusY="311.03" />
+                            </Path.Data>
+                        </Path>
 
 
-                            <!--  bg_100_small  -->
-                            <Path Fill="{TemplateBinding FillBrush}">
-                                <Path.Data>
-                                    <EllipseGeometry
-                                        Center="207.99,783.50"
-                                        RadiusX="92.74"
-                                        RadiusY="92.74" />
-                                </Path.Data>
-                            </Path>
+                        <!--  bg_100_small  -->
+                        <Path Fill="{TemplateBinding FillBrush}">
+                            <Path.Data>
+                                <EllipseGeometry
+                                    Center="207.99,783.50"
+                                    RadiusX="92.74"
+                                    RadiusY="92.74" />
+                            </Path.Data>
+                        </Path>
 
-                            <!--  shell underlay  -->
-                            <Path
-                                Data="{StaticResource ShellIconPath}"
-                                Fill="{ThemeResource TextFillColorPrimaryBrush}"
-                                RenderTransformOrigin="0,0">
-                                <Path.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
-                                        <TranslateTransform X="36.41" Y="-94.52" />
-                                    </TransformGroup>
-                                </Path.RenderTransform>
-                            </Path>
+                        <!--  shell underlay  -->
+                        <Path
+                            Data="{StaticResource ShellIconPath}"
+                            Fill="{ThemeResource TextFillColorPrimaryBrush}"
+                            RenderTransformOrigin="0,0">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
+                                    <TranslateTransform X="36.41" Y="-94.52" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
 
-                            <!--  shell  -->
-                            <Path
-                                Data="{StaticResource ShellIconPath}"
-                                Fill="{TemplateBinding FillBrush}"
-                                Opacity="0.1"
-                                RenderTransformOrigin="0,0">
-                                <Path.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
-                                        <TranslateTransform X="36.41" Y="-94.52" />
-                                    </TransformGroup>
-                                </Path.RenderTransform>
-                            </Path>
-                        </Canvas>
-                    </Viewbox>
+                        <!--  shell  -->
+                        <Path
+                            Data="{StaticResource ShellIconPath}"
+                            Fill="{TemplateBinding FillBrush}"
+                            Opacity="0.1"
+                            RenderTransformOrigin="0,0">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
+                                    <TranslateTransform X="36.41" Y="-94.52" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:MermaidIconDark">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:MermaidIconDark">
+                    <Canvas Width="2416.5" Height="3653.5">
+                        <!--  mermaid underlay  -->
+                        <Path
+                            Data="{StaticResource MermaidIconPath}"
+                            Fill="{ThemeResource TextFillColorPrimaryBrush}"
+                            RenderTransformOrigin="0,0">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
+                                    <TranslateTransform X="36.41" Y="-94.52" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+
+                        <!--  mermaid  -->
+                        <Path
+                            Data="{StaticResource MermaidIconPath}"
+                            Fill="{TemplateBinding FillBrush}"
+                            Opacity="0.2"
+                            RenderTransformOrigin="0,0">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
+                                    <TranslateTransform X="36.41" Y="-94.52" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+
+                        <!--  mermaid overlay  -->
+                        <Path
+                            Data="{StaticResource MermaidIconPath}"
+                            Fill="#222222"
+                            Opacity="0.3"
+                            RenderTransformOrigin="0,0">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
+                                    <TranslateTransform X="36.41" Y="-94.52" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Canvas>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -224,17 +270,24 @@
                                 Visibility="{TemplateBinding SubtitleVisibility}" />
                         </StackPanel>
 
-                        <controls:ShellIconDark
+                        <Viewbox
                             Grid.Column="1"
+                            Width="64"
+                            Height="64"
                             VerticalAlignment="Center"
-                            FillBrush="{ThemeResource AccentFillColorDefaultBrush}"
-                            Visibility="{TemplateBinding MusleIconVisibility}" />
+                            Visibility="{TemplateBinding MusleIconVisibility}">
+                            <controls:ShellIconDark FillBrush="{ThemeResource AccentFillColorDefaultBrush}" />
+                        </Viewbox>
 
-                        <controls:ShellIconLight
+                        <Viewbox
                             Grid.Column="1"
+                            Width="64"
+                            Height="64"
                             VerticalAlignment="Center"
-                            FillBrush="{ThemeResource AccentFillColorDefaultBrush}"
-                            Visibility="{TemplateBinding MusleIconLightVisibility}" />
+                            Visibility="{TemplateBinding MusleIconVisibility}">
+                            <controls:ShellIconLight FillBrush="{ThemeResource AccentFillColorDefaultBrush}" />
+                        </Viewbox>
+
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
