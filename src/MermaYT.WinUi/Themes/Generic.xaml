@@ -287,7 +287,6 @@
                             Visibility="{TemplateBinding MusleIconVisibility}">
                             <controls:ShellIconLight FillBrush="{ThemeResource AccentFillColorDefaultBrush}" />
                         </Viewbox>
-
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
