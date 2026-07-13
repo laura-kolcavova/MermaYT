@@ -30,26 +30,24 @@
             </TitleBar.IconSource>
         </TitleBar>
 
-        <controls:NavigationViewExtended
+        <NavigationView
             x:Name="NavView"
             Grid.Row="1"
-            ImageSource="ms-appx:///Assets/vila.svg"
             IsBackButtonVisible="Collapsed"
             IsPaneToggleButtonVisible="False"
             ItemInvoked="NavView_ItemInvoked">
-
-            <controls:NavigationViewExtended.Resources>
+            <NavigationView.Resources>
                 <Thickness x:Key="NavigationViewHeaderMargin">0,0,0,0</Thickness>
                 <Thickness x:Key="NavigationViewMinimalHeaderMargin">0,0,0,0</Thickness>
-            </controls:NavigationViewExtended.Resources>
+            </NavigationView.Resources>
 
-            <controls:NavigationViewExtended.HeaderTemplate>
+            <NavigationView.HeaderTemplate>
                 <DataTemplate x:DataType="models:NavigationHeaderInfoModel">
                     <controls:PageHeader Title="{x:Bind Title}" Subtitle="{x:Bind Subtitle}" />
                 </DataTemplate>
-            </controls:NavigationViewExtended.HeaderTemplate>
+            </NavigationView.HeaderTemplate>
 
-            <controls:NavigationViewExtended.MenuItems>
+            <NavigationView.MenuItems>
                 <controls:NavigationViewItemExtended x:Uid="MainWindow_DownloadsNavItem" Tag="DownloadsPage">
                     <controls:NavigationViewItemExtended.Icon>
                         <FontIcon Glyph="{StaticResource GlyphDownload}" />
@@ -61,9 +59,9 @@
                         <FontIcon Glyph="{StaticResource GlyphInfo}" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-            </controls:NavigationViewExtended.MenuItems>
+            </NavigationView.MenuItems>
 
             <Frame x:Name="NavFrame" Navigated="NavFrame_Navigated" />
-        </controls:NavigationViewExtended>
+        </NavigationView>
     </Grid>
 </Window>

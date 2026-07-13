@@ -205,8 +205,8 @@
                             RenderTransformOrigin="0,0">
                             <Path.RenderTransform>
                                 <TransformGroup>
-                                    <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
-                                    <TranslateTransform X="36.41" Y="-94.52" />
+                                    <ScaleTransform ScaleX="12.0091" ScaleY="10.4834" />
+                                    <TranslateTransform X="-128.92" Y="412.67" />
                                 </TransformGroup>
                             </Path.RenderTransform>
                         </Path>
@@ -219,8 +219,8 @@
                             RenderTransformOrigin="0,0">
                             <Path.RenderTransform>
                                 <TransformGroup>
-                                    <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
-                                    <TranslateTransform X="36.41" Y="-94.52" />
+                                    <ScaleTransform ScaleX="12.0091" ScaleY="10.4834" />
+                                    <TranslateTransform X="-128.92" Y="412.67" />
                                 </TransformGroup>
                             </Path.RenderTransform>
                         </Path>
@@ -233,8 +233,8 @@
                             RenderTransformOrigin="0,0">
                             <Path.RenderTransform>
                                 <TransformGroup>
-                                    <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
-                                    <TranslateTransform X="36.41" Y="-94.52" />
+                                    <ScaleTransform ScaleX="12.0091" ScaleY="10.4834" />
+                                    <TranslateTransform X="-128.92" Y="412.67" />
                                 </TransformGroup>
                             </Path.RenderTransform>
                         </Path>
