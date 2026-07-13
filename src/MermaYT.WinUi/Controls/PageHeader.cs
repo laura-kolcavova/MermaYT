@@ -26,8 +26,8 @@ public sealed partial class PageHeader :
         typeof(PageHeader),
         new PropertyMetadata(Visibility.Collapsed));
 
-    public static readonly DependencyProperty MusleIconVisibilityProperty = DependencyProperty.Register(
-        nameof(MusleIconVisibility),
+    public static readonly DependencyProperty MusleIconDarkVisibilityProperty = DependencyProperty.Register(
+        nameof(MusleIconDarkVisibility),
         typeof(Visibility),
         typeof(PageHeader),
         new PropertyMetadata(Visibility.Visible));
@@ -56,10 +56,10 @@ public sealed partial class PageHeader :
         private set => SetValue(SubtitleVisibilityProperty, value);
     }
 
-    public Visibility MusleIconVisibility
+    public Visibility MusleIconDarkVisibility
     {
-        get => (Visibility)GetValue(MusleIconVisibilityProperty);
-        private set => SetValue(MusleIconVisibilityProperty, value);
+        get => (Visibility)GetValue(MusleIconDarkVisibilityProperty);
+        private set => SetValue(MusleIconDarkVisibilityProperty, value);
     }
 
     public Visibility MusleIconLightVisibility
@@ -94,7 +94,8 @@ public sealed partial class PageHeader :
         FrameworkElement sender,
         object args)
     {
-        UpdateMusleIconVisibility(sender.ActualTheme);
+        UpdateMusleIconVisibility(
+            sender.ActualTheme);
     }
 
     private void UpdateMusleIconVisibility(
@@ -102,7 +103,7 @@ public sealed partial class PageHeader :
     {
         var isLight = theme == ElementTheme.Light;
 
-        MusleIconVisibility = isLight
+        MusleIconDarkVisibility = isLight
             ? Visibility.Collapsed
             : Visibility.Visible;
 

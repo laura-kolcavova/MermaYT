@@ -44,7 +44,7 @@
                     Margin="0,0,0,8"
                     HorizontalAlignment="Center"
                     Foreground="{ThemeResource TextFillColorSecondaryBrush}">
-                    <Run Text="Icons and illustrations by" />
+                    <Run x:Uid="AboutPage_IconsAndIllustrationsRun" />
                     <Hyperlink NavigateUri="https://janna.belohradsky.cz/en/index">Janna Bělohradská</Hyperlink>
                 </TextBlock>
 
@@ -58,8 +58,18 @@
                 Grid.Row="1"
                 Width="200"
                 Margin="0,16"
-                HorizontalAlignment="Left">
+                HorizontalAlignment="Left"
+                Visibility="{x:Bind MermaidIconDarkVisibility, Mode=OneWay}">
                 <controls:MermaidIconDark FillBrush="{ThemeResource AccentFillColorDefaultBrush}" />
+            </Viewbox>
+
+            <Viewbox
+                Grid.Row="1"
+                Width="200"
+                Margin="0,16"
+                HorizontalAlignment="Left"
+                Visibility="{x:Bind MermaidIconLightVisibility, Mode=OneWay}">
+                <controls:MermaidIconLight FillBrush="{ThemeResource AccentFillColorDefaultBrush}" />
             </Viewbox>
         </Grid>
     </ScrollViewer>

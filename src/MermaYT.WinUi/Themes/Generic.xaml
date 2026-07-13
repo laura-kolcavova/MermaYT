@@ -198,6 +198,37 @@
             <Setter.Value>
                 <ControlTemplate TargetType="controls:MermaidIconDark">
                     <Canvas Width="2416.5" Height="3653.5">
+                        <Canvas.Clip>
+                            <RectangleGeometry Rect="0,0,2416.5,3653.5" />
+                        </Canvas.Clip>
+
+                        <!--  sun  -->
+                        <Path
+                            Data="{StaticResource MermaidCircleIconPath}"
+                            Fill="{TemplateBinding FillBrush}"
+                            RenderTransformOrigin="0,0">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="0.504032" ScaleY="0.439998" />
+                                    <TranslateTransform X="0" Y="0" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+
+                        <!--  sun overlay  -->
+                        <Path
+                            Data="{StaticResource MermaidCircleIconPath}"
+                            Fill="#222222"
+                            Opacity="0.8"
+                            RenderTransformOrigin="0,0">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="0.504032" ScaleY="0.439998" />
+                                    <TranslateTransform X="0" Y="0" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+
                         <!--  mermaid underlay  -->
                         <Path
                             Data="{StaticResource MermaidIconPath}"
@@ -244,6 +275,74 @@
         </Setter>
     </Style>
 
+    <Style TargetType="controls:MermaidIconLight">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:MermaidIconLight">
+                    <Canvas Width="2416.5" Height="3653.5">
+                        <Canvas.Clip>
+                            <RectangleGeometry Rect="0,0,2416.5,3653.5" />
+                        </Canvas.Clip>
+
+                        <!--  sun  -->
+                        <Path
+                            Data="{StaticResource MermaidCircleIconPath}"
+                            Fill="{TemplateBinding FillBrush}"
+                            RenderTransformOrigin="0,0">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="0.504032" ScaleY="0.439998" />
+                                    <TranslateTransform X="0" Y="0" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+
+                        <!--  sun overlay  -->
+                        <Path
+                            Data="{StaticResource MermaidCircleIconPath}"
+                            Fill="#ffffff"
+                            Opacity="0.7"
+                            RenderTransformOrigin="0,0">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="0.504032" ScaleY="0.439998" />
+                                    <TranslateTransform X="0" Y="0" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+
+                        <!--  mermaid underlay  -->
+                        <Path
+                            Data="{StaticResource MermaidIconPath}"
+                            Fill="{ThemeResource TextFillColorPrimaryBrush}"
+                            RenderTransformOrigin="0,0">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="12.0091" ScaleY="10.4834" />
+                                    <TranslateTransform X="-128.92" Y="412.67" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+
+                        <!--  mermaid  -->
+                        <Path
+                            Data="{StaticResource MermaidIconPath}"
+                            Fill="{TemplateBinding FillBrush}"
+                            Opacity="0.1"
+                            RenderTransformOrigin="0,0">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="12.0091" ScaleY="10.4834" />
+                                    <TranslateTransform X="-128.92" Y="412.67" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="controls:PageHeader">
         <Setter Property="Template">
             <Setter.Value>
@@ -275,7 +374,7 @@
                             Width="64"
                             Height="64"
                             VerticalAlignment="Center"
-                            Visibility="{TemplateBinding MusleIconVisibility}">
+                            Visibility="{TemplateBinding MusleIconDarkVisibility}">
                             <controls:ShellIconDark FillBrush="{ThemeResource AccentFillColorDefaultBrush}" />
                         </Viewbox>
 
@@ -284,7 +383,7 @@
                             Width="64"
                             Height="64"
                             VerticalAlignment="Center"
-                            Visibility="{TemplateBinding MusleIconVisibility}">
+                            Visibility="{TemplateBinding MusleIconLightVisibility}">
                             <controls:ShellIconLight FillBrush="{ThemeResource AccentFillColorDefaultBrush}" />
                         </Viewbox>
                     </Grid>
