@@ -198,9 +198,6 @@
             <Setter.Value>
                 <ControlTemplate TargetType="controls:MermaidIconDark">
                     <Canvas Width="2416.5" Height="3653.5">
-                        <Canvas.Clip>
-                            <RectangleGeometry Rect="0,0,2416.5,3653.5" />
-                        </Canvas.Clip>
 
                         <!--  sun  -->
                         <Path
@@ -280,9 +277,6 @@
             <Setter.Value>
                 <ControlTemplate TargetType="controls:MermaidIconLight">
                     <Canvas Width="2416.5" Height="3653.5">
-                        <Canvas.Clip>
-                            <RectangleGeometry Rect="0,0,2416.5,3653.5" />
-                        </Canvas.Clip>
 
                         <!--  sun  -->
                         <Path
