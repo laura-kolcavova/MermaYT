@@ -18,224 +18,223 @@
         <converters:ProgressPercentageToStringConverter x:Key="ProgressPercentageToStringConverter" />
     </Page.Resources>
 
-    <Grid>
-        <ScrollViewer>
-            <StackPanel Padding="24,12" Spacing="10">
-                <InfoBar
-                    x:Name="ErrorInfoBar"
-                    x:Uid="DownloadsPage_ErrorInfoBar"
-                    IsClosable="True"
-                    IsOpen="False"
-                    Severity="Error" />
+    <ScrollViewer>
+        <StackPanel Padding="24,12" Spacing="10">
+            <InfoBar
+                x:Name="ErrorInfoBar"
+                x:Uid="DownloadsPage_ErrorInfoBar"
+                IsClosable="True"
+                IsOpen="False"
+                Severity="Error" />
 
-                <Border
-                    Padding="16"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                    BorderThickness="1"
-                    CornerRadius="8">
+            <Border
+                Padding="16"
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="8">
 
-                    <Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel
+                        Grid.Row="0"
+                        Margin="0,0,0,20"
+                        Spacing="6">
+                        <TextBlock x:Uid="DownloadsPage_YouTubeUrlLabel" Style="{StaticResource BodyStrongTextBlockStyle}" />
+
+                        <Grid>
+                            <TextBox
+                                x:Name="YouTubeUrlTextBox"
+                                x:Uid="DownloadsPage_YouTubeUrlTextBox"
+                                Padding="36,5,10,6"
+                                KeyDown="YouTubeUrlTextBox_KeyDown"
+                                Text="{x:Bind YouTubeUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <FontIcon
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontFamily="Segoe MDL2 Assets"
+                                FontSize="16"
+                                Glyph="{StaticResource GlyphLink}"
+                                RenderTransformOrigin="0.5,0.5">
+                                <FontIcon.RenderTransform>
+                                    <RotateTransform Angle="-45" />
+                                </FontIcon.RenderTransform>
+                            </FontIcon>
+                        </Grid>
+                    </StackPanel>
+
+                    <Grid
+                        x:Name="OptionsGrid"
+                        Grid.Row="1"
+                        Margin="0,0,0,20"
+                        ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition x:Name="OptionsCol0" Width="Auto" />
+                            <ColumnDefinition x:Name="OptionsCol1" Width="*" />
+                            <ColumnDefinition x:Name="OptionsCol2" Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition x:Name="OptionsRow1" Height="0" />
+                            <RowDefinition x:Name="OptionsRow2" Height="0" />
                         </Grid.RowDefinitions>
 
                         <StackPanel
-                            Grid.Row="0"
-                            Margin="0,0,0,20"
-                            Spacing="6">
-                            <TextBlock x:Uid="DownloadsPage_YouTubeUrlLabel" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                            x:Name="FormatPanel"
+                            Grid.Column="0"
+                            Margin="0,0,24,0"
+                            Spacing="8">
+                            <TextBlock x:Uid="DownloadsPage_OutputFormatLabel" Style="{StaticResource BodyStrongTextBlockStyle}" />
+
+                            <ComboBox
+                                x:Name="OutputFormatComboBox"
+                                MinWidth="160"
+                                SelectedIndex="{x:Bind SelectedOutputFormat, Mode=TwoWay, Converter={StaticResource OutputFormatToIndexConverter}}">
+                                <ComboBoxItem>
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <FontIcon FontSize="14" Glyph="{StaticResource GlyphMusic}" />
+
+                                        <TextBlock x:Uid="DownloadsPage_Mp3Text" />
+                                    </StackPanel>
+                                </ComboBoxItem>
+
+                                <ComboBoxItem>
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <FontIcon FontSize="14" Glyph="{StaticResource GlyphMovie}" />
+
+                                        <TextBlock x:Uid="DownloadsPage_Mp4Text" />
+                                    </StackPanel>
+                                </ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <StackPanel
+                            x:Name="DownloadToPanel"
+                            Grid.Column="1"
+                            Spacing="8">
+                            <TextBlock x:Uid="DownloadsPage_DownloadToLabel" Style="{StaticResource BodyStrongTextBlockStyle}" />
 
                             <Grid>
                                 <TextBox
-                                    x:Name="YouTubeUrlTextBox"
-                                    x:Uid="DownloadsPage_YouTubeUrlTextBox"
+                                    x:Name="DestinationFolderTextBox"
+                                    x:Uid="DownloadsPage_DestinationFolderTextBox"
                                     Padding="36,5,10,6"
-                                    KeyDown="YouTubeUrlTextBox_KeyDown"
-                                    Text="{x:Bind YouTubeUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    Text="{x:Bind DestinationFolder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                                 <FontIcon
                                     Margin="10,0,0,0"
                                     HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    FontFamily="Segoe MDL2 Assets"
                                     FontSize="16"
-                                    Glyph="{StaticResource GlyphLink}"
-                                    RenderTransformOrigin="0.5,0.5">
-                                    <FontIcon.RenderTransform>
-                                        <RotateTransform Angle="-45" />
-                                    </FontIcon.RenderTransform>
-                                </FontIcon>
+                                    Glyph="{StaticResource GlyphFolderHorizontal}" />
                             </Grid>
                         </StackPanel>
 
-                        <Grid
-                            x:Name="OptionsGrid"
-                            Grid.Row="1"
-                            Margin="0,0,0,20"
-                            ColumnSpacing="12">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition x:Name="OptionsCol0" Width="Auto" />
-                                <ColumnDefinition x:Name="OptionsCol1" Width="*" />
-                                <ColumnDefinition x:Name="OptionsCol2" Width="Auto" />
-                            </Grid.ColumnDefinitions>
+                        <Button
+                            x:Name="BrowseButton"
+                            x:Uid="DownloadsPage_BrowseButton"
+                            Grid.Column="2"
+                            MinWidth="130"
+                            VerticalAlignment="Bottom"
+                            Click="BrowseButton_Click" />
+                    </Grid>
 
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition x:Name="OptionsRow1" Height="0" />
-                                <RowDefinition x:Name="OptionsRow2" Height="0" />
-                            </Grid.RowDefinitions>
+                    <Button
+                        x:Name="AddButton"
+                        Grid.Row="2"
+                        MinWidth="130"
+                        HorizontalAlignment="Right"
+                        Click="AddButton_Click"
+                        IsEnabled="{x:Bind AddButtonIsEnabled, Mode=OneWay}"
+                        Style="{StaticResource AccentButtonStyle}">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBlock x:Uid="DownloadsPage_AddButtonText" />
 
-                            <StackPanel
-                                x:Name="FormatPanel"
-                                Grid.Column="0"
-                                Margin="0,0,24,0"
-                                Spacing="8">
-                                <TextBlock x:Uid="DownloadsPage_OutputFormatLabel" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                            <FontIcon FontSize="14" Glyph="{StaticResource GlyphAdd}" />
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Border>
 
-                                <ComboBox
-                                    x:Name="OutputFormatComboBox"
-                                    MinWidth="160"
-                                    SelectedIndex="{x:Bind SelectedOutputFormat, Mode=TwoWay, Converter={StaticResource OutputFormatToIndexConverter}}">
-                                    <ComboBoxItem>
-                                        <StackPanel Orientation="Horizontal" Spacing="8">
-                                            <FontIcon FontSize="14" Glyph="{StaticResource GlyphMusic}" />
+            <Border
+                Padding="16"
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="8">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
-                                            <TextBlock x:Uid="DownloadsPage_Mp3Text" />
-                                        </StackPanel>
-                                    </ComboBoxItem>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
 
-                                    <ComboBoxItem>
-                                        <StackPanel Orientation="Horizontal" Spacing="8">
-                                            <FontIcon FontSize="14" Glyph="{StaticResource GlyphMovie}" />
-
-                                            <TextBlock x:Uid="DownloadsPage_Mp4Text" />
-                                        </StackPanel>
-                                    </ComboBoxItem>
-                                </ComboBox>
-                            </StackPanel>
-
-                            <StackPanel
-                                x:Name="DownloadToPanel"
-                                Grid.Column="1"
-                                Spacing="8">
-                                <TextBlock x:Uid="DownloadsPage_DownloadToLabel" Style="{StaticResource BodyStrongTextBlockStyle}" />
-
-                                <Grid>
-                                    <TextBox
-                                        x:Name="DestinationFolderTextBox"
-                                        x:Uid="DownloadsPage_DestinationFolderTextBox"
-                                        Padding="36,5,10,6"
-                                        Text="{x:Bind DestinationFolder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                                    <FontIcon
-                                        Margin="10,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        FontSize="16"
-                                        Glyph="{StaticResource GlyphFolderHorizontal}" />
-                                </Grid>
-                            </StackPanel>
-
-                            <Button
-                                x:Name="BrowseButton"
-                                x:Uid="DownloadsPage_BrowseButton"
-                                Grid.Column="2"
-                                MinWidth="130"
-                                VerticalAlignment="Bottom"
-                                Click="BrowseButton_Click" />
-                        </Grid>
+                        <TextBlock
+                            x:Uid="DownloadsPage_DownloadQueueLabel"
+                            Grid.Column="0"
+                            Style="{StaticResource BodyStrongTextBlockStyle}" />
 
                         <Button
-                            x:Name="AddButton"
-                            Grid.Row="2"
+                            x:Name="ClearCompletedButton"
+                            Grid.Column="2"
                             MinWidth="130"
-                            HorizontalAlignment="Right"
-                            Click="AddButton_Click"
-                            IsEnabled="{x:Bind AddButtonIsEnabled, Mode=OneWay}"
-                            Style="{StaticResource AccentButtonStyle}">
+                            Click="ClearCompletedButton_Click">
                             <StackPanel Orientation="Horizontal" Spacing="8">
-                                <TextBlock x:Uid="DownloadsPage_AddButtonText" />
+                                <FontIcon
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Glyph="{StaticResource GlyphDelete}" />
 
-                                <FontIcon FontSize="14" Glyph="{StaticResource GlyphAdd}" />
+                                <TextBlock x:Uid="DownloadsPage_ClearCompletedText" />
                             </StackPanel>
                         </Button>
                     </Grid>
-                </Border>
 
-                <Border
-                    Padding="16"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                    BorderThickness="1"
-                    CornerRadius="8">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
+                    <ItemsRepeater
+                        x:Name="DownloadQueueList"
+                        Grid.Row="1"
+                        Margin="0,12,0,0"
+                        ItemsSource="{x:Bind DownloadQueue}">
+                        <ItemsRepeater.Layout>
+                            <StackLayout Spacing="8" />
+                        </ItemsRepeater.Layout>
 
-                        <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
+                        <ItemsRepeater.ItemTemplate>
+                            <DataTemplate x:DataType="models:DownloadItemModel">
+                                <controls:DownloadListItem
+                                    Title="{x:Bind Title, Mode=OneWay}"
+                                    DownloadState="{x:Bind DownloadState, Mode=OneWay}"
+                                    DownloadStateText="{x:Bind DownloadState, Mode=OneWay, Converter={StaticResource DownloadStateToStringConverter}}"
+                                    DownloadedBytesText="{x:Bind DownloadedBytes, Mode=OneWay, Converter={StaticResource BytesToFileSizeConverter}}"
+                                    Item="{x:Bind}"
+                                    OpenDestinationFolderButtonClick="DownloadListItem_OpenDestinationFolderButtonClick"
+                                    OutputFormat="{x:Bind OutputFormat, Mode=OneWay}"
+                                    OutputFormatText="{x:Bind OutputFormat, Mode=OneWay, Converter={StaticResource OutputFormatToStringConverter}}"
+                                    Progress="{x:Bind ProgressPercentage, Mode=OneWay}"
+                                    ProgressText="{x:Bind ProgressPercentage, Mode=OneWay, Converter={StaticResource ProgressPercentageToStringConverter}}"
+                                    RemoveButtonClick="DownloadListItem_RemoveButtonClick"
+                                    TotalBytesText="{x:Bind TotalBytes, Mode=OneWay, Converter={StaticResource BytesToFileSizeConverter}}" />
+                            </DataTemplate>
+                        </ItemsRepeater.ItemTemplate>
+                    </ItemsRepeater>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
 
-                            <TextBlock
-                                x:Uid="DownloadsPage_DownloadQueueLabel"
-                                Grid.Column="0"
-                                Style="{StaticResource BodyStrongTextBlockStyle}" />
-
-                            <Button
-                                x:Name="ClearCompletedButton"
-                                Grid.Column="2"
-                                MinWidth="130"
-                                Click="ClearCompletedButton_Click">
-                                <StackPanel Orientation="Horizontal" Spacing="8">
-                                    <FontIcon
-                                        VerticalAlignment="Center"
-                                        FontSize="14"
-                                        Glyph="{StaticResource GlyphDelete}" />
-
-                                    <TextBlock x:Uid="DownloadsPage_ClearCompletedText" />
-                                </StackPanel>
-                            </Button>
-                        </Grid>
-
-                        <ItemsRepeater
-                            x:Name="DownloadQueueList"
-                            Grid.Row="1"
-                            Margin="0,12,0,0"
-                            ItemsSource="{x:Bind DownloadQueue}">
-                            <ItemsRepeater.Layout>
-                                <StackLayout Spacing="8" />
-                            </ItemsRepeater.Layout>
-
-                            <ItemsRepeater.ItemTemplate>
-                                <DataTemplate x:DataType="models:DownloadItemModel">
-                                    <controls:DownloadListItem
-                                        Title="{x:Bind Title, Mode=OneWay}"
-                                        DownloadState="{x:Bind DownloadState, Mode=OneWay}"
-                                        DownloadStateText="{x:Bind DownloadState, Mode=OneWay, Converter={StaticResource DownloadStateToStringConverter}}"
-                                        DownloadedBytesText="{x:Bind DownloadedBytes, Mode=OneWay, Converter={StaticResource BytesToFileSizeConverter}}"
-                                        Item="{x:Bind}"
-                                        OpenDestinationFolderButtonClick="DownloadListItem_OpenDestinationFolderButtonClick"
-                                        OutputFormat="{x:Bind OutputFormat, Mode=OneWay}"
-                                        OutputFormatText="{x:Bind OutputFormat, Mode=OneWay, Converter={StaticResource OutputFormatToStringConverter}}"
-                                        Progress="{x:Bind ProgressPercentage, Mode=OneWay}"
-                                        ProgressText="{x:Bind ProgressPercentage, Mode=OneWay, Converter={StaticResource ProgressPercentageToStringConverter}}"
-                                        RemoveButtonClick="DownloadListItem_RemoveButtonClick"
-                                        TotalBytesText="{x:Bind TotalBytes, Mode=OneWay, Converter={StaticResource BytesToFileSizeConverter}}" />
-                                </DataTemplate>
-                            </ItemsRepeater.ItemTemplate>
-                        </ItemsRepeater>
-                    </Grid>
-                </Border>
-            </StackPanel>
-        </ScrollViewer>
-    </Grid>
 
     <VisualStateManager.VisualStateGroups>
         <VisualStateGroup>

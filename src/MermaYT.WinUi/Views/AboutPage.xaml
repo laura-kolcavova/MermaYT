@@ -8,59 +8,59 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-
-        </Grid.RowDefinitions>
-
-        <StackPanel
-            Grid.Row="0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Spacing="8">
-
-            <TextBlock
+            <StackPanel
+                Grid.Row="0"
                 HorizontalAlignment="Center"
-                FontSize="24"
-                FontWeight="SemiBold"
-                Text="MermaYT" />
+                VerticalAlignment="Center"
+                Spacing="8">
 
-            <TextBlock HorizontalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}">
-                <Run x:Uid="AboutPage_GuiWrapperRun" />
-                <Hyperlink NavigateUri="https://github.com/yt-dlp/yt-dlp ">yt-dlp</Hyperlink>
-            </TextBlock>
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="24"
+                    FontWeight="SemiBold"
+                    Text="MermaYT" />
 
-            <TextBlock
-                x:Uid="AboutPage_DescriptionText"
-                Margin="0,16,0,0"
-                HorizontalAlignment="Center" />
+                <TextBlock
+                    Margin="0,0,0,16"
+                    HorizontalAlignment="Center"
+                    Foreground="{ThemeResource TextFillColorSecondaryBrush}">
+                    <Run x:Uid="AboutPage_GuiWrapperRun" />
+                    <Hyperlink NavigateUri="https://github.com/yt-dlp/yt-dlp ">yt-dlp</Hyperlink>
+                </TextBlock>
 
-            <TextBlock
-                Margin="0,16,0,0"
-                HorizontalAlignment="Center"
-                Foreground="{ThemeResource TextFillColorSecondaryBrush}">
-                <Run Text="&#169; 2026" />
-                <Hyperlink NavigateUri="https://github.com/laura-kolcavova">Laura Kolčavová</Hyperlink>
-            </TextBlock>
+                <TextBlock
+                    x:Uid="AboutPage_DescriptionText"
+                    Margin="0,0,0,16"
+                    HorizontalAlignment="Center" />
 
-            <!--<TextBlock
-                Margin="0,8,0,0"
-                HorizontalAlignment="Center"
-                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                Text="Icons and illustrations by [Name]" />-->
-        </StackPanel>
+                <TextBlock
+                    Margin="0,0,0,8"
+                    HorizontalAlignment="Center"
+                    Foreground="{ThemeResource TextFillColorSecondaryBrush}">
+                    <Run Text="Icons and illustrations by" />
+                    <Hyperlink NavigateUri="https://janna.belohradsky.cz/en/index">Janna Bělohradská</Hyperlink>
+                </TextBlock>
 
-        <Viewbox
-            Grid.Row="1"
-            Width="160"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            IsHitTestVisible="False">
-            <controls:MermaidIconDark FillBrush="{ThemeResource AccentFillColorDefaultBrush}" />
-        </Viewbox>
-    </Grid>
+                <TextBlock HorizontalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}">
+                    <Run Text="&#169; 2026" />
+                    <Hyperlink NavigateUri="https://github.com/laura-kolcavova">Laura Kolčavová</Hyperlink>
+                </TextBlock>
+            </StackPanel>
 
+            <Viewbox
+                Grid.Row="1"
+                Width="200"
+                Margin="0,16"
+                HorizontalAlignment="Left">
+                <controls:MermaidIconDark FillBrush="{ThemeResource AccentFillColorDefaultBrush}" />
+            </Viewbox>
+        </Grid>
+    </ScrollViewer>
 </Page>

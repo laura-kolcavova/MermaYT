@@ -91,6 +91,9 @@
   <data name="AboutPage_DescriptionText.Text" xml:space="preserve">
     <value>Download audio and video from YouTube</value>
   </data>
+  <data name="AboutPage_IconsAndIllustrationsRun.Text" xml:space="preserve">
+    <value>Icons and illustrations by </value>
+  </data>
 
   <!-- DownloadsPage -->
   <data name="DownloadsPage_ErrorInfoBar.Title" xml:space="preserve">
