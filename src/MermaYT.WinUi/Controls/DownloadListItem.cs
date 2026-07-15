@@ -18,7 +18,9 @@ public sealed partial class DownloadListItem :
         nameof(OutputFormat),
         typeof(OutputFormat),
         typeof(DownloadListItem),
-        new PropertyMetadata(OutputFormat.MP3, OnOutputFormatChanged));
+        new PropertyMetadata(
+            OutputFormat.MP3,
+            OnOutputFormatChanged));
 
     public static readonly DependencyProperty OutputFormatTextProperty = DependencyProperty.Register(
         nameof(OutputFormatText),

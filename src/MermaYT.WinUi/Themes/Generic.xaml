@@ -18,7 +18,7 @@
                     <Canvas Width="960.5" Height="960.5">
 
                         <!--  bg_60  -->
-                        <Path Fill="{TemplateBinding FillBrush}" Opacity="0.6">
+                        <Path Fill="{TemplateBinding MediumCircleBrush}">
                             <Path.Data>
                                 <EllipseGeometry
                                     Center="314.81,337.57"
@@ -26,30 +26,9 @@
                                     RadiusY="208.24" />
                             </Path.Data>
                         </Path>
-
-                        <!--  bg_60 overlay  -->
-                        <Path Fill="#222222" Opacity="0.3">
-                            <Path.Data>
-                                <EllipseGeometry
-                                    Center="314.81,337.57"
-                                    RadiusX="208.24"
-                                    RadiusY="208.24" />
-                            </Path.Data>
-                        </Path>
-
 
                         <!--  bg_100_big  -->
-                        <Path Fill="{TemplateBinding FillBrush}">
-                            <Path.Data>
-                                <EllipseGeometry
-                                    Center="626.00,582.40"
-                                    RadiusX="311.03"
-                                    RadiusY="311.03" />
-                            </Path.Data>
-                        </Path>
-
-                        <!--  bg_100_big overlay  -->
-                        <Path Fill="#222222" Opacity="0.3">
+                        <Path Fill="{TemplateBinding BigCircleBrush}">
                             <Path.Data>
                                 <EllipseGeometry
                                     Center="626.00,582.40"
@@ -59,57 +38,19 @@
                         </Path>
 
                         <!--  bg_100_small  -->
-                        <Path Fill="{TemplateBinding FillBrush}">
+                        <Path Fill="{TemplateBinding SmallCircleBrush}">
                             <Path.Data>
                                 <EllipseGeometry
                                     Center="207.99,783.50"
                                     RadiusX="92.74"
                                     RadiusY="92.74" />
                             </Path.Data>
-                        </Path>
-
-                        <!--  bg_100_small overlay  -->
-                        <Path Fill="#222222" Opacity="0.3">
-                            <Path.Data>
-                                <EllipseGeometry
-                                    Center="207.99,783.50"
-                                    RadiusX="92.74"
-                                    RadiusY="92.74" />
-                            </Path.Data>
-                        </Path>
-
-                        <!--  shell underlay  -->
-                        <Path
-                            Data="{StaticResource ShellIconPath}"
-                            Fill="{ThemeResource TextFillColorPrimaryBrush}"
-                            RenderTransformOrigin="0,0">
-                            <Path.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
-                                    <TranslateTransform X="36.41" Y="-94.52" />
-                                </TransformGroup>
-                            </Path.RenderTransform>
                         </Path>
 
                         <!--  shell  -->
                         <Path
                             Data="{StaticResource ShellIconPath}"
-                            Fill="{TemplateBinding FillBrush}"
-                            Opacity="0.2"
-                            RenderTransformOrigin="0,0">
-                            <Path.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
-                                    <TranslateTransform X="36.41" Y="-94.52" />
-                                </TransformGroup>
-                            </Path.RenderTransform>
-                        </Path>
-
-                        <!--  shell overlay  -->
-                        <Path
-                            Data="{StaticResource ShellIconPath}"
-                            Fill="#222222"
-                            Opacity="0.3"
+                            Fill="{TemplateBinding ShellBrush}"
                             RenderTransformOrigin="0,0">
                             <Path.RenderTransform>
                                 <TransformGroup>
@@ -365,17 +306,17 @@
 
                         <Viewbox
                             Grid.Column="1"
-                            Width="64"
-                            Height="64"
+                            Width="72"
+                            Height="72"
                             VerticalAlignment="Center"
                             Visibility="{TemplateBinding MusleIconDarkVisibility}">
-                            <controls:ShellIconDark FillBrush="{ThemeResource AccentFillColorDefaultBrush}" />
+                            <controls:ShellIconDark FillBrush="{ThemeResource AccentFillColorDefaultBrush}" SecondaryColorBrush="{ThemeResource TextFillColorPrimaryBrush}" />
                         </Viewbox>
 
                         <Viewbox
                             Grid.Column="1"
-                            Width="64"
-                            Height="64"
+                            Width="72"
+                            Height="72"
                             VerticalAlignment="Center"
                             Visibility="{TemplateBinding MusleIconLightVisibility}">
                             <controls:ShellIconLight FillBrush="{ThemeResource AccentFillColorDefaultBrush}" />
