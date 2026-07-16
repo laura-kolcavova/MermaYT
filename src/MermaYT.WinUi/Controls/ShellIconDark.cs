@@ -9,13 +9,21 @@ namespace MermaYT.WinUi.Controls;
 public sealed partial class ShellIconDark :
     Control
 {
-    public static readonly DependencyProperty FillBrushProperty = DependencyProperty.Register(
-        nameof(FillBrush),
+    public static readonly DependencyProperty FillColorBrushProperty = DependencyProperty.Register(
+        nameof(FillColorBrush),
         typeof(Brush),
         typeof(ShellIconDark),
         new PropertyMetadata(
             default,
-            OnFillBrushChanged));
+            OnFillColorBrushChanged));
+
+    public static readonly DependencyProperty BaseColorBrushProperty = DependencyProperty.Register(
+        nameof(BaseColorBrush),
+        typeof(Brush),
+        typeof(ShellIconDark),
+        new PropertyMetadata(
+            default,
+            OnBaseColorBrushChanged));
 
     public static readonly DependencyProperty SmallCircleBrushProperty = DependencyProperty.Register(
         nameof(SmallCircleBrush),
@@ -41,24 +49,16 @@ public sealed partial class ShellIconDark :
         typeof(ShellIconDark),
         new PropertyMetadata(default));
 
-    public static readonly DependencyProperty SecondaryColorBrushProperty = DependencyProperty.Register(
-        nameof(SecondaryColorBrush),
-        typeof(Brush),
-        typeof(ShellIconDark),
-        new PropertyMetadata(
-            default,
-            OnSecondaryColorBrushChanged));
-
-    public Brush FillBrush
+    public Brush FillColorBrush
     {
-        get => (Brush)GetValue(FillBrushProperty);
-        set => SetValue(FillBrushProperty, value);
+        get => (Brush)GetValue(FillColorBrushProperty);
+        set => SetValue(FillColorBrushProperty, value);
     }
 
-    public Brush SecondaryColorBrush
+    public Brush BaseColorBrush
     {
-        get => (Brush)GetValue(SecondaryColorBrushProperty);
-        set => SetValue(SecondaryColorBrushProperty, value);
+        get => (Brush)GetValue(BaseColorBrushProperty);
+        set => SetValue(BaseColorBrushProperty, value);
     }
 
     public Brush SmallCircleBrush
@@ -90,56 +90,57 @@ public sealed partial class ShellIconDark :
         DefaultStyleKey = typeof(ShellIconDark);
     }
 
-    private static void OnFillBrushChanged(
+    private static void OnFillColorBrushChanged(
         DependencyObject d,
         DependencyPropertyChangedEventArgs e)
     {
         var self = (ShellIconDark)d;
 
-        if (self.FillBrush is null)
+        if (self.FillColorBrush is null)
         {
             return;
         }
 
-        var newFillBrush = (Brush)e.NewValue;
+        var newFillColorBrush = (Brush)e.NewValue;
 
-        self.SmallCircleBrush = ComputeSmallCircleBrush(newFillBrush);
-        self.MediumCircleBrush = ComputeMediumCircleBrush(newFillBrush);
-        self.BigCircleBrush = ComputeBigCircleBrush(newFillBrush);
+        self.SmallCircleBrush = ComputeSmallCircleBrush(newFillColorBrush);
+        self.MediumCircleBrush = ComputeMediumCircleBrush(newFillColorBrush);
+        self.BigCircleBrush = ComputeBigCircleBrush(newFillColorBrush);
 
-        if (self.SecondaryColorBrush is null)
+        if (self.BaseColorBrush is null)
         {
             return;
         }
 
         self.ShellBrush = ComputeShellBrush(
-            newFillBrush,
-            self.SecondaryColorBrush);
+            newFillColorBrush,
+            self.BaseColorBrush);
     }
 
-    private static void OnSecondaryColorBrushChanged(
+    private static void OnBaseColorBrushChanged(
         DependencyObject d,
         DependencyPropertyChangedEventArgs e)
     {
         var self = (ShellIconDark)d;
 
-        if (self.FillBrush is null ||
-            self.SecondaryColorBrush is null)
+        if (self.FillColorBrush is null ||
+            self.BaseColorBrush is null)
         {
             return;
         }
 
-        var newSecondaryColorBrush = (Brush)e.NewValue;
+        var newBaseColorBrush = (Brush)e.NewValue;
 
         self.ShellBrush = ComputeShellBrush(
-            self.FillBrush,
-            newSecondaryColorBrush);
+            self.FillColorBrush,
+            newBaseColorBrush);
     }
 
+    // Fill Color + #222222 (30%)
     private static Brush ComputeSmallCircleBrush(
-        Brush fillBrush)
+        Brush fillColorBrush)
     {
-        var fillColor = ((SolidColorBrush)fillBrush).Color;
+        var fillColor = ((SolidColorBrush)fillColorBrush).Color;
 
         const byte overlayR = 0x22;
         const byte overlayG = 0x22;
@@ -155,10 +156,11 @@ public sealed partial class ShellIconDark :
         return new SolidColorBrush(blendedColor);
     }
 
+    // Fill Color (60%) + #222222 (30%)
     private static Brush ComputeMediumCircleBrush(
-        Brush fillBrush)
+        Brush fillColorBrush)
     {
-        var fillColor = ((SolidColorBrush)fillBrush).Color;
+        var fillColor = ((SolidColorBrush)fillColorBrush).Color;
 
         const double fillOpacity = 0.6;
 
@@ -178,10 +180,11 @@ public sealed partial class ShellIconDark :
         return new SolidColorBrush(blendedColor);
     }
 
+    // Fill Color + #222222 (30%)
     private static Brush ComputeBigCircleBrush(
-        Brush fillBrush)
+        Brush fillColorBrush)
     {
-        var fillColor = ((SolidColorBrush)fillBrush).Color;
+        var fillColor = ((SolidColorBrush)fillColorBrush).Color;
 
         const byte overlayR = 0x22;
         const byte overlayG = 0x22;
@@ -197,12 +200,13 @@ public sealed partial class ShellIconDark :
         return new SolidColorBrush(blendedColor);
     }
 
+    // Base Color + Fill Color (10%)
     private static Brush ComputeShellBrush(
-        Brush fillBrush,
-        Brush secondaryColorBrush)
+        Brush fillColorBrush,
+        Brush baseColorBrush)
     {
-        var fillColor = ((SolidColorBrush)fillBrush).Color;
-        var baseColor = ((SolidColorBrush)secondaryColorBrush).Color;
+        var fillColor = ((SolidColorBrush)fillColorBrush).Color;
+        var baseColor = ((SolidColorBrush)baseColorBrush).Color;
 
         const double fillOpacity = 0.2;
 

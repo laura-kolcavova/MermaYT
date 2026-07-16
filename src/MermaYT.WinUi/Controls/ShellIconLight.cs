@@ -135,7 +135,7 @@ public sealed partial class ShellIconLight :
             newBaseColorBrush);
     }
 
-    // Fill Color (100%)
+    // Fill Color
     private static Brush ComputeSmallCircleBrush(
         Brush fillColorBrush)
     {
@@ -159,7 +159,7 @@ public sealed partial class ShellIconLight :
         return new SolidColorBrush(blendedColor);
     }
 
-    // Fill Color (100%)
+    // Fill Color
     private static Brush ComputeBigCircleBrush(
         Brush fillColorBrush)
     {

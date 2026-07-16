@@ -60,7 +60,7 @@
                 Margin="0,16"
                 HorizontalAlignment="Left"
                 Visibility="{x:Bind MermaidIconDarkVisibility, Mode=OneWay}">
-                <controls:MermaidIconDark FillBrush="{ThemeResource AccentFillColorDefaultBrush}" />
+                <controls:MermaidIconDark BaseColorBrush="{ThemeResource TextFillColorPrimaryBrush}" FillColorBrush="{ThemeResource AccentFillColorDefaultBrush}" />
             </Viewbox>
 
             <Viewbox
@@ -69,7 +69,7 @@
                 Margin="0,16"
                 HorizontalAlignment="Left"
                 Visibility="{x:Bind MermaidIconLightVisibility, Mode=OneWay}">
-                <controls:MermaidIconLight FillBrush="{ThemeResource AccentFillColorDefaultBrush}" />
+                <controls:MermaidIconLight BaseColorBrush="{ThemeResource TextFillColorPrimaryBrush}" FillColorBrush="{ThemeResource AccentFillColorDefaultBrush}" />
             </Viewbox>
         </Grid>
     </ScrollViewer>

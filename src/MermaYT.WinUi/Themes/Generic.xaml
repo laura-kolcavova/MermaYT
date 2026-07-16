@@ -22,8 +22,8 @@
                             <Path.Data>
                                 <EllipseGeometry
                                     Center="207.99,783.50"
-                                    RadiusX="92.74"
-                                    RadiusY="92.74" />
+                                    RadiusX="93"
+                                    RadiusY="93" />
                             </Path.Data>
                         </Path>
 
@@ -32,8 +32,8 @@
                             <Path.Data>
                                 <EllipseGeometry
                                     Center="314.81,337.57"
-                                    RadiusX="208.24"
-                                    RadiusY="208.24" />
+                                    RadiusX="208"
+                                    RadiusY="208" />
                             </Path.Data>
                         </Path>
 
@@ -42,8 +42,8 @@
                             <Path.Data>
                                 <EllipseGeometry
                                     Center="626.00,582.40"
-                                    RadiusX="311.03"
-                                    RadiusY="311.03" />
+                                    RadiusX="311"
+                                    RadiusY="311" />
                             </Path.Data>
                         </Path>
 
@@ -76,29 +76,29 @@
                             <Path.Data>
                                 <EllipseGeometry
                                     Center="207.99,783.50"
-                                    RadiusX="92.74"
-                                    RadiusY="92.74" />
+                                    RadiusX="93"
+                                    RadiusY="93" />
                             </Path.Data>
                         </Path>
 
                         <!--  medium circle  -->
+
                         <Path Fill="{TemplateBinding MediumCircleBrush}">
                             <Path.Data>
                                 <EllipseGeometry
                                     Center="314.81,337.57"
-                                    RadiusX="208.24"
-                                    RadiusY="208.24" />
+                                    RadiusX="208"
+                                    RadiusY="208" />
                             </Path.Data>
                         </Path>
-
 
                         <!--  big circle  -->
                         <Path Fill="{TemplateBinding BigCircleBrush}">
                             <Path.Data>
                                 <EllipseGeometry
                                     Center="626.00,582.40"
-                                    RadiusX="311.03"
-                                    RadiusY="311.03" />
+                                    RadiusX="311"
+                                    RadiusY="311" />
                             </Path.Data>
                         </Path>
 
@@ -114,6 +114,7 @@
                                 </TransformGroup>
                             </Path.RenderTransform>
                         </Path>
+
                     </Canvas>
                 </ControlTemplate>
             </Setter.Value>
@@ -129,39 +130,12 @@
                         <!--  sun  -->
                         <Path
                             Data="{StaticResource MermaidCircleIconPath}"
-                            Fill="{TemplateBinding FillBrush}"
+                            Fill="{TemplateBinding SunBrush}"
                             RenderTransformOrigin="0,0">
                             <Path.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform ScaleX="0.504032" ScaleY="0.439998" />
                                     <TranslateTransform X="0" Y="0" />
-                                </TransformGroup>
-                            </Path.RenderTransform>
-                        </Path>
-
-                        <!--  sun overlay  -->
-                        <Path
-                            Data="{StaticResource MermaidCircleIconPath}"
-                            Fill="#222222"
-                            Opacity="0.8"
-                            RenderTransformOrigin="0,0">
-                            <Path.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform ScaleX="0.504032" ScaleY="0.439998" />
-                                    <TranslateTransform X="0" Y="0" />
-                                </TransformGroup>
-                            </Path.RenderTransform>
-                        </Path>
-
-                        <!--  mermaid underlay  -->
-                        <Path
-                            Data="{StaticResource MermaidIconPath}"
-                            Fill="{ThemeResource TextFillColorPrimaryBrush}"
-                            RenderTransformOrigin="0,0">
-                            <Path.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform ScaleX="12.0091" ScaleY="10.4834" />
-                                    <TranslateTransform X="-128.92" Y="412.67" />
                                 </TransformGroup>
                             </Path.RenderTransform>
                         </Path>
@@ -169,22 +143,7 @@
                         <!--  mermaid  -->
                         <Path
                             Data="{StaticResource MermaidIconPath}"
-                            Fill="{TemplateBinding FillBrush}"
-                            Opacity="0.2"
-                            RenderTransformOrigin="0,0">
-                            <Path.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform ScaleX="12.0091" ScaleY="10.4834" />
-                                    <TranslateTransform X="-128.92" Y="412.67" />
-                                </TransformGroup>
-                            </Path.RenderTransform>
-                        </Path>
-
-                        <!--  mermaid overlay  -->
-                        <Path
-                            Data="{StaticResource MermaidIconPath}"
-                            Fill="#222222"
-                            Opacity="0.3"
+                            Fill="{TemplateBinding MermaidBrush}"
                             RenderTransformOrigin="0,0">
                             <Path.RenderTransform>
                                 <TransformGroup>
@@ -208,39 +167,12 @@
                         <!--  sun  -->
                         <Path
                             Data="{StaticResource MermaidCircleIconPath}"
-                            Fill="{TemplateBinding FillBrush}"
+                            Fill="{TemplateBinding SunBrush}"
                             RenderTransformOrigin="0,0">
                             <Path.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform ScaleX="0.504032" ScaleY="0.439998" />
                                     <TranslateTransform X="0" Y="0" />
-                                </TransformGroup>
-                            </Path.RenderTransform>
-                        </Path>
-
-                        <!--  sun overlay  -->
-                        <Path
-                            Data="{StaticResource MermaidCircleIconPath}"
-                            Fill="#ffffff"
-                            Opacity="0.7"
-                            RenderTransformOrigin="0,0">
-                            <Path.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform ScaleX="0.504032" ScaleY="0.439998" />
-                                    <TranslateTransform X="0" Y="0" />
-                                </TransformGroup>
-                            </Path.RenderTransform>
-                        </Path>
-
-                        <!--  mermaid underlay  -->
-                        <Path
-                            Data="{StaticResource MermaidIconPath}"
-                            Fill="{ThemeResource TextFillColorPrimaryBrush}"
-                            RenderTransformOrigin="0,0">
-                            <Path.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform ScaleX="12.0091" ScaleY="10.4834" />
-                                    <TranslateTransform X="-128.92" Y="412.67" />
                                 </TransformGroup>
                             </Path.RenderTransform>
                         </Path>
@@ -248,8 +180,7 @@
                         <!--  mermaid  -->
                         <Path
                             Data="{StaticResource MermaidIconPath}"
-                            Fill="{TemplateBinding FillBrush}"
-                            Opacity="0.1"
+                            Fill="{TemplateBinding MermaidBrush}"
                             RenderTransformOrigin="0,0">
                             <Path.RenderTransform>
                                 <TransformGroup>
@@ -296,7 +227,7 @@
                             Height="72"
                             VerticalAlignment="Center"
                             Visibility="{TemplateBinding ShellIconDarkVisibility}">
-                            <controls:ShellIconDark FillBrush="{ThemeResource AccentFillColorDefaultBrush}" SecondaryColorBrush="{ThemeResource TextFillColorPrimaryBrush}" />
+                            <controls:ShellIconDark BaseColorBrush="{ThemeResource TextFillColorPrimaryBrush}" FillColorBrush="{ThemeResource AccentFillColorDefaultBrush}" />
                         </Viewbox>
 
                         <Viewbox
