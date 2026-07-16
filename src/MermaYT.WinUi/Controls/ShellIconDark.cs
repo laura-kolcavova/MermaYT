@@ -147,7 +147,7 @@ public sealed partial class ShellIconDark :
         const double overlayOpacity = 0.3;
 
         var blendedColor = Color.FromArgb(
-            fillColor.A,
+            255,
             (byte)((overlayR * overlayOpacity) + (fillColor.R * (1 - overlayOpacity))),
             (byte)((overlayG * overlayOpacity) + (fillColor.G * (1 - overlayOpacity))),
             (byte)((overlayB * overlayOpacity) + (fillColor.B * (1 - overlayOpacity))));
@@ -189,7 +189,7 @@ public sealed partial class ShellIconDark :
         const double overlayOpacity = 0.3;
 
         var blendedColor = Color.FromArgb(
-            fillColor.A,
+            255,
             (byte)((overlayR * overlayOpacity) + (fillColor.R * (1 - overlayOpacity))),
             (byte)((overlayG * overlayOpacity) + (fillColor.G * (1 - overlayOpacity))),
             (byte)((overlayB * overlayOpacity) + (fillColor.B * (1 - overlayOpacity))));

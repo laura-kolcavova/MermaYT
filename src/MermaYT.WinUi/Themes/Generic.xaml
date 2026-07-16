@@ -17,7 +17,17 @@
                 <ControlTemplate TargetType="controls:ShellIconDark">
                     <Canvas Width="960.5" Height="960.5">
 
-                        <!--  bg_60  -->
+                        <!--  small circle  -->
+                        <Path Fill="{TemplateBinding SmallCircleBrush}">
+                            <Path.Data>
+                                <EllipseGeometry
+                                    Center="207.99,783.50"
+                                    RadiusX="92.74"
+                                    RadiusY="92.74" />
+                            </Path.Data>
+                        </Path>
+
+                        <!--  medium circle  -->
                         <Path Fill="{TemplateBinding MediumCircleBrush}">
                             <Path.Data>
                                 <EllipseGeometry
@@ -27,23 +37,13 @@
                             </Path.Data>
                         </Path>
 
-                        <!--  bg_100_big  -->
+                        <!--  big circle  -->
                         <Path Fill="{TemplateBinding BigCircleBrush}">
                             <Path.Data>
                                 <EllipseGeometry
                                     Center="626.00,582.40"
                                     RadiusX="311.03"
                                     RadiusY="311.03" />
-                            </Path.Data>
-                        </Path>
-
-                        <!--  bg_100_small  -->
-                        <Path Fill="{TemplateBinding SmallCircleBrush}">
-                            <Path.Data>
-                                <EllipseGeometry
-                                    Center="207.99,783.50"
-                                    RadiusX="92.74"
-                                    RadiusY="92.74" />
                             </Path.Data>
                         </Path>
 
@@ -71,29 +71,8 @@
                 <ControlTemplate TargetType="controls:ShellIconLight">
                     <Canvas Width="960.5" Height="960.5">
 
-                        <!--  bg_60  -->
-                        <Path Fill="{TemplateBinding FillBrush}" Opacity="0.6">
-                            <Path.Data>
-                                <EllipseGeometry
-                                    Center="314.81,337.57"
-                                    RadiusX="208.24"
-                                    RadiusY="208.24" />
-                            </Path.Data>
-                        </Path>
-
-                        <!--  bg_100_big  -->
-                        <Path Fill="{TemplateBinding FillBrush}">
-                            <Path.Data>
-                                <EllipseGeometry
-                                    Center="626.00,582.40"
-                                    RadiusX="311.03"
-                                    RadiusY="311.03" />
-                            </Path.Data>
-                        </Path>
-
-
-                        <!--  bg_100_small  -->
-                        <Path Fill="{TemplateBinding FillBrush}">
+                        <!--  small circle  -->
+                        <Path Fill="{TemplateBinding SmallCircleBrush}">
                             <Path.Data>
                                 <EllipseGeometry
                                     Center="207.99,783.50"
@@ -102,24 +81,31 @@
                             </Path.Data>
                         </Path>
 
-                        <!--  shell underlay  -->
-                        <Path
-                            Data="{StaticResource ShellIconPath}"
-                            Fill="{ThemeResource TextFillColorPrimaryBrush}"
-                            RenderTransformOrigin="0,0">
-                            <Path.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
-                                    <TranslateTransform X="36.41" Y="-94.52" />
-                                </TransformGroup>
-                            </Path.RenderTransform>
+                        <!--  medium circle  -->
+                        <Path Fill="{TemplateBinding MediumCircleBrush}">
+                            <Path.Data>
+                                <EllipseGeometry
+                                    Center="314.81,337.57"
+                                    RadiusX="208.24"
+                                    RadiusY="208.24" />
+                            </Path.Data>
+                        </Path>
+
+
+                        <!--  big circle  -->
+                        <Path Fill="{TemplateBinding BigCircleBrush}">
+                            <Path.Data>
+                                <EllipseGeometry
+                                    Center="626.00,582.40"
+                                    RadiusX="311.03"
+                                    RadiusY="311.03" />
+                            </Path.Data>
                         </Path>
 
                         <!--  shell  -->
                         <Path
                             Data="{StaticResource ShellIconPath}"
-                            Fill="{TemplateBinding FillBrush}"
-                            Opacity="0.1"
+                            Fill="{TemplateBinding ShellBrush}"
                             RenderTransformOrigin="0,0">
                             <Path.RenderTransform>
                                 <TransformGroup>
@@ -309,7 +295,7 @@
                             Width="72"
                             Height="72"
                             VerticalAlignment="Center"
-                            Visibility="{TemplateBinding MusleIconDarkVisibility}">
+                            Visibility="{TemplateBinding ShellIconDarkVisibility}">
                             <controls:ShellIconDark FillBrush="{ThemeResource AccentFillColorDefaultBrush}" SecondaryColorBrush="{ThemeResource TextFillColorPrimaryBrush}" />
                         </Viewbox>
 
@@ -318,8 +304,8 @@
                             Width="72"
                             Height="72"
                             VerticalAlignment="Center"
-                            Visibility="{TemplateBinding MusleIconLightVisibility}">
-                            <controls:ShellIconLight FillBrush="{ThemeResource AccentFillColorDefaultBrush}" />
+                            Visibility="{TemplateBinding ShellIconLightVisibility}">
+                            <controls:ShellIconLight BaseColorBrush="{ThemeResource TextFillColorPrimaryBrush}" FillColorBrush="{ThemeResource AccentFillColorDefaultBrush}" />
                         </Viewbox>
                     </Grid>
                 </ControlTemplate>

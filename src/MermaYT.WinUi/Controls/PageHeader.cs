@@ -26,14 +26,14 @@ public sealed partial class PageHeader :
         typeof(PageHeader),
         new PropertyMetadata(Visibility.Collapsed));
 
-    public static readonly DependencyProperty MusleIconDarkVisibilityProperty = DependencyProperty.Register(
-        nameof(MusleIconDarkVisibility),
+    public static readonly DependencyProperty ShellIconDarkVisibilityProperty = DependencyProperty.Register(
+        nameof(ShellIconDarkVisibility),
         typeof(Visibility),
         typeof(PageHeader),
         new PropertyMetadata(Visibility.Visible));
 
-    public static readonly DependencyProperty MusleIconLightVisibilityProperty = DependencyProperty.Register(
-        nameof(MusleIconLightVisibility),
+    public static readonly DependencyProperty ShellIconLightVisibilityProperty = DependencyProperty.Register(
+        nameof(ShellIconLightVisibility),
         typeof(Visibility),
         typeof(PageHeader),
         new PropertyMetadata(Visibility.Collapsed));
@@ -56,16 +56,16 @@ public sealed partial class PageHeader :
         private set => SetValue(SubtitleVisibilityProperty, value);
     }
 
-    public Visibility MusleIconDarkVisibility
+    public Visibility ShellIconDarkVisibility
     {
-        get => (Visibility)GetValue(MusleIconDarkVisibilityProperty);
-        private set => SetValue(MusleIconDarkVisibilityProperty, value);
+        get => (Visibility)GetValue(ShellIconDarkVisibilityProperty);
+        private set => SetValue(ShellIconDarkVisibilityProperty, value);
     }
 
-    public Visibility MusleIconLightVisibility
+    public Visibility ShellIconLightVisibility
     {
-        get => (Visibility)GetValue(MusleIconLightVisibilityProperty);
-        private set => SetValue(MusleIconLightVisibilityProperty, value);
+        get => (Visibility)GetValue(ShellIconLightVisibilityProperty);
+        private set => SetValue(ShellIconLightVisibilityProperty, value);
     }
 
     public PageHeader()
@@ -74,7 +74,7 @@ public sealed partial class PageHeader :
 
         ActualThemeChanged += PageHeader_ActualThemeChanged;
 
-        UpdateMusleIconVisibility(ActualTheme);
+        UpdateShellIconVisibility(ActualTheme);
     }
 
     private static void OnSubtitleChanged(
@@ -94,20 +94,20 @@ public sealed partial class PageHeader :
         FrameworkElement sender,
         object args)
     {
-        UpdateMusleIconVisibility(
+        UpdateShellIconVisibility(
             sender.ActualTheme);
     }
 
-    private void UpdateMusleIconVisibility(
+    private void UpdateShellIconVisibility(
         ElementTheme theme)
     {
         var isLight = theme == ElementTheme.Light;
 
-        MusleIconDarkVisibility = isLight
+        ShellIconDarkVisibility = isLight
             ? Visibility.Collapsed
             : Visibility.Visible;
 
-        MusleIconLightVisibility = isLight
+        ShellIconLightVisibility = isLight
             ? Visibility.Visible
             : Visibility.Collapsed;
     }
