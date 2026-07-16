@@ -27,11 +27,6 @@ public sealed partial class MainWindow : Window
 
         SetTitleBar(AppTitleBar);
 
-        //var iconId = IconService.GetApplicationIconId();
-
-        //AppWindow.SetIcon(iconId);
-        //AppWindow.SetTaskbarIcon(iconId);
-
         if (Content is FrameworkElement rootElement)
         {
             rootElement.ActualThemeChanged += RootElement_ActualThemeChanged;
