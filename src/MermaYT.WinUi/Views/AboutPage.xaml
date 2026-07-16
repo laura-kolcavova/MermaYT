@@ -56,7 +56,7 @@
 
             <Viewbox
                 Grid.Row="1"
-                Width="200"
+                Width="300"
                 Margin="0,16"
                 HorizontalAlignment="Left"
                 Visibility="{x:Bind MermaidIconDarkVisibility, Mode=OneWay}">

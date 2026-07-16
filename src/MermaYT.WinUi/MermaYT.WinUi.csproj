@@ -25,12 +25,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Assets\musle.svg" />
-    <Content Remove="Assets\vila.svg" />
-    <Content Remove="Assets\vila_l.svg" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="..\..\Tools\yt-dlp.exe">
       <Link>Tools\yt-dlp.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
