@@ -23,7 +23,7 @@ MermaYT provides a simple graphical interface for downloading audio and video fr
 ## Tech Stack
 
 - **UI:** WinUI 3
-- **Framework:** .NET 8
+- **Framework:** .NET 10
 
 ## Build
 
