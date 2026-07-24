@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/docs/">
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/MermaYT.Core/MermaYT.Core.csproj" />
+    <Project Path="src/MermaYT.WinUi/MermaYT.WinUi.csproj">
+      <Platform Project="x64" />
+      <Deploy />
+    </Project>
+  </Folder>
+</Solution>
