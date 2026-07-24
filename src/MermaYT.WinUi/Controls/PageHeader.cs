@@ -26,6 +26,18 @@ public sealed partial class PageHeader :
         typeof(PageHeader),
         new PropertyMetadata(Visibility.Collapsed));
 
+    public static readonly DependencyProperty ShellIconDarkVisibilityProperty = DependencyProperty.Register(
+        nameof(ShellIconDarkVisibility),
+        typeof(Visibility),
+        typeof(PageHeader),
+        new PropertyMetadata(Visibility.Visible));
+
+    public static readonly DependencyProperty ShellIconLightVisibilityProperty = DependencyProperty.Register(
+        nameof(ShellIconLightVisibility),
+        typeof(Visibility),
+        typeof(PageHeader),
+        new PropertyMetadata(Visibility.Collapsed));
+
     public string Title
     {
         get => (string)GetValue(TitleProperty);
@@ -44,9 +56,25 @@ public sealed partial class PageHeader :
         private set => SetValue(SubtitleVisibilityProperty, value);
     }
 
+    public Visibility ShellIconDarkVisibility
+    {
+        get => (Visibility)GetValue(ShellIconDarkVisibilityProperty);
+        private set => SetValue(ShellIconDarkVisibilityProperty, value);
+    }
+
+    public Visibility ShellIconLightVisibility
+    {
+        get => (Visibility)GetValue(ShellIconLightVisibilityProperty);
+        private set => SetValue(ShellIconLightVisibilityProperty, value);
+    }
+
     public PageHeader()
     {
         DefaultStyleKey = typeof(PageHeader);
+
+        ActualThemeChanged += PageHeader_ActualThemeChanged;
+
+        UpdateShellIconVisibility(ActualTheme);
     }
 
     private static void OnSubtitleChanged(
@@ -58,6 +86,28 @@ public sealed partial class PageHeader :
         var isSubtitleSet = !string.IsNullOrEmpty((string)e.NewValue);
 
         self.SubtitleVisibility = isSubtitleSet
+            ? Visibility.Visible
+            : Visibility.Collapsed;
+    }
+
+    private void PageHeader_ActualThemeChanged(
+        FrameworkElement sender,
+        object args)
+    {
+        UpdateShellIconVisibility(
+            sender.ActualTheme);
+    }
+
+    private void UpdateShellIconVisibility(
+        ElementTheme theme)
+    {
+        var isLight = theme == ElementTheme.Light;
+
+        ShellIconDarkVisibility = isLight
+            ? Visibility.Collapsed
+            : Visibility.Visible;
+
+        ShellIconLightVisibility = isLight
             ? Visibility.Visible
             : Visibility.Collapsed;
     }

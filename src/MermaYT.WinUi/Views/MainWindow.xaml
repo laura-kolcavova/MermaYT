@@ -9,7 +9,6 @@
     xmlns:models="using:MermaYT.WinUi.Models"
     Title="MermaYT"
     mc:Ignorable="d">
-
     <Window.SystemBackdrop>
         <MicaBackdrop Kind="Base" />
     </Window.SystemBackdrop>
@@ -27,7 +26,7 @@
             IsPaneToggleButtonVisible="True"
             PaneToggleRequested="AppTitleBar_PaneToggleRequested">
             <TitleBar.IconSource>
-                <ImageIconSource ImageSource="ms-appx:///Assets/AppIcon.png" />
+                <ImageIconSource ImageSource="ms-appx:///Assets/icon.svg" />
             </TitleBar.IconSource>
         </TitleBar>
 
@@ -37,7 +36,6 @@
             IsBackButtonVisible="Collapsed"
             IsPaneToggleButtonVisible="False"
             ItemInvoked="NavView_ItemInvoked">
-
             <NavigationView.Resources>
                 <Thickness x:Key="NavigationViewHeaderMargin">0,0,0,0</Thickness>
                 <Thickness x:Key="NavigationViewMinimalHeaderMargin">0,0,0,0</Thickness>
@@ -50,9 +48,7 @@
             </NavigationView.HeaderTemplate>
 
             <NavigationView.MenuItems>
-                <controls:NavigationViewItemExtended
-                    x:Uid="MainWindow_DownloadsNavItem"
-                    Tag="DownloadsPage">
+                <controls:NavigationViewItemExtended x:Uid="MainWindow_DownloadsNavItem" Tag="DownloadsPage">
                     <controls:NavigationViewItemExtended.Icon>
                         <FontIcon Glyph="{StaticResource GlyphDownload}" />
                     </controls:NavigationViewItemExtended.Icon>

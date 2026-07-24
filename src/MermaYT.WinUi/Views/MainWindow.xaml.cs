@@ -23,12 +23,6 @@ public sealed partial class MainWindow : Window
     {
         InitializeComponent();
 
-        if (AppWindow.Presenter is OverlappedPresenter presenter)
-        {
-            presenter.PreferredMinimumWidth = 540;
-            presenter.PreferredMinimumHeight = 490;
-        }
-
         ExtendsContentIntoTitleBar = true;
 
         SetTitleBar(AppTitleBar);
@@ -38,6 +32,12 @@ public sealed partial class MainWindow : Window
             rootElement.ActualThemeChanged += RootElement_ActualThemeChanged;
 
             UpdateAppTitleBarColors(rootElement.ActualTheme);
+        }
+
+        if (AppWindow.Presenter is OverlappedPresenter presenter)
+        {
+            presenter.PreferredMinimumWidth = 540;
+            presenter.PreferredMinimumHeight = 490;
         }
 
         NavView.SelectedItem = NavView.MenuItems[0];

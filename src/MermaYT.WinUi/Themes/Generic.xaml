@@ -11,6 +11,190 @@
         <Setter Property="CornerRadius" Value="4" />
     </Style>
 
+    <Style TargetType="controls:ShellIconDark">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ShellIconDark">
+                    <Canvas Width="960.5" Height="960.5">
+
+                        <!--  small circle  -->
+                        <Path Fill="{TemplateBinding SmallCircleBrush}">
+                            <Path.Data>
+                                <EllipseGeometry
+                                    Center="207.99,783.50"
+                                    RadiusX="93"
+                                    RadiusY="93" />
+                            </Path.Data>
+                        </Path>
+
+                        <!--  medium circle  -->
+                        <Path Fill="{TemplateBinding MediumCircleBrush}">
+                            <Path.Data>
+                                <EllipseGeometry
+                                    Center="314.81,337.57"
+                                    RadiusX="208"
+                                    RadiusY="208" />
+                            </Path.Data>
+                        </Path>
+
+                        <!--  big circle  -->
+                        <Path Fill="{TemplateBinding BigCircleBrush}">
+                            <Path.Data>
+                                <EllipseGeometry
+                                    Center="626.00,582.40"
+                                    RadiusX="311"
+                                    RadiusY="311" />
+                            </Path.Data>
+                        </Path>
+
+                        <!--  shell  -->
+                        <Path
+                            Data="{StaticResource ShellIconPath}"
+                            Fill="{TemplateBinding ShellBrush}"
+                            RenderTransformOrigin="0,0">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
+                                    <TranslateTransform X="36.41" Y="-94.52" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:ShellIconLight">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ShellIconLight">
+                    <Canvas Width="960.5" Height="960.5">
+
+                        <!--  small circle  -->
+                        <Path Fill="{TemplateBinding SmallCircleBrush}">
+                            <Path.Data>
+                                <EllipseGeometry
+                                    Center="207.99,783.50"
+                                    RadiusX="93"
+                                    RadiusY="93" />
+                            </Path.Data>
+                        </Path>
+
+                        <!--  medium circle  -->
+
+                        <Path Fill="{TemplateBinding MediumCircleBrush}">
+                            <Path.Data>
+                                <EllipseGeometry
+                                    Center="314.81,337.57"
+                                    RadiusX="208"
+                                    RadiusY="208" />
+                            </Path.Data>
+                        </Path>
+
+                        <!--  big circle  -->
+                        <Path Fill="{TemplateBinding BigCircleBrush}">
+                            <Path.Data>
+                                <EllipseGeometry
+                                    Center="626.00,582.40"
+                                    RadiusX="311"
+                                    RadiusY="311" />
+                            </Path.Data>
+                        </Path>
+
+                        <!--  shell  -->
+                        <Path
+                            Data="{StaticResource ShellIconPath}"
+                            Fill="{TemplateBinding ShellBrush}"
+                            RenderTransformOrigin="0,0">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="4.39663" ScaleY="4.39663" />
+                                    <TranslateTransform X="36.41" Y="-94.52" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:MermaidIconDark">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:MermaidIconDark">
+                    <Canvas Width="2416.5" Height="3653.5">
+
+                        <!--  sun  -->
+                        <Path
+                            Data="{StaticResource MermaidCircleIconPath}"
+                            Fill="{TemplateBinding SunBrush}"
+                            RenderTransformOrigin="0,0">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="0.504032" ScaleY="0.439998" />
+                                    <TranslateTransform X="0" Y="0" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+
+                        <!--  mermaid  -->
+                        <Path
+                            Data="{StaticResource MermaidIconPath}"
+                            Fill="{TemplateBinding MermaidBrush}"
+                            RenderTransformOrigin="0,0">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="12.0091" ScaleY="10.4834" />
+                                    <TranslateTransform X="-128.92" Y="412.67" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:MermaidIconLight">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:MermaidIconLight">
+                    <Canvas Width="2416.5" Height="3653.5">
+
+                        <!--  sun  -->
+                        <Path
+                            Data="{StaticResource MermaidCircleIconPath}"
+                            Fill="{TemplateBinding SunBrush}"
+                            RenderTransformOrigin="0,0">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="0.504032" ScaleY="0.439998" />
+                                    <TranslateTransform X="0" Y="0" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+
+                        <!--  mermaid  -->
+                        <Path
+                            Data="{StaticResource MermaidIconPath}"
+                            Fill="{TemplateBinding MermaidBrush}"
+                            RenderTransformOrigin="0,0">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="12.0091" ScaleY="10.4834" />
+                                    <TranslateTransform X="-128.92" Y="412.67" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="controls:PageHeader">
         <Setter Property="Template">
             <Setter.Value>
@@ -37,12 +221,23 @@
                                 Visibility="{TemplateBinding SubtitleVisibility}" />
                         </StackPanel>
 
-                        <!--<Image
+                        <Viewbox
                             Grid.Column="1"
-                            Width="64"
-                            Height="64"
+                            Width="72"
+                            Height="72"
                             VerticalAlignment="Center"
-                            Source="ms-appx:///Assets/Square150x150Logo.scale-200.png" />-->
+                            Visibility="{TemplateBinding ShellIconDarkVisibility}">
+                            <controls:ShellIconDark BaseColorBrush="{ThemeResource TextFillColorPrimaryBrush}" FillColorBrush="{ThemeResource AccentFillColorDefaultBrush}" />
+                        </Viewbox>
+
+                        <Viewbox
+                            Grid.Column="1"
+                            Width="72"
+                            Height="72"
+                            VerticalAlignment="Center"
+                            Visibility="{TemplateBinding ShellIconLightVisibility}">
+                            <controls:ShellIconLight BaseColorBrush="{ThemeResource TextFillColorPrimaryBrush}" FillColorBrush="{ThemeResource AccentFillColorDefaultBrush}" />
+                        </Viewbox>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

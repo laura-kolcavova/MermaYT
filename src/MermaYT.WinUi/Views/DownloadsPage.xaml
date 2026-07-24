@@ -235,6 +235,7 @@
         </StackPanel>
     </ScrollViewer>
 
+
     <VisualStateManager.VisualStateGroups>
         <VisualStateGroup>
             <VisualState x:Name="WideOptionsGridState">
